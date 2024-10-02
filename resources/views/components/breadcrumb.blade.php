@@ -2,21 +2,34 @@
     @php
         $segments = Request::segments();
         $url = url('/');
-        array_pop($segments); // Remove the last segment
+        $isParentPage = count($segments) <= 1; // Check if it's a parent page
+$hasChildPages = function ($url) {
+    // Implement your logic to check if the page has child pages
+    // For example, you might query the database or check a predefined list
+    $childPages = get_pages(['child_of' => get_the_ID()]);
+            return !empty($childPages);
+        };
     @endphp
 
-    @foreach ($segments as $segment)
-        @php
-            $url .= '/' . $segment;
-            $isCurrentPage = $loop->last;
-        @endphp
-        @if (!$loop->first)
-            |
-        @endif
-        @if (count($segments) > 1)
-            <strong><a href="{{ $url }}">{{ ucfirst($segment) }}</a></strong>
+    @if ($isParentPage)
+        @if ($hasChildPages($url))
+            <p>Overview</p>
         @else
-            <a href="{{ $url }}">{{ ucfirst($segment) }}</a>
+            <p>{!! get_the_title() !!}</p>
         @endif
-    @endforeach
+    @else
+        @foreach ($segments as $index => $segment)
+            @if ($index < count($segments) - 1)
+                <!-- Skip the last segment -->
+                @php
+                    $segment = str_replace('-', ' ', $segment);
+                    $url .= '/' . $segment;
+                @endphp
+                @if ($index > 0)
+                    |
+                @endif
+                <a href="{{ $url }}">{{ ucfirst($segment) }}</a>
+            @endif
+        @endforeach
+    @endif
 </div>

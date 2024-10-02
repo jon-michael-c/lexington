@@ -1,3 +1,7 @@
+@php
+    $header_text = get_field('page_excerpt') ?: get_the_title();
+@endphp
+
 <section class="page-header full-width relative h-[620px] sm:h-full pb-8 sm:pb-28">
     <div
         class="page-header-content absolute top-[10%] breakout w-full flex justify-start items-end pr-4 sm:pr-0 py-16 z-1 h-[430px] sm:top-0 sm:h-[446px]">
@@ -14,7 +18,7 @@
         <div class="w-full max-w-[550px] ">
             @include('components.breadcrumb')
             <div class="max-w-[595px]">
-                <h1 class="text-white">{!! get_the_title() !!}</h1>
+                <h1 class="text-white">{!! $header_text !!}</h1>
             </div>
         </div>
         <div class=" w-full sm:relative left-0 sm:bottom-[12px] h-[32px] z-[5]">

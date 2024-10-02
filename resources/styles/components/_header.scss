@@ -7,6 +7,15 @@ header {
     background-size: cover;
   }
   nav {
+    @include sm {
+      .primaryMenu {
+        & > li {
+          &:last-of-type {
+            margin-left: 3rem !important;
+          }
+        }
+      }
+    }
     li.menu-item {
       position: relative;
 
