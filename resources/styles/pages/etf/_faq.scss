@@ -1,0 +1,76 @@
+.faqs-container {
+  .faq-item {
+    position: relative;
+    padding: 8px 0;
+    @include sm {
+      padding: 16px 0;
+    }
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 2px;
+      opacity: 0.3;
+      @apply bg-cornflower;
+    }
+
+    &:first-child {
+      &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 2px;
+        opacity: 0.3;
+        @apply bg-cornflower;
+      }
+    }
+
+    .faq-q {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      cursor: pointer;
+      padding-bottom: 0px;
+      transition: padding 0.2s ease;
+
+      &-title {
+        max-width: 80%;
+      }
+
+      &-icon {
+        cursor: pointer;
+        width: auto;
+        height: 18px;
+        transform-origin: center center;
+        transition: transform 0.2s;
+        position: relative;
+        top: 5px;
+      }
+    }
+
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.2s ease;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+
+    &.active {
+      .faq-q {
+        padding-bottom: 8px;
+      }
+      .faq-q-icon {
+        transform: rotate(180deg);
+      }
+
+      .faq-a {
+        max-height: 1000px;
+      }
+    }
+  }
+}

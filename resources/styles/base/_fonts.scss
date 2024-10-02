@@ -1,0 +1,71 @@
+// Define a mixin to create @font-face rules
+@mixin font-face($font-family, $font-path, $weights-styles) {
+  @each $file, $properties in $weights-styles {
+    $weight: map-get($properties, 'weight');
+    $style: map-get($properties, 'style');
+
+    @font-face {
+      font-family: $font-family;
+      font-weight: $weight;
+      font-style: $style;
+      src: url('#{$font-path}/#{$font-family}#{$file}/font.woff2')
+        format('woff2');
+    }
+  }
+}
+
+// Define a map of font files to their weights and styles
+// format: titillium-*: ('weight': *, 'style': '*'),
+$juana-font-weights-styles: (
+  Thin: (
+    'weight': 100,
+    'style': 'normal',
+  ),
+
+  Light: (
+    'weight': 300,
+    'style': 'normal',
+  ),
+  Regular: (
+    'weight': 400,
+    'style': 'normal',
+  ),
+  Medium: (
+    'weight': 500,
+    'style': 'normal',
+  ),
+  SemiBold: (
+    'weight': 600,
+    'style': 'normal',
+  ),
+  Bold: (
+    'weight': 700,
+    'style': 'normal',
+  ),
+  Black: (
+    'weight': 900,
+    'style': 'normal',
+  ),
+);
+
+$eina-font-weights-styles: (
+  Light: (
+    'weight': 300,
+    'style': 'normal',
+  ),
+  Regular: (
+    'weight': 400,
+    'style': 'normal',
+  ),
+  SemiBold: (
+    'weight': 600,
+    'style': 'normal',
+  ),
+  Bold: (
+    'weight': 700,
+    'style': 'normal',
+  ),
+);
+
+@include font-face('Juana', '~@fonts/Juana', $juana-font-weights-styles);
+@include font-face('Eina', '~@fonts/Eina', $eina-font-weights-styles);

@@ -1,0 +1,132 @@
+.hero {
+  width: 100%;
+  overflow: hidden;
+  z-index: 10;
+  @include md {
+    aspect-ratio: 5 / 2;
+  }
+
+  &-etf-slider {
+    .bg-overlay {
+      background: linear-gradient(
+        222deg,
+        #bfa5fe 6.82%,
+        #a658ff 44.15%,
+        #5d13c1 85.05%
+      );
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.8;
+      z-index: -1;
+    }
+    .bg-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center center;
+      }
+    }
+
+    .etf-slider-controls-container {
+      position: relative;
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      bottom: -170px;
+      @include md {
+        position: absolute;
+        right: 10%;
+        bottom: 1%;
+      }
+      @include lg {
+        bottom: 3%;
+      }
+      .etf-slider-controls {
+        height: 130px;
+        width: fit-content;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+
+        .etf-slider-arrow {
+          width: 12px;
+          height: 12px;
+          cursor: pointer;
+          svg {
+            width: 100%;
+            height: 100%;
+          }
+
+          &.up {
+            transform: rotate(180deg);
+            transform-origin: center center;
+          }
+        }
+
+        .etf-slider-scrollbar {
+          width: 2px;
+          height: 80%;
+          background-color: white;
+          position: relative;
+          .bar {
+            position: absolute;
+            top: 0;
+            left: -2px;
+            width: 6px;
+            background-color: white;
+            transition: all 0.2s ease-in-out;
+          }
+        }
+      }
+    }
+  }
+}
+
+.hero-etf-slider {
+  position: relative;
+  .hero-etf-slider-slide {
+    position: absolute;
+    visibility: hidden;
+    top: 0;
+    transform: translate(0%, 25%);
+    opacity: 0;
+    scale: 0.8;
+    max-width: 450px;
+    padding-right: 24px;
+    @include md {
+      top: 50%;
+      left: 17vw;
+      max-width: 500px;
+      transform: translate(0%, 150%);
+    }
+
+    transition: all 0.5s ease, scale 0.55s ease;
+    &.active {
+      visibility: visible;
+      opacity: 1;
+      scale: 1;
+      @include md {
+        transform: translate(0%, -50%);
+      }
+    }
+  }
+}
+
+@include md-lg {
+  .hero {
+    height: 550px;
+  }
+}

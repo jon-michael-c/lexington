@@ -1,11 +1,28 @@
-<header class="banner">
-  <a class="brand" href="{{ home_url('/') }}">
-    {!! $siteName !!}
-  </a>
-
-  @if (has_nav_menu('primary_navigation'))
-    <nav class="nav-primary" aria-label="{{ wp_get_nav_menu_name('primary_navigation') }}">
-      {!! wp_nav_menu(['theme_location' => 'primary_navigation', 'menu_class' => 'nav', 'echo' => false]) !!}
+<header class="banner bg-white text-xs sticky z-[999] top-0 left-0  content-grid  ">
+    <nav class="navbar breakout">
+        <div class="flex flex-wrap items-center justify-between mx-auto py-2 sm:py-4 gap-2 ">
+            @if ($siteLogo)
+                <a href="{{ $homeUrl }}"
+                    class="flex items-center max-w-[115px] md:max-w-[130px] space-x-3 rtl:space-x-reverse">
+                    <img src="{{ $siteLogo }}" class="w-full md:w-[130px]"
+                        alt="{{ get_bloginfo('name', 'display') }} logo" />
+                </a>
+            @endif
+            <button data-collapse-toggle="navbar-default" type="button"
+                class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg lg:hidden "
+                aria-controls="navbar-default" aria-expanded="false" id="navbar-toggler">
+                <span class="sr-only">Open main menu</span>
+                <div class="hamburger-btn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </button>
+            <div class="navbar-collapse flex flex-col-reverse w-full lg:block lg:w-auto" id="navbarBasic">
+                @if ($primaryMenu && is_array($primaryMenu) && count($primaryMenu) > 0)
+                    @include('components.menus.primary', ['menu' => $primaryMenu])
+                @endif
+            </div>
+        </div>
     </nav>
-  @endif
 </header>

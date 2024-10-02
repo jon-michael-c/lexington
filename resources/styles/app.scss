@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import './base/breakpoints';
+@import './base/fonts';
+@import './base/baseline';
+@import './base/misc';
+
+@import './layout/grid';
+@import './components/header';
+/*
+@import './components/buttons';
+@import './components/form';
+@import './components/footer';
+@import './components/hero';
+@import './components/table';
+@import './components/posts';
+@import './pages/etf/faq.scss';
+@import './pages/home/process.scss';
+ */

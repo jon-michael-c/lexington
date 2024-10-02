@@ -1,0 +1,42 @@
+.btn {
+  background: linear-gradient(90deg, #b269ff 0%, #3e2ba5 100%);
+  padding: 0.4rem 1rem;
+
+  transition: color 0.2s ease-in, background-color 0.2s ease-in,
+    border-color 0.2s ease-in;
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  &.btn--sm {
+    @apply font-light px-[16px] py-[4px];
+  }
+}
+
+.wp-buttons {
+  margin-top: 1rem;
+}
+
+.wp-button,
+.btn-primary {
+  background-size: 200% auto;
+
+  background-position: right center;
+  background-image: linear-gradient(
+    to right,
+
+    #c7a1ff 0%,
+    #b269ff 50%,
+    #3e2ba5 100%
+  );
+
+  padding: 0.4rem 1rem;
+  transition: all 0.35s ease;
+
+  &:hover {
+    background-position: left center;
+    @apply text-midnight;
+  }
+}

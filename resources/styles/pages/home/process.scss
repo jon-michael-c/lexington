@@ -1,0 +1,88 @@
+@include sm {
+  .process-controls-container {
+    display: flex;
+
+    position: relative;
+    align-items: flex-start;
+
+    .process-controls {
+      height: 100%;
+      max-height: 500px;
+      width: fit-content;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+
+      .process-arrow {
+        width: 12px;
+        height: 12px;
+        cursor: pointer;
+        svg {
+          width: 100%;
+          height: 100%;
+        }
+
+        &.up {
+          transform: rotate(180deg);
+          transform-origin: center center;
+        }
+      }
+
+      .process-scrollbar {
+        width: 2px;
+        height: 80%;
+        background-color: white;
+        position: relative;
+        .bar {
+          position: absolute;
+          top: 0;
+          left: -2px;
+          width: 6px;
+          background-color: white;
+          transition: all 0.2s ease-in-out;
+        }
+      }
+    }
+  }
+
+  .process-categories {
+    .process-category {
+      .category-name {
+        h3 {
+          opacity: 0.5;
+          transition: all 0.2s ease-in-out;
+        }
+
+        &:hover {
+          cursor: pointer;
+          h3 {
+            opacity: 0.75;
+          }
+        }
+      }
+
+      .process-category-items {
+        opacity: 0;
+        visibility: hidden;
+        max-height: 0px;
+        transition: all 0.5s ease-in-out;
+      }
+
+      &.active {
+        .category-name {
+          h3 {
+            opacity: 1;
+          }
+        }
+
+        .process-category-items {
+          opacity: 1;
+          visibility: visible;
+          max-height: 1000px;
+        }
+      }
+    }
+  }
+}

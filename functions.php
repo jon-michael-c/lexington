@@ -11,7 +11,7 @@
 |
 */
 
-if (! file_exists($composer = __DIR__.'/vendor/autoload.php')) {
+if (!file_exists($composer = __DIR__ . '/vendor/autoload.php')) {
     wp_die(__('Error locating autoloader. Please run <code>composer install</code>.', 'sage'));
 }
 
@@ -29,7 +29,7 @@ require $composer;
 |
 */
 
-if (! function_exists('\Roots\bootloader')) {
+if (!function_exists('\Roots\bootloader')) {
     wp_die(
         __('You need to install Acorn to use this theme.', 'sage'),
         '',
@@ -56,10 +56,67 @@ if (! function_exists('\Roots\bootloader')) {
 
 collect(['setup', 'filters'])
     ->each(function ($file) {
-        if (! locate_template($file = "app/{$file}.php", true, true)) {
+        if (!locate_template($file = "app/{$file}.php", true, true)) {
             wp_die(
                 /* translators: %s is replaced with the relative file path */
                 sprintf(__('Error locating <code>%s</code> for inclusion.', 'sage'), $file)
             );
         }
     });
+
+
+function getMenu($location)
+{
+
+
+    $menuItems = wp_get_nav_menu_items($location);
+    $menuArray = [];
+
+    // First, convert all menu items to associative arrays and index by ID
+    if ($menuItems) {
+        foreach ($menuItems as $item) {
+            $classes = implode(' ', $item->classes);
+            if (get_the_ID() == $item->object_id) {
+                $classes .= ' current-menu-item';
+            }
+
+            $menuArray[$item->ID] = [
+                'id' => $item->ID,
+                'title' => html_entity_decode($item->title),
+                'url' => $item->url,
+                'target' => $item->target,
+                'parent_id' => $item->menu_item_parent,
+                'classes' => $classes,
+                'children' => [],
+                'current' => $item->current ? true : false,
+            ];
+        }
+    }
+
+    // Next, iterate through the array and assign children to their parents
+    foreach ($menuArray as $id => &$menuItem) {
+        if ($menuItem['parent_id'] != 0) { // If item has a parent
+            $menuArray[$menuItem['parent_id']]['children'][] = &$menuItem; // Add it to the parent's 'children' array
+        }
+    }
+    unset($menuItem); // Break reference to the last element
+
+    // Mark parent items as current if any of their children are current
+    foreach ($menuArray as &$menuItem) {
+        if ($menuItem['current']) {
+            $parentId = $menuItem['parent_id'];
+            while ($parentId != 0 && isset($menuArray[$parentId])) {
+                $menuArray[$parentId]['current'] = true;
+                $parentId = $menuArray[$parentId]['parent_id'];
+            }
+        }
+    }
+    unset($menuItem); // Break reference to the last element
+
+    // Filter out the child items to get a list of top-level items only
+    $menuTree = array_filter($menuArray, function ($item) {
+        return $item['parent_id'] == 0;
+    });
+
+    return array_values($menuTree); // Re-index and return 
+}

@@ -46,6 +46,7 @@ add_action('after_setup_theme', function () {
      */
     register_nav_menus([
         'primary_navigation' => __('Primary Navigation', 'sage'),
+        'secondary_navigation' => __('Secondary Navigation', 'sage'),
     ]);
 
     /**
@@ -122,3 +123,58 @@ add_action('widgets_init', function () {
         'id' => 'sidebar-footer',
     ] + $config);
 });
+
+
+// Allow SVG uploads
+add_filter('upload_mimes', function ($mimes) {
+    $mimes['svg'] = 'image/svg+xml';
+    return $mimes;
+});
+// Enqueue the JavaScript file and localize the script
+add_action('wp_enqueue_scripts', function () {
+    wp_enqueue_script('contact-form-script', get_template_directory_uri() . '/resources/assets/scripts/app.js', ['jquery'], null, true);
+    wp_localize_script('contact-form-script', 'ajax_object', [
+        'ajax_url' => admin_url('admin-ajax.php')
+    ]);
+});
+
+// Define the AJAX handler function
+function send_contact_email()
+{
+    $first_name = sanitize_text_field($_POST['firstName']);
+    $last_name = sanitize_text_field($_POST['lastName']);
+    $email = sanitize_email($_POST['email']);
+    $company = sanitize_text_field($_POST['company']);
+    $telephone = sanitize_text_field($_POST['telephone']);
+    $country = sanitize_text_field($_POST['country']);
+    $investor_type = sanitize_text_field($_POST['investorType']);
+    $message = sanitize_textarea_field($_POST['message']);
+
+    $to = 'your-email@example.com';
+    $subject = 'New Contact Form Submission';
+    $headers = array('Content-Type: text/html; charset=UTF-8', 'From: ' . $email);
+
+    $body = "
+    <html>
+    <body>
+    <p>First Name: $first_name</p>
+    <p>Last Name: $last_name</p>
+    <p>Email: $email</p>
+    <p>Company: $company</p>
+    <p>Telephone: $telephone</p>
+    <p>Country/Region: $country</p>
+    <p>Investor Type: $investor_type</p>
+    <p>Message: $message</p>
+    </body>
+    </html>";
+
+    if (true) {
+        wp_send_json_success('Thank you for your message!');
+    } else {
+        wp_send_json_error('There was an error sending your message. Please try again later.');
+    }
+}
+
+// Register the AJAX actions
+add_action('wp_ajax_send_contact_email', 'send_contact_email');
+add_action('wp_ajax_nopriv_send_contact_email', 'send_contact_email');

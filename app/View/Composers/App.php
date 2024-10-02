@@ -23,7 +23,10 @@ class App extends Composer
     public function with()
     {
         return [
+            'homeUrl' => home_url(),
             'siteName' => $this->siteName(),
+            'siteLogo' => get_field('logo', 'option'),
+            'feedDir' => get_theme_root() . '/' . get_template() . '/resources/data',
         ];
     }
 
@@ -36,4 +39,21 @@ class App extends Composer
     {
         return get_bloginfo('name', 'display');
     }
+
+    /**
+     * Returns site copyright.
+     * 
+     * @param mixed $foundingYear
+     * @return string
+     */
+    public function copyright($foundingYear)
+    {
+        $currentYear = date('Y');
+
+        if ($foundingYear == $currentYear) {
+            return '© ' . $foundingYear;
+        }
+        return '© ' . $foundingYear . ' - ' . $currentYear;
+    }
+
 }

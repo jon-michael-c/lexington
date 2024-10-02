@@ -1,29 +1,14 @@
 {
-  "name": "roots/sage",
+  "name": "jon-michael-c/leibstarter",
   "type": "wordpress-theme",
   "license": "MIT",
-  "description": "WordPress starter theme with a modern development workflow",
-  "homepage": "https://roots.io/sage/",
+  "description": "Leibowitz Starter based on Sage by roots.io",
+  "homepage": "https://github.com/jon-michael-c/leibstarter",
   "authors": [
     {
-      "name": "Ben Word",
-      "email": "ben@benword.com",
-      "homepage": "https://github.com/retlehs"
-    },
-    {
-      "name": "Scott Walkinshaw",
-      "email": "scott.walkinshaw@gmail.com",
-      "homepage": "https://github.com/swalkinshaw"
-    },
-    {
-      "name": "QWp6t",
-      "email": "hi@qwp6t.me",
-      "homepage": "https://github.com/qwp6t"
-    },
-    {
-      "name": "Brandon Nifong",
-      "email": "brandon@tendency.me",
-      "homepage": "https://github.com/log1x"
+      "name": "jon-michael-c",
+      "email": "jon@jmcubano.com",
+      "homepage": "https://jmcubano.com"
     }
   ],
   "keywords": [
@@ -39,7 +24,12 @@
     }
   },
   "require": {
-    "php": ">=8.1"
+    "php": ">=8.1",
+    "log1x/acf-composer": "^3.0",
+    "log1x/poet": "^2.0",
+    "log1x/sage-directives": "^2.0",
+    "log1x/sage-svg": "^1.1",
+    "roots/acorn": "*"
   },
   "require-dev": {
     "laravel/pint": "^1.13"
@@ -51,6 +41,11 @@
     "optimize-autoloader": true,
     "preferred-install": "dist",
     "sort-packages": true
+  },
+  "scripts": {
+    "post-autoload-dump": [
+      "Roots\\Acorn\\ComposerScripts::postAutoloadDump"
+    ]
   },
   "minimum-stability": "dev",
   "prefer-stable": true,

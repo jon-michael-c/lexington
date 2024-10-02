@@ -23,7 +23,7 @@ export default async (app) => {
    *
    * @see {@link https://bud.js.org/reference/bud.setPublicPath}
    */
-  app.setPublicPath('/app/themes/sage/public/');
+  app.setPublicPath('/app/themes/lexington/public');
 
   /**
    * Development server settings
@@ -33,8 +33,8 @@ export default async (app) => {
    * @see {@link https://bud.js.org/reference/bud.watch}
    */
   app
-    .setUrl('http://localhost:3000')
-    .setProxyUrl('http://example.test')
+    .setUrl('http://localhost:3500')
+    .setProxyUrl('https://lexington.local')
     .watch(['resources/views', 'app']);
 
   /**
@@ -51,7 +51,7 @@ export default async (app) => {
         backgroundImage: true,
       },
       color: {
-        custom: false,
+        custom: true,
         customDuotone: false,
         customGradient: false,
         defaultDuotone: false,
