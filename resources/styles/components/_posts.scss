@@ -1,23 +1,10 @@
 .post-preview {
-  min-height: 175px;
-
   .post-title {
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: 2;
     text-overflow: ellipsis;
     overflow: hidden;
-  }
-
-  h4,
-  p {
-    transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
-  }
-  &:hover {
-    h4,
-    p {
-      color: rgba(199, 161, 255) !important;
-    }
   }
 }
 

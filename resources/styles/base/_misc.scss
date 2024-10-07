@@ -107,3 +107,56 @@ article {
     margin-bottom: 8px;
   }
 }
+
+.stats {
+  .stat {
+    position: relative;
+
+    @include sm-md {
+      &:not(:nth-child(2n)):not(:last-child)::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        right: 0;
+        height: 55%;
+        width: 2px;
+        transform: translate(0%, -50%);
+        @apply bg-mist;
+      }
+
+      // not the last 2 items
+      &:not(:nth-last-child(-n + 2)):before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 2px;
+        width: 100%;
+        @apply bg-mist;
+      }
+    }
+
+    @include md {
+      &:not(:nth-child(3n)):not(:last-child)::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        right: 0;
+        height: 55%;
+        width: 2px;
+        transform: translate(0%, -50%);
+        @apply bg-mist;
+      }
+      // not the last 3 items
+      &:not(:nth-last-child(-n + 3)):before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 2px;
+        width: 100%;
+        @apply bg-mist;
+      }
+    }
+  }
+}

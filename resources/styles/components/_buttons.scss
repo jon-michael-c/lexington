@@ -19,24 +19,16 @@
   margin-top: 1rem;
 }
 
-.wp-button,
-.btn-primary {
-  background-size: 200% auto;
-
-  background-position: right center;
-  background-image: linear-gradient(
-    to right,
-
-    #c7a1ff 0%,
-    #b269ff 50%,
-    #3e2ba5 100%
-  );
-
-  padding: 0.4rem 1rem;
-  transition: all 0.35s ease;
-
-  &:hover {
-    background-position: left center;
-    @apply text-midnight;
+.link {
+  position: relative;
+  padding: 12px 0;
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    @apply bg-magenta;
   }
 }

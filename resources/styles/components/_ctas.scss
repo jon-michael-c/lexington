@@ -1,0 +1,77 @@
+.video-ctas {
+  display: flex;
+  &__item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: start;
+    padding: 2.5rem;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    text-align: center;
+    z-index: 1;
+    width: 33.3333%;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+      width: 90%;
+
+      .video-ctas__item__heading {
+        font-size: 40px;
+      }
+
+      .video-ctas__item__overlay {
+        opacity: 0.2;
+      }
+      .video-ctas__item__arrow {
+        transform: translate(0px, 0%);
+        opacity: 1;
+      }
+    }
+
+    &__video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+      video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center center;
+      }
+    }
+
+    &__overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      opacity: 0.9;
+      background: linear-gradient(42deg, #002e45 25%, #c7d9d4 100%);
+      transition: all 0.2s ease-in-out;
+    }
+
+    &__heading {
+      text-align: left;
+      text-transform: uppercase;
+      font-family: 'Eina' !important;
+      font-weight: 400;
+      transition: all 0.2s ease-in-out;
+    }
+
+    &__arrow {
+      position: absolute;
+      right: 2.5rem;
+      bottom: 2.5rem;
+      transform: translate(-150px, 0%);
+      opacity: 0;
+      transition: all 0.2s ease-in-out;
+    }
+  }
+}
