@@ -17,7 +17,7 @@ html {
 
 body {
   @apply bg-white text-charcoal;
-  font-family: 'Eina', Geneva, Tahoma, sans-serif;
+  font-family: 'Eina', Tahoma, sans-serif;
   font-style: normal;
   overflow-x: hidden;
 }
@@ -91,7 +91,7 @@ h6 {
   }
 }
 p {
-  font-family: 'Grotesk', sans-serif;
+  font-family: 'Eina';
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -130,6 +130,7 @@ sup {
 }
 
 article {
+  font-family: 'Eina';
   p:not(:last-child) {
     margin-bottom: 6px;
   }

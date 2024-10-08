@@ -17,7 +17,6 @@
         ],
     ];
 @endphp
-
 <section class="full-width">
     <div class="inner-full h-[450px]">
         <div class="video-ctas">

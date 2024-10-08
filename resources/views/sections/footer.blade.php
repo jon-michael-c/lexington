@@ -5,8 +5,8 @@
                 <img src="https://lexington.local/app/uploads/2024/10/istockphoto-954282570-2048x2048-1.jpg"
                     alt="footer image" class="w-full h-full object-bottom" />
             </div>
-            <div class="grid grid-cols-2 sm:py-8">
-                <div class="flex flex-col justify-between items-start">
+            <div class="grid sm:grid-cols-2 gap-12 py-8 sm:gap-0">
+                <div class="flex flex-col gap-8 justify-between items-start">
                     <div class="w-[130px]">
                         <a href="{{ home_url() }}" class="flex">
                             <img src="{{ $footerLogo }}" alt="{{ $siteName }} Logo" />
@@ -16,7 +16,7 @@
                         <p>Lexington Partners is a subsidiary of Franklin Templeton.</p>
                     </div>
                 </div>
-                <div>
+                <div class="pb-8 sm:pb-0">
                     @if ($footerMenu && is_array($footerMenu) && count($footerMenu) > 0)
                         @include('components.menus.footer', ['menu' => $footerMenu])
                     @endif

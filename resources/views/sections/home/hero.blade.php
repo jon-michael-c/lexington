@@ -1,4 +1,4 @@
-<section class="hero full-width relative h-[620px] sm:h-[689px] pb-8 sm:pb-28 ">
+<section class="hero full-width relative  h-[620px] sm:h-[689px] pb-8 sm:pb-28 ">
     <div
         class="page-header-content absolute top-[10%] breakout w-full flex justify-start items-end pr-4 sm:pr-0 py-16 z-1 h-[530px] sm:top-0 sm:h-[610px]">
         <div class="bg-video z-[-4]">

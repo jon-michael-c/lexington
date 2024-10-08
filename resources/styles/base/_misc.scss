@@ -85,29 +85,6 @@ footer .bg-image {
   }
 }
 
-.breadcrumb {
-  p,
-  a {
-    font-weight: 300 !important;
-  }
-}
-
-article {
-  hr {
-    @apply my-6;
-  }
-
-  p {
-    font-family: 'Inter';
-  }
-
-  h2,
-  h3,
-  h4 {
-    margin-bottom: 8px;
-  }
-}
-
 .stats {
   .stat {
     position: relative;

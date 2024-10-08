@@ -2,7 +2,7 @@
     $header_text = get_field('page_excerpt') ?: get_the_title();
 @endphp
 
-<section class="page-header full-width relative h-[620px] sm:h-full pb-8 sm:pb-28">
+<section class="page-header full-width relative h-[510px] pb-8 sm:pb-28">
     <div
         class="page-header-content absolute top-[10%] breakout w-full flex justify-start items-end pr-4 sm:pr-0 py-16 z-1 h-[430px] sm:top-0 sm:h-[446px]">
         <div class="bg-image relative z-[-4]">
