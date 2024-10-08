@@ -1,1 +1,140 @@
 @import './base/fonts';
+@import './base/breakpoints';
+@import './base/misc';
+@import './layout/grid';
+@import './components/ctas';
+@import './components/hero';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.wp-block-post-title {
+  font-family: 'Juana', sans-serif;
+  font-size: 3rem;
+  margin-left: 1rem;
+}
+
+.editor-styles-wrapper a:where(:not(.wp-element-button)) {
+  text-decoration: unset !important;
+}
+
+.is-root-container {
+  font-family: 'Eina';
+  h1 {
+    font-family: 'Juana', sans-serif;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.1667;
+    letter-spacing: 0.01em;
+    @include sm {
+      font-size: 50px;
+      font-style: normal;
+      font-weight: 400;
+    }
+  }
+  h2 {
+    font-family: 'Juana', sans-serif;
+    font-size: 22px;
+    line-height: 1.28;
+    font-weight: 600;
+    @include sm {
+      font-size: 50px;
+      line-height: normal;
+    }
+  }
+
+  h3 {
+    font-family: 'Juana', sans-serif;
+    font-size: 22px;
+    font-weight: 500;
+    font-style: normal;
+    line-height: 1.26316;
+    @include sm {
+      font-size: 38px;
+    }
+  }
+  h4 {
+    font-family: 'Juana', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.3;
+    @include sm {
+      font-size: 24px;
+    }
+  }
+  h5 {
+    font-family: 'Juana', sans-serif;
+    font-size: 16px;
+    line-height: 1.3;
+    @include sm {
+      font-size: 20px;
+      line-height: 1.3;
+    }
+  }
+
+  p {
+    font-family: 'Eina';
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.5;
+    @include sm {
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 24px; /* 152.381% */
+    }
+  }
+
+  a {
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 0.8px;
+  }
+
+  a.menu-item {
+    text-transform: uppercase;
+  }
+
+  a.backlink {
+    text-decoration: underline !important;
+    text-underline-offset: 2px;
+  }
+
+  sup {
+    font-size: 0.5em;
+    vertical-align: super;
+  }
+
+  article {
+    font-family: 'Eina';
+    p:not(:last-child) {
+      margin-bottom: 6px;
+    }
+  }
+
+  b,
+  strong {
+    font-weight: 600;
+  }
+
+  .acf-block-component {
+    @extend .content-grid;
+    a {
+      pointer-events: none !important;
+    }
+  }
+}
+.block-editor__container img {
+  height: 100% !important;
+}
+
+.wp-block {
+  .wp-block-group.is-layout-constrained
+    > :where(:not(.alignleft):not(.alignright):not(.alignfull)) {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+}

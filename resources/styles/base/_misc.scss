@@ -89,7 +89,7 @@ footer .bg-image {
   .stat {
     position: relative;
 
-    @include sm-md {
+    @include md-lg {
       &:not(:nth-child(2n)):not(:last-child)::after {
         content: '';
         position: absolute;
@@ -113,7 +113,7 @@ footer .bg-image {
       }
     }
 
-    @include md {
+    @include lg {
       &:not(:nth-child(3n)):not(:last-child)::after {
         content: '';
         position: absolute;
@@ -133,6 +133,43 @@ footer .bg-image {
         height: 2px;
         width: 100%;
         @apply bg-mist;
+      }
+    }
+  }
+}
+
+.wp-block-group {
+  display: grid;
+  gap: 1rem;
+}
+
+.text-sect {
+  .acf-innerblocks-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding-bottom: 10rem;
+    gap: 1.5rem;
+
+    div:first-child {
+      max-width: 490px;
+      padding-top: 3rem;
+    }
+
+    div:last-child {
+      padding-top: 1rem;
+      max-width: 490px;
+    }
+
+    @include m-sm {
+      flex-direction: column;
+      align-items: center;
+      padding-top: 2rem;
+      padding-bottom: 3rem;
+      gap: 0;
+
+      div {
+        max-width: 100%;
       }
     }
   }
