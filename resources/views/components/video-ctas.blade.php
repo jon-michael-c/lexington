@@ -1,5 +1,5 @@
 <section class="full-width">
-    <div class="inner-full h-[450px]">
+    <div class="inner-full h-fit sm:h-[450px]">
         <div class="video-ctas video-ctas__{{ count($ctas) }}">
             @foreach ($ctas as $cta)
                 <a href="{{ $cta['link']['url'] }}" class="video-ctas__item">

@@ -4,11 +4,11 @@ label {
 input,
 textarea,
 select {
-  @apply border border-indigoLight text-midnight;
-  background: rgba(199, 161, 255, 0.2);
+  @apply border-[1px] border-solid border-mist text-charcoal;
+  background: none;
   width: 100%;
   display: block;
-  padding: 13px 21px;
+  padding: 8px 12px;
   font-size: 1rem;
   font-family: 'Grotesk', Geneva, Tahoma, sans-serif;
   transition: all 0.2s ease-in-out;
@@ -18,11 +18,11 @@ select {
     outline-width: 3px;
   }
   &:focus {
-    @apply outline-indigo;
+    @apply outline-mist;
   }
 
   &::placeholder {
-    @apply text-midnight opacity-45;
+    @apply text-charcoal opacity-45;
   }
 }
 
@@ -34,7 +34,7 @@ select {
   height: 46px;
 
   .dropdown-container {
-    @apply bg-indigoLight border border-midnight text-midnight;
+    @apply bg-mist border border-charcoal text-charcoal;
     position: absolute;
     width: 100%;
     top: 0;
@@ -111,7 +111,7 @@ select {
 }
 
 .dropdown-content .dropdown-item {
-  @apply font-Grotesk text-midnight;
+  @apply font-Eina text-charcoal;
   padding: 13px 21px;
   font-size: 16px;
   font-style: normal;
