@@ -5,7 +5,9 @@
                 <a href="{{ $cta['link']['url'] }}" class="video-ctas__item">
                     <div class="video-ctas__item__overlay"></div>
                     <div class="video-ctas__item__video">
-                        <video src="{{ $cta['video']['url'] }}" muted loop></video>
+                        @if (isset($cta['video']['url']))
+                            <video src="{{ $cta['video']['url'] }}" muted loop></video>
+                        @endif
                     </div>
                     <h4 class="video-ctas__item__heading">{!! $cta['title'] !!}</h4>
                     <div class="video-ctas__item__arrow">
