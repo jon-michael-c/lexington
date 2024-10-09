@@ -140,6 +140,7 @@ footer .bg-image {
 
 .wp-block-group {
   display: grid;
+  height: fit-content;
   gap: 1rem;
 }
 
@@ -171,6 +172,27 @@ footer .bg-image {
       div {
         max-width: 100%;
       }
+    }
+  }
+}
+
+.split-sect {
+  &.break-right {
+    .acf-innerblocks-container {
+      grid-column: content-start / breakout-end;
+
+      & > div:first-child {
+        max-width: 520px;
+      }
+    }
+  }
+  .acf-innerblocks-container {
+    display: grid;
+    gap: 1.5rem;
+    width: 100%;
+
+    @include sm {
+      grid-template-columns: 1fr 1fr;
     }
   }
 }

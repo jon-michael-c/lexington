@@ -12,9 +12,10 @@ class Section extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct($bgColor)
+    public function __construct($bgColor, $textColor)
     {
         $this->bgColor = $bgColor;
+        $this->textColor = $textColor;
     }
 
     /**
