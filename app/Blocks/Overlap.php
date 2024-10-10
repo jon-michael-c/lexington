@@ -5,21 +5,21 @@ namespace App\Blocks;
 use Log1x\AcfComposer\Block;
 use Log1x\AcfComposer\Builder;
 
-class Section extends Block
+class Overlap extends Block
 {
     /**
      * The block name.
      *
      * @var string
      */
-    public $name = 'Section';
+    public $name = 'Overlap';
 
     /**
      * The block description.
      *
      * @var string
      */
-    public $description = 'A simple Section block.';
+    public $description = 'A simple Overlap block.';
 
     /**
      * The block category.
@@ -139,7 +139,7 @@ class Section extends Block
      */
     public $template = [
         'core/heading' => ['placeholder' => 'Hello World'],
-        'core/paragraph' => ['placeholder' => 'Welcome to the Section block.'],
+        'core/paragraph' => ['placeholder' => 'Welcome to the Overlap block.'],
     ];
 
     /**
@@ -148,7 +148,9 @@ class Section extends Block
     public function with(): array
     {
         return [
-            'pad' => get_field('pad')
+            'image' => get_field('image'),
+            'items' => get_field('items'),
+
         ];
     }
 
@@ -157,20 +159,17 @@ class Section extends Block
      */
     public function fields(): array
     {
-        $fields = Builder::make('section');
+        $fields = Builder::make('overlap');
 
         $fields
-            ->addSelect('pad', [
-                'label' => 'Padding',
-                'choices' => [
-                    'default' => 'Default',
-                    'sm' => 'Small',
-                    'md' => 'Medium',
-                    'lg' => 'Large',
-                    'none' => 'None',
-                ],
-            ]);
-
+            ->addImage('image')
+            ->addRepeater('items', [
+                'layout' => 'block',
+            ])
+            ->addText('title')
+            ->addTextarea('content')
+            ->endRepeater()
+        ;
 
 
         return $fields->build();

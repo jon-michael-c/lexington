@@ -196,3 +196,8 @@ footer .bg-image {
     }
   }
 }
+
+section.wp-block-group {
+  grid-column: full-width !important;
+  gap: 0 !important;
+}

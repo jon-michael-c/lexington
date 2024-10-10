@@ -1,0 +1,58 @@
+.overlay-list {
+  position: relative;
+  padding-left: 3rem;
+  li {
+    &:not(:last-child) {
+      margin-bottom: 5rem;
+    }
+    .overlay-list-item {
+      position: relative;
+      max-height: 28px;
+      display: flex;
+      justify-content: start;
+      align-items: center;
+      .overlay-dot {
+        position: absolute;
+        left: -3rem;
+        top: 50%;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        @apply bg-mist;
+        z-index: 10;
+        transform: translate(-50%, -50%);
+        transition: all 0.3s ease;
+      }
+      .overlay-content {
+        transition: all 0.3s ease;
+        opacity: 0.5;
+        h4 {
+          font-size: 28px;
+          transition: all 0.3s ease;
+        }
+      }
+    }
+
+    &:hover {
+      .overlay-dot {
+        @apply bg-magenta;
+      }
+      .overlay-content {
+        opacity: 1;
+        h4 {
+          font-size: 38px;
+        }
+      }
+    }
+  }
+
+  .overlay-line {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 2px;
+    height: 95%;
+    @apply bg-mist;
+  }
+}

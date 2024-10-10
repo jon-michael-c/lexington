@@ -9,13 +9,16 @@ use Illuminate\View\Component;
 class Section extends Component
 {
     public $bgColor;
+    public $textColor;
+    public $pad;
     /**
      * Create a new component instance.
      */
-    public function __construct($bgColor, $textColor)
+    public function __construct($bgColor, $textColor, $pad = '')
     {
         $this->bgColor = $bgColor;
         $this->textColor = $textColor;
+        $this->pad = $pad;
     }
 
     /**

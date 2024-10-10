@@ -8,6 +8,6 @@
     }
 @endphp
 
-<x-section :bgColor="$block->block->backgroundColor" :textColor="$block->block->textColor">
+<x-section :bgColor="$block->block->backgroundColor" :textColor="$block->block->textColor" :pad="$pad">
     <InnerBlocks />
 </x-section>
