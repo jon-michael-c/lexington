@@ -1,0 +1,152 @@
+.timeline {
+  $ease: ease;
+  $time: 0.75s;
+  position: relative;
+  margin-top: 5rem;
+
+  ol li {
+    position: relative;
+
+    &:not(:last-child) {
+      padding-bottom: 2rem;
+    }
+    &.active {
+      .timeline-year-container {
+        .timeline-year {
+          @apply text-magenta;
+          font-size: 60px;
+        }
+      }
+
+      .timeline-content {
+        opacity: 1;
+        width: 110%;
+        max-width: 200%;
+
+        .timeline-content-bg {
+          width: 100%;
+        }
+        .timeline-title {
+          font-size: 28px;
+          opacity: 1;
+        }
+      }
+    }
+
+    &.dot {
+      .timeline-dot {
+        width: 20px;
+        height: 20px;
+        @apply bg-magenta;
+      }
+    }
+  }
+
+  .timeline-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 2px;
+    height: 100%;
+    z-index: 1;
+    @apply bg-mist;
+    transition: all $time $ease;
+    .timeline-line-progress {
+      width: 200%;
+      transform: translate(-25%, 0%);
+      height: 0;
+      @apply bg-magenta;
+      transition: all $time $ease;
+    }
+  }
+
+  .timeline-item {
+    display: grid;
+    gap: 0.75rem;
+    position: relative;
+    transition: all $time $ease;
+
+    .timeline-dot {
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      transition: all $time $ease;
+      @apply bg-mist;
+    }
+
+    .timeline-year-container {
+      width: 100%;
+      margin-left: 2rem;
+      .timeline-year {
+        transition: all $time $ease;
+      }
+    }
+
+    .timeline-content {
+      margin-left: 2rem;
+      position: relative;
+      padding-left: 1rem;
+      transition: all $time $ease;
+
+      .timeline-content-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0.5rem;
+        height: 100%;
+        z-index: -1;
+        transition: all $time $ease;
+        @apply bg-mist-100;
+      }
+
+      .timeline-title {
+        transition: all 0.5s $ease;
+        opacity: 0.5;
+      }
+
+      .timeline-description {
+        display: none;
+        transition: all $time $ease;
+      }
+    }
+  }
+
+  @include sm {
+    ol li {
+      padding: 7rem 0;
+    }
+
+    .timeline-line {
+      left: 40%;
+      transform: translate(-50%, 0%);
+    }
+
+    .timeline-item {
+      grid-template-columns: 4fr 6fr;
+      justify-items: center;
+      gap: 7rem;
+
+      .timeline-dot {
+        left: 40%;
+      }
+
+      .timeline-year-container {
+        text-align: right;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        margin-right: 5rem;
+      }
+
+      .timeline-content {
+        max-width: 400px;
+        margin-right: auto;
+        padding: 1rem 2rem;
+      }
+    }
+  }
+}
