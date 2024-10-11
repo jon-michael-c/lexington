@@ -51,6 +51,8 @@
                 @include('partials.posts.preview', ['id' => get_the_ID()])
             @endwhile
         </div>
+
+        {!! get_the_posts_navigation() !!}
     </section>
-    {!! get_the_posts_navigation() !!}
+    {!! get_post_field('post_content', get_page_by_title('News and Press')->ID) !!}
 @endsection
