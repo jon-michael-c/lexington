@@ -7,6 +7,7 @@
 @import './components/form';
 @import './components/carousel';
 @import './components/overlay';
+@import './components/quotes';
 @import './pages/milestones/timeline.scss';
 @tailwind base;
 @tailwind components;
@@ -126,7 +127,7 @@
 
   .acf-block-component {
     @extend .content-grid;
-    a {
+    a:not(.acf-button) {
       pointer-events: none !important;
     }
   }

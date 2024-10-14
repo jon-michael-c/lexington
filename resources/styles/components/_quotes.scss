@@ -1,0 +1,106 @@
+.quotes {
+  position: relative;
+  height: 650px;
+
+  .quote {
+    position: absolute;
+    width: 100vw;
+    left: -25px;
+    height: fit-content;
+    top: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+
+    .quote__headshot {
+      margin-bottom: -5rem;
+    }
+
+    .quote__content {
+      padding: 5rem 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+
+      .quote_icon {
+        display: block;
+        height: 80px;
+
+        p {
+          height: 80px;
+        }
+      }
+
+      .quote__author {
+        margin-top: 1rem;
+      }
+    }
+
+    &.active {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
+  .quote__controls {
+    position: relative;
+    height: 12px;
+    width: 100%;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    margin: auto 0;
+
+    .quote__dot {
+      @apply border-[1px] border-solid border-mist;
+      width: 12px;
+      height: auto;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      transition: all 0.3s ease;
+
+      &:hover {
+        @apply bg-mist-300;
+        cursor: pointer;
+      }
+
+      &.active {
+        @apply bg-mist;
+      }
+    }
+  }
+
+  @include sm {
+    height: 426px;
+    width: 100%;
+
+    .quote {
+      width: 100%;
+      left: 0;
+
+      .quote__headshot {
+        margin-right: -4rem;
+      }
+
+      .quote__content {
+        flex-direction: row;
+        gap: 2rem;
+        padding: 6rem 3rem 6rem 7rem;
+        width: 100%;
+
+        .quote__author {
+          margin-top: 3rem;
+        }
+      }
+    }
+
+    .quote__controls {
+      position: absolute;
+      right: 4rem;
+      top: 50%;
+      transform: translate(0, -50%);
+    }
+  }
+}
