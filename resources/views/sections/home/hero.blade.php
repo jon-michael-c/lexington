@@ -3,7 +3,7 @@
         class="page-header-content absolute top-[10%] breakout w-full flex justify-start items-end pr-4 sm:pr-0 py-16 z-1 h-[530px] sm:top-0 sm:h-[610px]">
         <div class="bg-video z-[-4]">
             <video autoplay muted loop class="w-full h-full object-cover">
-                <source src="https://lexington.local/app/uploads/2024/10/lg_hero_video.mp4" type="video/mp4">
+                <source src="/app/uploads/2024/10/lg_hero_video.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
         </div>
@@ -54,7 +54,9 @@
         class="breakout bg-magenta w-[16px] sm:w-[32px] h-[183px] absolute bottom-[40%] sm:bottom-[25%] left-[-8px] sm:left-[-16px] z-[2]">
     </div>
     <div
-        class="breakout w-[16px] sm:w-[32px] h-[16px] sm:h-[32px] absolute bottom-[71px] right-[-12px] sm:right-[-56px] z-[2]">
-        <p> || </p>
+        class="breakout w-[16px] sm:w-[32px] h-[16px] sm:h-[32px] absolute bottom-[90px] right-[-12px] sm:right-[-56px] z-[2]">
+        <div class="hero-video-btn">
+            <p> || </p>
+        </div>
     </div>
 </section>

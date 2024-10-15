@@ -5,11 +5,6 @@
   "description": "Leibowitz Starter based on Sage by roots.io",
   "homepage": "https://github.com/jon-michael-c/leibstarter",
   "authors": [
-    {
-      "name": "jon-michael-c",
-      "email": "jon@jmcubano.com",
-      "homepage": "https://jmcubano.com"
-    }
   ],
   "keywords": [
     "wordpress"

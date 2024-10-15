@@ -16,7 +16,5 @@
                 | {!! $location !!}
             @endif
         </p>
-
     </div>
-
 </a>

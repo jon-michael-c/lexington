@@ -8,6 +8,7 @@
 @import './components/carousel';
 @import './components/overlay';
 @import './components/quotes';
+@import './components/buttons';
 @import './pages/milestones/timeline.scss';
 @tailwind base;
 @tailwind components;
@@ -19,6 +20,23 @@
   margin-left: 1rem;
 }
 
+.editor-styles-wrapper :where(.wp-element-button, .wp-block-button__link) {
+  // remove styles from the button
+  position: relative !important;
+  background: none !important;
+  padding: 8px 0 !important;
+  text-align: left;
+  color: black !important;
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    @apply bg-magenta;
+  }
+}
 .editor-styles-wrapper a:where(:not(.wp-element-button)) {
   text-decoration: unset !important;
 }

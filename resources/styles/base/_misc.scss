@@ -152,12 +152,12 @@ footer .bg-image {
     padding-bottom: 10rem;
     gap: 1.5rem;
 
-    div:first-child {
+    & > div:first-child {
       max-width: 490px;
       padding-top: 3rem;
     }
 
-    div:last-child {
+    & > div:last-child {
       padding-top: 1rem;
       max-width: 490px;
     }

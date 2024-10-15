@@ -2,8 +2,7 @@
     $team = get_posts([
         'post_type' => 'team-member',
         'posts_per_page' => -1,
-        'orderby' => 'menu_order',
-        'order' => 'ASC',
+        'order' => 'DESC',
         'fields' => 'ids',
     ]);
 
@@ -27,8 +26,8 @@
 
     </div>
     <div class="grid gap-4 sm:gap-10 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-        @for ($i = 0; $i < 8; $i++)
-            @include('partials.team.preview', ['id' => $team[0]])
-        @endfor
+        @foreach ($team as $id)
+            @include('partials.team.preview', ['id' => $id])
+        @endforeach
     </div>
 </div>
