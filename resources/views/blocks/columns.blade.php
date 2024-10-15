@@ -7,7 +7,7 @@
         <div class="col-span-8">
             <div class="w-full sm:aspect-[2]">
                 @if ($image)
-                    <img class="w-full h-full object-cover" src="{{ $image['url'] }}" alt="{{ $image['alt'] }}">
+                    <x-image :src="$image['url']" :alt="$image['alt']" />
                 @endif
             </div>
         </div>
@@ -21,7 +21,7 @@
         <div class="col-span-6 h-full relative">
             <div class="w-full h-full absolute top-0 left-0">
                 @if ($image)
-                    <img class="w-full h-full object-cover" src="{{ $image['url'] }}" alt="{{ $image['alt'] }}">
+                    <x-image :src="$image['url']" :alt="$image['alt']" />
                 @endif
             </div>
         </div>
@@ -31,7 +31,7 @@
         <div class="col-span-8">
             <div class="w-full sm:aspect-[2]">
                 @if ($image)
-                    <img class="w-full h-full object-cover" src="{{ $image['url'] }}" alt="{{ $image['alt'] }}">
+                    <x-image :src="$image['url']" :alt="$image['alt']" />
                 @endif
             </div>
         </div>
@@ -45,7 +45,7 @@
         <div class="col-span-6 h-full relative">
             <div class="w-full h-full absolute top-0 left-0">
                 @if ($image)
-                    <img class="w-full h-full object-cover" src="{{ $image['url'] }}" alt="{{ $image['alt'] }}">
+                    <x-image :src="$image['url']" :alt="$image['alt']" />
                 @endif
             </div>
         </div>
@@ -65,7 +65,7 @@
         <div class="col-span-5">
             <div class="w-full h-full">
                 @if ($image)
-                    <img class="w-full h-full object-cover" src="{{ $image['url'] }}" alt="{{ $image['alt'] }}">
+                    <x-image :src="$image['url']" :alt="$image['alt']" />
                 @endif
             </div>
         </div>
