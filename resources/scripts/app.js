@@ -3,6 +3,7 @@ import VideoCTAs from './videoCTAs';
 import Carousel from './carousel';
 import Timeline from './timeline';
 import Quotes from './quotes';
+import HighchartsController from './charts';
 
 /**
  * Application entrypoint
@@ -13,6 +14,7 @@ domReady(async () => {
   new Carousel();
   new Timeline();
   new Quotes();
+  new HighchartsController();
 });
 
 /**
