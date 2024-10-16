@@ -25,6 +25,7 @@
     "@roots/sage": "6.20.0"
   },
   "dependencies": {
+    "animejs": "^3.2.2",
     "highcharts": "^11.4.8"
   }
 }
