@@ -320,3 +320,74 @@ section.wp-block-group {
     }
   }
 }
+
+.reasons {
+  .reasons-breakout {
+    grid-column: full-width-start / breakout-end !important;
+  }
+  .reasons-bg {
+    grid-column: breakout-start / content-end !important;
+  }
+
+  .reasons-items {
+    .reasons-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1rem 4rem;
+      position: relative;
+      transition: all 0.3s ease;
+      &:first-child {
+        &::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 50%;
+          transform: translate(-50%, 0%);
+          width: calc(100% - 8rem);
+          height: 2px;
+          @apply bg-mist;
+        }
+      }
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translate(-50%, 0%);
+        width: calc(100% - 8rem);
+        height: 2px;
+        @apply bg-mist;
+      }
+
+      .reasons-icon {
+        position: relative;
+        top: 7px;
+        width: 10px;
+        min-width: 10px;
+        height: 10px;
+        @apply bg-magenta;
+      }
+
+      .reasons-text {
+        max-height: 0px;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.5s ease;
+      }
+
+      &:hover {
+        cursor: pointer;
+        @apply bg-mist-300;
+        padding: 2rem 4rem;
+
+        .reasons-text {
+          max-height: 1000px;
+          opacity: 1;
+          visibility: visible;
+        }
+      }
+    }
+  }
+}
