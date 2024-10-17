@@ -2,6 +2,7 @@ import Highcharts from 'highcharts';
 
 export default class HighChartsController {
   constructor() {
+    if (!document.querySelector('#sec-chart')) return;
     Highcharts.chart('sec-chart', {
       chart: {
         type: 'column',

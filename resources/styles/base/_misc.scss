@@ -88,51 +88,105 @@ footer .bg-image {
 .stats {
   .stat {
     position: relative;
+  }
+  &.stats-md {
+    .stat {
+      @include md-lg {
+        &:not(:nth-child(2n)):not(:last-child)::after {
+          content: '';
+          position: absolute;
+          top: 50%;
+          right: 0;
+          height: 55%;
+          width: 2px;
+          transform: translate(0%, -50%);
+          @apply bg-mist;
+        }
 
-    @include md-lg {
-      &:not(:nth-child(2n)):not(:last-child)::after {
-        content: '';
-        position: absolute;
-        top: 50%;
-        right: 0;
-        height: 55%;
-        width: 2px;
-        transform: translate(0%, -50%);
-        @apply bg-mist;
+        // not the last 2 items
+        &:not(:nth-last-child(-n + 2)):before {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          height: 2px;
+          width: 100%;
+          @apply bg-mist;
+        }
       }
 
-      // not the last 2 items
-      &:not(:nth-last-child(-n + 2)):before {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        height: 2px;
-        width: 100%;
-        @apply bg-mist;
+      @include lg {
+        &:not(:nth-child(3n)):not(:last-child)::after {
+          content: '';
+          position: absolute;
+          top: 50%;
+          right: 0;
+          height: 55%;
+          width: 2px;
+          transform: translate(0%, -50%);
+          @apply bg-mist;
+        }
+        // not the last 3 items
+        &:not(:nth-last-child(-n + 3)):before {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          height: 2px;
+          width: 100%;
+          @apply bg-mist;
+        }
       }
     }
+  }
 
-    @include lg {
-      &:not(:nth-child(3n)):not(:last-child)::after {
-        content: '';
-        position: absolute;
-        top: 50%;
-        right: 0;
-        height: 55%;
-        width: 2px;
-        transform: translate(0%, -50%);
-        @apply bg-mist;
+  &.stats-lg {
+    // for 4 columns logic
+    .stat {
+      @include md-lg {
+        &:not(:nth-child(3n)):not(:last-child)::after {
+          content: '';
+          position: absolute;
+          top: 50%;
+          right: 0;
+          height: 55%;
+          width: 2px;
+          transform: translate(0%, -50%);
+          @apply bg-mist;
+        }
+
+        // not the last 2 items
+        &:not(:nth-last-child(-n + 3)):before {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          height: 2px;
+          width: 100%;
+          @apply bg-mist;
+        }
       }
-      // not the last 3 items
-      &:not(:nth-last-child(-n + 3)):before {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        height: 2px;
-        width: 100%;
-        @apply bg-mist;
+      @include lg {
+        &:not(:nth-child(4n)):not(:last-child)::after {
+          content: '';
+          position: absolute;
+          top: 50%;
+          right: 0;
+          height: 55%;
+          width: 2px;
+          transform: translate(0%, -50%);
+          @apply bg-mist;
+        }
+        // not the last 4 items
+        &:not(:nth-last-child(-n + 4)):before {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          height: 2px;
+          width: 100%;
+          @apply bg-mist;
+        }
       }
     }
   }
@@ -177,27 +231,92 @@ footer .bg-image {
 }
 
 .split-sect {
+  position: relative;
   &.break-right {
-    .acf-innerblocks-container {
+    & > .acf-innerblocks-container {
       grid-column: content-start / breakout-end;
+      @include sm {
+        grid-template-columns: 1fr 1fr;
+      }
 
       & > div:first-child {
         max-width: 520px;
       }
     }
   }
+  &.items-center {
+    & > .acf-innerblocks-container {
+      align-items: center;
+    }
+  }
   .acf-innerblocks-container {
     display: grid;
     gap: 1.5rem;
     width: 100%;
-
-    @include sm {
-      grid-template-columns: 1fr 1fr;
-    }
   }
 }
 
 section.wp-block-group {
   grid-column: full-width !important;
   gap: 0 !important;
+}
+
+.accordion {
+  .accordion-bg {
+    grid-column: breakout-start / content-end !important;
+  }
+
+  .accordion-content {
+    grid-column: content-start / breakout-end !important;
+    display: grid;
+    grid-template-columns: 3fr 7fr;
+    gap: 2rem;
+    height: 578px;
+    .acf-innerblocks-container {
+      display: grid;
+      align-content: start;
+      gap: 0.5rem;
+    }
+    p.font-bold {
+      line-height: 34px !important;
+    }
+
+    .accordion-item {
+      .accordion-title {
+        transition: all 0.3s ease;
+        &.short {
+          padding: 1.5rem 3rem;
+        }
+      }
+      .accordion-text {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        padding: 0;
+        height: 0px;
+        padding: 0;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+      }
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      &.active {
+        .accordion-text {
+          height: 450px;
+          padding: 0rem 3rem;
+          opacity: 1;
+          visibility: visible;
+        }
+        .accordion-title {
+          height: 0px;
+          padding: 0;
+          opacity: 0;
+        }
+      }
+    }
+  }
 }

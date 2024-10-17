@@ -5,21 +5,21 @@ namespace App\Blocks;
 use Log1x\AcfComposer\Block;
 use Log1x\AcfComposer\Builder;
 
-class SplitSect extends Block
+class ImageBG extends Block
 {
     /**
      * The block name.
      *
      * @var string
      */
-    public $name = 'Split Sect';
+    public $name = 'Image B G';
 
     /**
      * The block description.
      *
      * @var string
      */
-    public $description = 'A simple Split Sect block.';
+    public $description = 'A simple Image B G block.';
 
     /**
      * The block category.
@@ -139,7 +139,7 @@ class SplitSect extends Block
      */
     public $template = [
         'core/heading' => ['placeholder' => 'Hello World'],
-        'core/paragraph' => ['placeholder' => 'Welcome to the Split Sect block.'],
+        'core/paragraph' => ['placeholder' => 'Welcome to the Image B G block.'],
     ];
 
     /**
@@ -148,8 +148,7 @@ class SplitSect extends Block
     public function with(): array
     {
         return [
-            'justify' => get_field('justify'),
-            'align' => get_field('align'),
+            'image' => get_field('image')
         ];
     }
 
@@ -158,22 +157,10 @@ class SplitSect extends Block
      */
     public function fields(): array
     {
-        $fields = Builder::make('split_sect');
+        $fields = Builder::make('image_b_g');
 
         $fields
-            ->addSelect('justify')
-            ->addChoices([
-                'start' => 'Start',
-                'center' => 'Center',
-                'end' => 'End',
-            ])
-            ->addSelect('align')
-            ->addChoices([
-                'items-start' => 'Start',
-                'items-center' => 'Center',
-                'items-end' => 'End',
-            ])
-        ;
+            ->addImage('image');
 
 
         return $fields->build();

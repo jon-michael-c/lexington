@@ -45,6 +45,11 @@ class SiteOptions extends Field
                 'instructions' => 'Upload your footer logo here.',
                 'return_format' => 'url',
             ])
+            ->addImage("footer_image", [
+                "label" => "Footer Image",
+                "instructions" => "Upload your footer image here.",
+                "return_format" => "url",
+            ])
             /**
              * Contact Info Tab
              */

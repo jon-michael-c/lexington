@@ -15,7 +15,7 @@ domReady(async () => {
   new Carousel();
   new Timeline();
   new Quotes();
-  //new HighchartsController();
+  new HighchartsController();
   if (!document.querySelector('.hero')) return;
   // Define targets
   const siteLogo = '.site-logo';
@@ -130,7 +130,7 @@ domReady(async () => {
       opacity: 1,
     },
     { targets: reds[1], opacity: 0 },
-    { targets: green, left: '0' },
+    { targets: green, left: '0', backgroundColor: '#C7D9D4' },
   ];
 
   async function runTimelines(i) {
@@ -210,7 +210,6 @@ domReady(async () => {
         );
       });
 
-      await tl5.finished; // Wait for Timeline 5 to finish
       const introbg = document.querySelector('.intro-bg');
       introbg.style.display = 'none'; // Hide the intro background
       const intro = document.querySelector('.intro');
@@ -218,6 +217,7 @@ domReady(async () => {
       header.style.opacity = '1'; // Show the header
 
       body.style.overflow = 'auto'; // Allow scrolling
+      await tl5.finished; // Wait for Timeline 5 to finish
     }
   }
 

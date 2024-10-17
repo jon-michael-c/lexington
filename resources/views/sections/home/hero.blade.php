@@ -28,7 +28,7 @@
             <div class="hero-text-container bg-magenta w-full h-full absolute top-0  z-[-1] opacity-90"></div>
             <div class="hero-text flex flex-col justify-between h-full w-full">
                 <div class="text-white">
-                    <h4 class="text-[20px]">
+                    <h4 class="font-normal text-[20px]">
                         Lexington Partners is one of the world’s largest and most trusted managers of secondary private
                         equity
                         and co-investment funds.

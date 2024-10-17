@@ -24,8 +24,9 @@
     } else {
         $classes .= ' py-8 sm:py-24';
     }
+
 @endphp
 
-<section class="full-width {{ $classes }}">
+<section class="full-width relative {{ $classes }}">
     {{ $slot }}
 </section>

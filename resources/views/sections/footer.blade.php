@@ -2,8 +2,8 @@
     <div class="full-width w-full border-t-[9px] border-solid border-magenta overflow-hidden relative">
         <div class="breakout">
             <div class="bg-image w-full inner-full absolute left-0 top-0 opacity-10  z-index-[-1]">
-                <img src="https://lexington.local/app/uploads/2024/10/istockphoto-954282570-2048x2048-1.jpg"
-                    alt="footer image" class="w-full h-full object-bottom" />
+                <img src="{{ get_field('footer_image', 'option') }}" alt="footer image"
+                    class="w-full h-full object-bottom" />
             </div>
             <div class="grid sm:grid-cols-2 gap-12 py-8 sm:gap-0">
                 <div class="flex flex-col gap-8 justify-between items-start">

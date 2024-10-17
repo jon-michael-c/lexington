@@ -5,21 +5,21 @@ namespace App\Blocks;
 use Log1x\AcfComposer\Block;
 use Log1x\AcfComposer\Builder;
 
-class SplitSect extends Block
+class BoxCTAs extends Block
 {
     /**
      * The block name.
      *
      * @var string
      */
-    public $name = 'Split Sect';
+    public $name = 'Box C T As';
 
     /**
      * The block description.
      *
      * @var string
      */
-    public $description = 'A simple Split Sect block.';
+    public $description = 'A simple Box C T As block.';
 
     /**
      * The block category.
@@ -102,7 +102,7 @@ class SplitSect extends Block
         'align_content' => false,
         'full_height' => false,
         'anchor' => false,
-        'mode' => false,
+        'mode' => true,
         'multiple' => true,
         'jsx' => true,
         'color' => [
@@ -139,7 +139,7 @@ class SplitSect extends Block
      */
     public $template = [
         'core/heading' => ['placeholder' => 'Hello World'],
-        'core/paragraph' => ['placeholder' => 'Welcome to the Split Sect block.'],
+        'core/paragraph' => ['placeholder' => 'Welcome to the Box C T As block.'],
     ];
 
     /**
@@ -148,8 +148,7 @@ class SplitSect extends Block
     public function with(): array
     {
         return [
-            'justify' => get_field('justify'),
-            'align' => get_field('align'),
+            'items' => $this->items(),
         ];
     }
 
@@ -158,23 +157,15 @@ class SplitSect extends Block
      */
     public function fields(): array
     {
-        $fields = Builder::make('split_sect');
+        $fields = Builder::make('box_c_t_as');
 
         $fields
-            ->addSelect('justify')
-            ->addChoices([
-                'start' => 'Start',
-                'center' => 'Center',
-                'end' => 'End',
+            ->addRepeater('items')
+            ->addLink('link')
+            ->addImage('image', [
+                'return_format' => 'array',
             ])
-            ->addSelect('align')
-            ->addChoices([
-                'items-start' => 'Start',
-                'items-center' => 'Center',
-                'items-end' => 'End',
-            ])
-        ;
-
+            ->endRepeater();
 
         return $fields->build();
     }

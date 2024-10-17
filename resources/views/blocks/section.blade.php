@@ -6,6 +6,7 @@
     if (!isset($block->block->textColor)) {
         $block->block->textColor = '';
     }
+
 @endphp
 
 <x-section :bgColor="$block->block->backgroundColor" :textColor="$block->block->textColor" :pad="$pad">
