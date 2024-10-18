@@ -249,6 +249,12 @@ footer .bg-image {
       align-items: center;
     }
   }
+
+  &.items-start {
+    & > .acf-innerblocks-container {
+      align-items: start;
+    }
+  }
   .acf-innerblocks-container {
     display: grid;
     gap: 1.5rem;

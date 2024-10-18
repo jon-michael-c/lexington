@@ -150,6 +150,7 @@ class SplitSect extends Block
         return [
             'justify' => get_field('justify'),
             'align' => get_field('align'),
+            'reverse' => get_field('reverse'),
         ];
     }
 
@@ -161,6 +162,7 @@ class SplitSect extends Block
         $fields = Builder::make('split_sect');
 
         $fields
+            ->addTrueFalse('reverse')
             ->addSelect('justify')
             ->addChoices([
                 'start' => 'Start',

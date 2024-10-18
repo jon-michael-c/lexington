@@ -5,21 +5,21 @@ namespace App\Blocks;
 use Log1x\AcfComposer\Block;
 use Log1x\AcfComposer\Builder;
 
-class ImageBG extends Block
+class ImageCTAs extends Block
 {
     /**
      * The block name.
      *
      * @var string
      */
-    public $name = 'Image B G';
+    public $name = 'Image C T As';
 
     /**
      * The block description.
      *
      * @var string
      */
-    public $description = 'A simple Image B G block.';
+    public $description = 'A simple Image C T As block.';
 
     /**
      * The block category.
@@ -102,7 +102,7 @@ class ImageBG extends Block
         'align_content' => false,
         'full_height' => false,
         'anchor' => false,
-        'mode' => false,
+        'mode' => true,
         'multiple' => true,
         'jsx' => true,
         'color' => [
@@ -139,7 +139,7 @@ class ImageBG extends Block
      */
     public $template = [
         'core/heading' => ['placeholder' => 'Hello World'],
-        'core/paragraph' => ['placeholder' => 'Welcome to the Image B G block.'],
+        'core/paragraph' => ['placeholder' => 'Welcome to the Image C T As block.'],
     ];
 
     /**
@@ -148,8 +148,7 @@ class ImageBG extends Block
     public function with(): array
     {
         return [
-            'image' => get_field('image'),
-            'reverse' => get_field('reverse'),
+            'items' => $this->items(),
         ];
     }
 
@@ -158,12 +157,13 @@ class ImageBG extends Block
      */
     public function fields(): array
     {
-        $fields = Builder::make('image_b_g');
+        $fields = Builder::make('image_c_t_as');
 
         $fields
-            ->addTrueFalse('reverse')
-            ->addImage('image');
-
+            ->addRepeater('items')
+            ->addImage('image')
+            ->addLink('link')
+            ->endRepeater();
 
         return $fields->build();
     }
