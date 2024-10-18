@@ -163,7 +163,9 @@ class Stats extends Block
             ->addRepeater('stats', [
                 'layout' => 'block',
             ])
+            ->addText('non_numeric_start')
             ->addText('value')
+            ->addText('non_numeric_end')
             ->addText('label')
             ->endRepeater();
 

@@ -145,7 +145,7 @@
 
   .acf-block-component {
     @extend .content-grid;
-    a:not(.acf-button):not(.button) {
+    a:not(.acf-button):not(.button):not(.acf-icon) {
       pointer-events: none !important;
     }
   }

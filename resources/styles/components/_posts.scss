@@ -33,3 +33,38 @@
     }
   }
 }
+.posts-container {
+  .post-item {
+    position: relative;
+  }
+
+  .post-item {
+    @include md-lg {
+      // Add vertical divider between posts except for every 2nd item and the last item in the row
+      &:not(:nth-child(2n)):not(:last-child)::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        right: 0;
+        height: 55%;
+        width: 2px;
+        transform: translate(0%, -50%);
+        @apply bg-mist; // Tailwind CSS for divider color
+      }
+    }
+
+    @include lg {
+      // 3-column layout: Add vertical dividers except for every 3rd item and the last item
+      &:not(:nth-child(3n)):not(:last-child)::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        right: 0;
+        height: 55%;
+        width: 2px;
+        transform: translate(0%, -50%);
+        @apply bg-mist;
+      }
+    }
+  }
+}

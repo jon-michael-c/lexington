@@ -126,6 +126,11 @@
           "slug": "xl"
         },
         {
+          "name": "xl-2",
+          "size": "28px",
+          "slug": "xl-2"
+        },
+        {
           "name": "2xl",
           "size": "30px",
           "slug": "2xl"

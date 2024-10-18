@@ -21,7 +21,8 @@
             @php(the_content())
         </div>
         <div class="my-16 sm:my-36">
-            <a href="{{ get_post_type_archive_link('post') }}" class="text-ocean uppercase link">Back to News &
+            <a href="{{ get_permalink(get_page_by_title('News and Press')->ID) }}"
+                class="text-ocean uppercase link">Back to News &
                 Press</a>
         </div>
     </div>

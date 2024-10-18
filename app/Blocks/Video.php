@@ -5,21 +5,21 @@ namespace App\Blocks;
 use Log1x\AcfComposer\Block;
 use Log1x\AcfComposer\Builder;
 
-class Columns extends Block
+class Video extends Block
 {
     /**
      * The block name.
      *
      * @var string
      */
-    public $name = 'Columns';
+    public $name = 'Video';
 
     /**
      * The block description.
      *
      * @var string
      */
-    public $description = 'A simple Columns block.';
+    public $description = 'A simple Video block.';
 
     /**
      * The block category.
@@ -102,7 +102,7 @@ class Columns extends Block
         'align_content' => false,
         'full_height' => false,
         'anchor' => false,
-        'mode' => false,
+        'mode' => true,
         'multiple' => true,
         'jsx' => true,
         'color' => [
@@ -139,7 +139,7 @@ class Columns extends Block
      */
     public $template = [
         'core/heading' => ['placeholder' => 'Hello World'],
-        'core/paragraph' => ['placeholder' => 'Welcome to the Columns block.'],
+        'core/paragraph' => ['placeholder' => 'Welcome to the Video block.'],
     ];
 
     /**
@@ -148,12 +148,8 @@ class Columns extends Block
     public function with(): array
     {
         return [
-            'alignment' => get_field('alignment') ?? 'center',
-            'stripes' => get_field('stripes'),
-            'image' => get_field('image'),
-            'columns_type' => get_field('column_type'),
+            'video' => get_field('video'),
         ];
-
     }
 
     /**
@@ -161,35 +157,13 @@ class Columns extends Block
      */
     public function fields(): array
     {
-        $fields = Builder::make('columns');
+        $fields = Builder::make('video');
 
         $fields
-            ->addImage('image')
-            ->addTrueFalse('stripes', [
-                'label' => 'Stripes',
-            ])
-            ->addSelect('alignment', [
-                'label' => 'Alignment',
-                'choices' => [
-                    'top' => 'Top',
-                    'center' => 'Center',
-                    'bottom' => 'Bottom',
-                ],
-            ])
-            ->setDefaultValue('center')
-            ->addSelect('column_type', [
-                'label' => 'Column Type',
-                'choices' => [
-                    '1/3' => '1/3',
-                    '1/2' => '1/2',
-                    '2/3' => '2/3',
-                    '1/2-reverse' => '1/2 Reverse',
-                    '2/3-reverse' => '2/3 Reverse',
-                    '1/3-reverse' => '1/3 Reverse',
-                    'full' => 'Full Width',
-                ],
+            ->addFile('video', [
+                'label' => 'Video',
+                'instructions' => 'Upload a video file.',
             ]);
-
 
         return $fields->build();
     }

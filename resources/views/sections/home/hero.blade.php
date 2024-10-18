@@ -15,16 +15,16 @@
 
     </div>
     <div
-        class="page-header-text relative bottom-[160px] pl-8 sm:pl-0 sm:bottom-[unset] z-[3] w-full flex gap-8 flex-col sm:flex-row items-end sm:pb-14 mt-auto">
+        class="page-header-text relative bottom-[160px] pl-8 sm:pl-6 sm:bottom-[unset] z-[3] w-full flex gap-8 flex-col sm:flex-row items-end sm:pb-14 mt-auto">
         <div class="tagline w-full max-w-[550px] ">
             <div class="max-w-[595px]">
                 <h1>{!! get_field('page_excerpt', get_the_ID()) !!}</h1>
             </div>
         </div>
-        <div class=" w-full sm:relative left-0 sm:bottom-[12px] h-[32px] z-[5]">
+        <div class=" w-[100vw] sm:absolute left-[47%] sm:bottom-[33%] h-[32px] z-[5]">
             <div class="stripe absolute sm:relative w-[100vw] bottom-0"></div>
         </div>
-        <div class="w-[50%] h-[226px] absolute bottom-0 right-0 z-[10] px-12 py-8 ">
+        <div class="w-[50%] h-[226px] absolute bottom-0 right-0 z-[10] px-12 py-10 ">
             <div class="hero-text-container bg-magenta w-full h-full absolute top-0  z-[-1] opacity-90"></div>
             <div class="hero-text flex flex-col justify-between h-full w-full">
                 <div class="text-white">

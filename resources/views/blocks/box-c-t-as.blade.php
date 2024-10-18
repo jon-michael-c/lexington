@@ -3,7 +3,7 @@
             @php($i = 1)
             @foreach ($items as $item)
                 <a href="{{ $item['link']['url'] }}" target="{{ $item['link']['target'] }}"
-                    class="relative p-10 text-center flex justify-center items-center">
+                    class="relative p-10 text-center flex justify-center items-center bg-taupe">
                     <div class="absolute top-0 left-0 w-full h-full opacity-25 z-[0] mix-blend-multiply">
                         @if (isset($item['image']['sizes']['medium']))
                             <img src="{{ $item['image']['sizes']['medium'] }}" alt="background image"

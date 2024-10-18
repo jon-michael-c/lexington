@@ -142,7 +142,6 @@ header {
         @apply bg-mist-300;
         a {
           @apply text-magenta font-bold;
-          pointer-events: none;
         }
       }
       a {
@@ -326,5 +325,11 @@ header {
 
   .hamburger-btn span:nth-child(3) {
     transform: translateY(-10px) rotate(-45deg);
+  }
+}
+
+.menu-item.underline {
+  &::after {
+    width: 100%;
   }
 }

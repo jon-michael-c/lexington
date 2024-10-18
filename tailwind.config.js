@@ -19,6 +19,7 @@ const config = {
       base: '18px',
       lg: '20px',
       xl: '24px',
+      'xl-2': '28px',
       '2xl': '30px',
       '3xl': '38px',
       '4xl': '50px',

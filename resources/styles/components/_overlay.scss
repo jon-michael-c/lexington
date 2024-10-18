@@ -2,12 +2,10 @@
   position: relative;
   padding-left: 3rem;
   li {
-    &:not(:last-child) {
-      margin-bottom: 5rem;
-    }
+    transition: all 0.3s ease;
+    padding: 3rem 0;
     .overlay-list-item {
       position: relative;
-      max-height: 28px;
       display: flex;
       justify-content: start;
       align-items: center;
@@ -30,10 +28,19 @@
           font-size: 28px;
           transition: all 0.3s ease;
         }
+        p {
+          @apply text-charcoal;
+          max-height: 0px;
+          opacity: 0;
+
+          visibility: hidden;
+          overflow: hidden;
+          transition: all 0.3s ease;
+        }
       }
     }
 
-    &:hover {
+    &.active {
       .overlay-dot {
         @apply bg-magenta;
       }
@@ -42,7 +49,17 @@
         h4 {
           font-size: 38px;
         }
+
+        p {
+          max-height: 1000px;
+          opacity: 1;
+          visibility: visible;
+        }
       }
+    }
+
+    &.short {
+      padding: 1rem 0;
     }
   }
 
