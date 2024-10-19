@@ -25,8 +25,8 @@ export default class Intro {
 
     // Base timeline settings
     const baseTimelineSettings = {
-      easing: 'easeOutExpo',
-      duration: 1000,
+      easing: 'cubicBezier(0.5, 0.05, 0.1, 0.3)',
+      duration: 700,
     };
 
     // Animation steps array

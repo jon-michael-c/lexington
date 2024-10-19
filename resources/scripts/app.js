@@ -6,7 +6,8 @@ import Quotes from './quotes';
 import HighchartsController from './charts';
 import Numbers from './components/numbers';
 import Intro from './components/intro';
-import anime from 'animejs';
+import anime, { stagger } from 'animejs';
+import Overlay from './components/overlay';
 
 /**
  * Application entrypoint
@@ -20,139 +21,77 @@ domReady(async () => {
   new HighchartsController();
   new Numbers();
   new Intro();
+  new Overlay();
 
-  let overlay = document.querySelector('.overlay-list');
-  let overlayItems = document.querySelectorAll('.overlay-list li');
-  let timing = 200;
-  let delay = 200;
   let easing = 'cubicBezier(.5, .05, .1, .3)';
-  if (!overlay) return;
+  let duration = 750;
+  let columns = document.querySelectorAll('.column'); // Get all columns
+  let options = {
+    root: null, // Use the viewport as the root
+    rootMargin: '0px',
+    threshold: 0.1, // Trigger when 10% of the element is in view
+  };
 
-  overlayItems.forEach((item) => {
-    item.addEventListener('mouseover', () => {
-      let header = item.querySelector('h4');
-      let text = item.querySelector('p');
-      let dot = item.querySelector('.overlay-dot');
-      anime({
-        targets: header,
-        fontSize: '38px',
-        duration: timing,
-        easing: easing,
-      });
-
-      anime({
-        targets: text,
-        maxHeight: '1000px',
-        opacity: 1,
-        visibility: 'visible',
-        duration: timing,
-        easing: easing,
-      });
-      anime({
-        targets: dot,
-        backgroundColor: '#8C1D40',
-        duration: timing,
-        easing: easing,
-      });
+  // Opacity 0 for all columns
+  columns.forEach((column) => {
+    let columnContent = column.querySelectorAll(
+      '.column-content .acf-innerblocks-container > .wp-block-group > *'
+    );
+    columnContent.forEach((content) => {
+      content.style.opacity = 0;
     });
 
-    item.addEventListener('mouseleave', () => {
-      overlayItems.forEach((item) => {
-        let header = item.querySelector('h4');
-        let text = item.querySelector('p');
-        let dot = item.querySelector('.overlay-dot');
-        anime({
-          targets: header,
-          fontSize: '24px',
-          scale: 1,
-          duration: timing,
-          easing: easing,
-        });
-
-        anime({
-          targets: text,
-          opacity: 0,
-          maxHeight: '0',
-          duration: timing,
-          easing: easing,
-        });
-
-        anime({
-          targets: dot,
-          backgroundColor: '#C7D9D4',
-          duration: timing,
-          easing: easing,
-        });
-      });
-    });
+    let columnImage = column.querySelector('.column-image .image-overlay');
+    columnImage.style.opacity = 0;
   });
 
-  overlay.addEventListener('mouseleave', () => {
-    overlayItems.forEach((item) => {
-      let header = item.querySelector('h4');
-      let text = item.querySelector('p');
-      let dot = item.querySelector('.overlay-dot');
-      anime({
-        targets: header,
-        scale: 1,
-        fontSize: '24px',
-        duration: timing,
-        easing: easing,
-      });
+  // Define the animation for column content and images
+  function animateColumn(column) {
+    let columnContent = column.querySelectorAll(
+      '.column-content .acf-innerblocks-container > .wp-block-group >  *'
+    );
+    let columnImage = column.querySelector('.column-image .image-overlay');
 
-      anime({
-        targets: text,
-        maxHeight: '0',
-        duration: timing,
-        easing: easing,
-      });
-
-      anime({
-        targets: dot,
-        backgroundColor: '#C7D9D4',
-        duration: timing,
-        easing: easing,
-      });
+    // Set initial states
+    columnImage.style.opacity = 0;
+    columnContent.forEach((content) => {
+      content.style.opacity = 0;
     });
+
+    // Animate the column content
+    anime({
+      targets: columnContent,
+      translateY: [200, 0],
+      opacity: 1,
+      duration: duration,
+      easing: 'easeInOutQuad',
+      delay: anime.stagger(200),
+    });
+
+    // Animate the column image
+    anime({
+      targets: columnImage,
+      width: ['0%', '100%'],
+      opacity: 1,
+      duration: duration,
+      easing: 'easeInOutQuad',
+    });
+  }
+
+  // Create an Intersection Observer to observe each column
+  let observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        animateColumn(entry.target); // Trigger animation when the element enters the viewport
+        observer.unobserve(entry.target); // Unobserve once animated
+      }
+    });
+  }, options);
+
+  // Observe each column
+  columns.forEach((column) => {
+    observer.observe(column);
   });
-
-  // when obserser sees overlay, activate the first item
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          let firstItem = overlayItems[0];
-          let header = firstItem.querySelector('h4');
-          let text = firstItem.querySelector('p');
-          let dot = firstItem.querySelector('.overlay-dot');
-          anime({
-            targets: header,
-            fontSize: '38px',
-            duration: timing,
-            easing: easing,
-          });
-
-          anime({
-            targets: text,
-            maxHeight: '1000px',
-            opacity: 1,
-            visibility: 'visible',
-            duration: timing,
-            easing: easing,
-          });
-          anime({
-            targets: dot,
-            backgroundColor: '#8C1D40',
-            duration: timing,
-            easing: easing,
-          });
-        }
-      });
-    },
-    { threshold: 0.1 }
-  );
-
-  observer.observe(overlay);
 });
 
 /**

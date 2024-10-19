@@ -165,6 +165,7 @@ class Timeline extends Block
             ->addGroup('content')
             ->addTextarea('title')
             ->addTextarea('description')
+            ->addImage('image')
             ->endGroup()
             ->endRepeater();
 

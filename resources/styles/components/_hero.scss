@@ -87,7 +87,6 @@
             left: -2px;
             width: 6px;
             background-color: white;
-            transition: all 0.2s ease-in-out;
           }
         }
       }
@@ -113,7 +112,6 @@
       transform: translate(0%, 150%);
     }
 
-    transition: all 0.5s ease, scale 0.55s ease;
     &.active {
       visibility: visible;
       opacity: 1;

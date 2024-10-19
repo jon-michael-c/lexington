@@ -4,30 +4,60 @@
   position: relative;
   margin-top: 5rem;
 
+  .top-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    opacity: 0;
+  }
+
+  .target-line {
+    position: fixed;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    opacity: 0;
+    background-color: red;
+  }
+
   ol li {
     position: relative;
+    height: 300px;
 
-    &:not(:last-child) {
-      padding-bottom: 2rem;
-    }
     &.active {
       .timeline-year-container {
         .timeline-year {
           @apply text-magenta;
           font-size: 60px;
         }
+
+        &::after {
+          opacity: 1;
+          scale: 1.5;
+        }
       }
 
       .timeline-content {
         opacity: 1;
-        width: 110%;
-        max-width: 200%;
-
+        width: 100%;
+        max-width: 550px;
         .timeline-content-bg {
           width: 100%;
+          max-width: 550px;
         }
         .timeline-title {
           font-size: 28px;
+          opacity: 1;
+        }
+
+        .timeline-description {
+          opacity: 1;
+        }
+
+        .timeline-image {
+          scale: 1;
           opacity: 1;
         }
       }
@@ -50,13 +80,21 @@
     height: 100%;
     z-index: 1;
     @apply bg-mist;
-    transition: all $time $ease;
-    .timeline-line-progress {
-      width: 200%;
-      transform: translate(-25%, 0%);
+    overflow: hidden;
+  }
+  .timeline-line-progress {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    transform: translate(-25%, 0%);
+    height: 100%;
+    overflow: hidden;
+    z-index: 15;
+    .line {
+      width: 100%;
       height: 0;
       @apply bg-magenta;
-      transition: all $time $ease;
     }
   }
 
@@ -64,7 +102,6 @@
     display: grid;
     gap: 0.75rem;
     position: relative;
-    transition: all $time $ease;
 
     .timeline-dot {
       position: absolute;
@@ -73,24 +110,20 @@
       transform: translate(-50%, -50%);
       width: 12px;
       height: 12px;
+      z-index: 10;
       border-radius: 50%;
-      transition: all $time $ease;
       @apply bg-mist;
     }
 
     .timeline-year-container {
       width: 100%;
       margin-left: 2rem;
-      .timeline-year {
-        transition: all $time $ease;
-      }
     }
 
     .timeline-content {
       margin-left: 2rem;
       position: relative;
       padding-left: 1rem;
-      transition: all $time $ease;
 
       .timeline-content-bg {
         position: absolute;
@@ -99,28 +132,38 @@
         width: 0.5rem;
         height: 100%;
         z-index: -1;
-        transition: all $time $ease;
         @apply bg-mist-100;
       }
 
       .timeline-title {
-        transition: all 0.5s $ease;
         opacity: 0.5;
       }
 
       .timeline-description {
-        display: none;
-        transition: all $time $ease;
+        max-height: 0px;
+        opacity: 0;
+        overflow: hidden;
+      }
+
+      .timeline-image {
+        max-height: 0px;
+        transform-origin: center center;
+        opacity: 0;
+        scale: 0;
       }
     }
   }
 
   @include sm {
     ol li {
-      padding: 7rem 0;
     }
 
     .timeline-line {
+      left: 40%;
+      transform: translate(-50%, 0%);
+    }
+
+    .timeline-line-progress {
       left: 40%;
       transform: translate(-50%, 0%);
     }
@@ -140,12 +183,42 @@
         justify-content: flex-end;
         align-items: center;
         margin-right: 5rem;
+        position: relative;
+        &::after {
+          content: '';
+          position: absolute;
+          right: -74px;
+          top: 50%;
+          width: 10px;
+          height: 10px;
+          border-radius: 50%;
+          transform: translate(0%, -50%);
+          z-index: 99;
+          scale: 1;
+          opacity: 0;
+          @apply bg-magenta;
+        }
       }
 
       .timeline-content {
-        max-width: 400px;
+        max-width: 100%;
         margin-right: auto;
         padding: 1rem 2rem;
+        position: relative;
+
+        .timeline-image {
+          height: 191px;
+          width: 323px;
+          margin-right: -8rem;
+          margin-left: 2rem;
+          opacity: 1;
+          aspect-ratio: 1.7;
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+          }
+        }
       }
     }
   }
