@@ -3,12 +3,12 @@
   padding-left: 3rem;
   li {
     transition: all 0.3s ease;
-    padding: 3rem 0;
     .overlay-list-item {
       position: relative;
       display: flex;
       justify-content: start;
       align-items: center;
+      cursor: pointer;
       .overlay-dot {
         position: absolute;
         left: -3rem;
@@ -23,17 +23,15 @@
       }
       .overlay-content {
         transition: all 0.3s ease;
-        opacity: 0.5;
         h4 {
           font-size: 28px;
+          transform-origin: right;
           transition: all 0.3s ease;
         }
         p {
           @apply text-charcoal;
           max-height: 0px;
           opacity: 0;
-
-          visibility: hidden;
           overflow: hidden;
           transition: all 0.3s ease;
         }
@@ -52,8 +50,6 @@
 
         p {
           max-height: 1000px;
-          opacity: 1;
-          visibility: visible;
         }
       }
     }

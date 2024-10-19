@@ -150,6 +150,7 @@ class Overlap extends Block
         return [
             'image' => get_field('image'),
             'items' => get_field('items'),
+            'reverse' => get_field('reverse'),
 
         ];
     }
@@ -162,6 +163,8 @@ class Overlap extends Block
         $fields = Builder::make('overlap');
 
         $fields
+            ->addTrueFalse('reverse')
+            ->setDefaultValue(false)
             ->addImage('image')
             ->addRepeater('items', [
                 'layout' => 'block',
