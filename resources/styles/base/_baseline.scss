@@ -121,6 +121,11 @@ a {
       letter-spacing: inherit !important;
       color: inherit;
       text-decoration: underline;
+      transition: all 0.2s ease;
+
+      &:hover {
+        @apply text-magenta;
+      }
     }
   }
 }

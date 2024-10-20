@@ -3,7 +3,7 @@
         @php($i = 1)
         @foreach ($items as $item)
             <a href="{{ $item['link']['url'] }}" target="{{ $item['link']['target'] }}"
-                class="relative p-10 text-center flex justify-center items-end h-[362px]">
+                class="img-hover relative p-10 text-center flex justify-center items-end h-[362px]">
                 <div class="absolute top-0 left-0 w-full h-full opacity-100 z-[0] mix-blend-multiply">
                     @if (isset($item['image']['sizes']['medium']))
                         <x-image :src="$item['image']['url']" :alt="$item['image']['alt']" />

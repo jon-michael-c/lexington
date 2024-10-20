@@ -3,7 +3,6 @@
     <div class="timeline-line"></div>
     <div class="timeline-line-progress">
         <div class="line"></div>
-
     </div>
     <div class="target-line"></div>
     @if ($items)

@@ -201,7 +201,6 @@ export default class Timeline {
     this.timelineItems.forEach((item, i) => {
       let dot = item.querySelector('.timeline-dot');
       if (i < index) {
-        console.log('before');
         anime({
           targets: dot,
           width: 12,

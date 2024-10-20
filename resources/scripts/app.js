@@ -92,6 +92,38 @@ domReady(async () => {
   columns.forEach((column) => {
     observer.observe(column);
   });
+
+  const collage = document.querySelector('.collage');
+  const collageItems = document.querySelectorAll('.collage__item');
+  const collageBG = document.querySelector('.collage__bg');
+  collageItems.forEach((item) => {
+    item.addEventListener('mouseover', () => {
+      collageItems.forEach((otherItem) => {
+        if (otherItem !== item) {
+          otherItem.classList.remove('active');
+        }
+      });
+      item.classList.add('active');
+    });
+
+    item.addEventListener('mouseout', () => {
+      item.classList.remove('active');
+    });
+  });
+
+  collage.addEventListener('mouseover', (e) => {
+    collageItems.forEach((item) => {
+      if (!item.classList.contains('active')) {
+        item.classList.add('inactive');
+      }
+    });
+  });
+
+  collage.addEventListener('mouseout', (e) => {
+    collageItems.forEach((item) => {
+      item.classList.remove('inactive');
+    });
+  });
 });
 
 /**
