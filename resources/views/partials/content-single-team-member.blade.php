@@ -3,7 +3,10 @@
         <div class="hidden sm:block absolute top-0 right-0 w-[85%] h-full bg-white z-[0]">
         </div>
         <div class="mb-12 hidden sm:block">
-            <a href="{{ home_url('team') }}" class="text-ocean uppercase link">Back to Team</a>
+            <div class="wp-button">
+                <a href="{{ home_url('team#members') }}" class="wp-button__link wp-element-button uppercase">Back to
+                    Team</a>
+            </div>
         </div>
         <div class="flex flex-col sm:flex-row sm:gap-8 justify-between items-start relative z-[5]">
             <div class="max-w-[170px] sm:max-w-[360px] pb-12">
@@ -23,7 +26,7 @@
                             {!! get_the_title() !!}
                         </h1>
                     </div>
-                    <div class="mt-4">
+                    <div class="mt-0">
                         @php
                             $locations = get_the_terms(get_the_ID(), 'location');
                             $location = $locations ? $locations[0]->name : '';
@@ -34,7 +37,7 @@
                         </p>
                     </div>
                 </header>
-                <div class="e-content grid gap-4 text-charcoal w-ful">
+                <div class="e-content grid gap-4 text-charcoal w-full">
                     @php(the_content())
                 </div>
                 <div class="mb-12 mt-8 sm:hidden">

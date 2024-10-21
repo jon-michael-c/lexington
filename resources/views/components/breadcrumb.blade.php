@@ -11,25 +11,27 @@ $hasChildPages = function ($url) {
         };
     @endphp
 
-    @if (!$isParentPage || $hasChildPages($url))
-        @if ($isParentPage)
-            @if ($hasChildPages($url))
-                <p>Overview</p>
-            @endif
+    @if ($isParentPage)
+        @if ($hasChildPages($url))
+            <p>Overview</p>
         @else
-            @foreach ($segments as $index => $segment)
-                @if ($index < count($segments) - 1)
-                    <!-- Skip the last segment -->
-                    @php
-                        $segment = str_replace('-', ' ', $segment);
-                        $url .= '/' . $segment;
-                    @endphp
-                    @if ($index > 0)
-                        |
-                    @endif
-                    <a href="{{ $url }}">{{ ucfirst($segment) }}</a>
-                @endif
-            @endforeach
+            @if (!empty(get_field('page_excerpt', get_the_ID())))
+                <p>{!! get_the_title() !!}</p>
+            @endif
         @endif
+    @else
+        @foreach ($segments as $index => $segment)
+            @if ($index < count($segments) - 1)
+                <!-- Skip the last segment -->
+                @php
+                    $segment = str_replace('-', ' ', $segment);
+                    $url .= '/' . $segment;
+                @endphp
+                @if ($index > 0)
+                    |
+                @endif
+                <a href="{{ $url }}">{{ ucfirst($segment) }}</a>
+            @endif
+        @endforeach
     @endif
 </div>

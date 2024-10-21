@@ -12,9 +12,11 @@ class Select extends Component
      * Create a new component instance.
      */
     public $options;
-    public function __construct($options = [])
+    public $id;
+    public function __construct($options = [], $id = '')
     {
         $this->options = $options;
+        $this->id = $id;
     }
 
     /**

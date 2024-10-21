@@ -10,7 +10,9 @@
 
 <div class="flex justify-between items-center w-full mb-4">
     <h3>News and Press</h3>
-    <a href="{{ get_post_type_archive_link('post') }}" class="text-ocean uppercase link">See More</a>
+    <div class="wp-block-button">
+        <a href="{{ home_url('/news-and-press') }}" class="wp-element-button wp-block-button_link">SEE MORE</a>
+    </div>
 </div>
 <div class="news grid sm:grid-cols-3 bg-mist-100 py-4 px-6">
     @if ($news)

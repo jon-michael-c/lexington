@@ -2,7 +2,6 @@
   position: relative;
   padding-left: 3rem;
   li {
-    transition: all 0.3s ease;
     .overlay-list-item {
       position: relative;
       display: flex;
@@ -19,21 +18,17 @@
         @apply bg-mist;
         z-index: 10;
         transform: translate(-50%, -50%);
-        transition: all 0.3s ease;
       }
       .overlay-content {
-        transition: all 0.3s ease;
         h4 {
           font-size: 28px;
           transform-origin: right;
-          transition: all 0.3s ease;
         }
         p {
           @apply text-charcoal;
           max-height: 0px;
           opacity: 0;
           overflow: hidden;
-          transition: all 0.3s ease;
         }
       }
     }

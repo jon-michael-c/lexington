@@ -167,11 +167,13 @@
     top: -220%;
     left: 50%;
     transform-origin: center center;
-    transform: translate(-50%, 0%);
+    transform: scale(1) translateX(-50%) translateY(-0%);
     opacity: 0;
     width: fit-content;
+    transition: font-size 0.5s ease;
     @apply text-magenta;
     h1 {
+      transition: all 0.5s ease;
     }
   }
   z-index: 9 !important;

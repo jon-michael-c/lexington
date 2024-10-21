@@ -7,7 +7,7 @@ export default class Intro {
     const siteLogo = '.site-logo';
     const tagline = document.querySelector('.tagline');
     const vids = ['.vid-1', '.vid-2', '.vid-3', '.hero > .page-header-content'];
-    const reds = ['.red-1', '.red-2', '.hero-text-container'];
+    const reds = ['.red-1', '', '.hero-text-container'];
     const green = '.hero .bg-block';
     const heroText = '.hero-text';
     const header = document.querySelector('header');
@@ -16,6 +16,7 @@ export default class Intro {
     const body = document.querySelector('body');
     const green2 = document.querySelector('.green-2');
     const app = document.querySelector('#app');
+    const videoControl = document.querySelector('.video-control');
     app.style.overflowX = 'hidden';
     header.style.opacity = '0';
     heroBtn.style.opacity = '0';
@@ -25,8 +26,8 @@ export default class Intro {
 
     // Base timeline settings
     const baseTimelineSettings = {
-      easing: 'cubicBezier(0.5, 0.05, 0.1, 0.3)',
-      duration: 700,
+      easing: 'easeInOutQuint',
+      duration: 600,
     };
 
     // Animation steps array
@@ -45,6 +46,7 @@ export default class Intro {
         targets: tagline,
         scale: 1.5,
         translateX: ['-50%', '-30%'],
+        translateY: ['0%', '0%'],
       },
     ];
 
@@ -71,6 +73,7 @@ export default class Intro {
         width: '426px',
         left: '0',
         translateY: ['-50%', '-50%'],
+        translateX: ['-50%', '0%'],
         top: '50%',
       },
       { targets: vids[1], left: '-10%', height: '258px', width: '281px' },
@@ -79,19 +82,17 @@ export default class Intro {
       {
         targets: tagline,
         color: '#ffffff',
-        top: '-100%',
         left: '0%',
-        translateX: 0,
-        translateY: 0,
-        scale: 1,
+        translateX: '0%',
+        translateY: '0%',
+        scale: [1.5, 1],
         update: function () {
           tagline.style.position = 'relative';
           tagline.style.width = '100%';
           tagline.querySelector('h1').style.fontSize = '60px';
         },
       },
-      { targets: reds[0], top: '25%', left: '35%' },
-      { targets: reds[2], right: '0%', opacity: 0.9 },
+      { targets: reds[2], right: ['0%', '0%'], opacity: 0.9 },
       { targets: green, width: '40%', right: '30%', height: '90vh' },
     ];
 
@@ -179,14 +180,14 @@ export default class Intro {
               targets: reds[0],
               top: '45%',
             },
-            '-=800'
+            '-=100'
           );
           tl5.add(
             {
               targets: green2,
               opacity: 1,
             },
-            '-=1500'
+            '-=100'
           );
           tl5.add(
             {
@@ -194,22 +195,38 @@ export default class Intro {
               height: '100%',
               bottom: '0',
             },
-            '-=1700'
+            '-=100'
+          );
+          tl5.add(
+            {
+              targets: videoControl,
+              opacity: 1,
+            },
+            '-=100'
           );
         });
+
+        body.style.overflow = 'auto'; // Allow scrolling
+        await tl5.finished; // Wait for Timeline 5 to finish
 
         const introbg = document.querySelector('.intro-bg');
         introbg.style.display = 'none'; // Hide the intro background
         const intro = document.querySelector('.intro');
         intro.style.display = 'none'; // Hide the intro
         header.style.opacity = '1'; // Show the header
-
-        body.style.overflow = 'auto'; // Allow scrolling
-        await tl5.finished; // Wait for Timeline 5 to finish
       }
     }
 
     // Run the timelines in sequence
     runTimelines(5);
+
+    videoControl.addEventListener('click', () => {
+      const video = document.querySelector('.bg-video > video');
+      if (video.paused) {
+        video.play();
+      } else {
+        video.pause();
+      }
+    });
   }
 }
