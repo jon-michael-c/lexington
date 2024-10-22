@@ -18,6 +18,7 @@
   font-family: 'Juana', sans-serif;
   font-size: 3rem;
   margin-left: 1rem;
+  @apply text-charcoal;
 }
 
 .editor-styles-wrapper :where(.wp-element-button, .wp-block-button__link) {
@@ -168,4 +169,16 @@
 
 #sec-chart {
   min-height: 400px;
+}
+
+.wp-admin:not(.post-type-page) {
+  .is-root-container {
+    padding-left: 1rem;
+    max-width: 900px;
+
+    p:not(:last-child) {
+      margin-bottom: 8px;
+      @apply text-charcoal;
+    }
+  }
 }

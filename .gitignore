@@ -5,3 +5,12 @@
 .budfiles
 npm-debug.log
 yarn-error.log
+
+yarn.lock
+composer.lock
+package-lock.json
+npm-debug.log
+
+/.vscode/
+/.idea/
+/.vscode/
