@@ -22,6 +22,5 @@
                 <source src="@asset('images/vid-3.mp4')" type="video/mp4">
             </video>
         </div>
-        <div class="red-2"></div>
     </div>
 </div>

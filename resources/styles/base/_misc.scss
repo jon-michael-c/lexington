@@ -400,12 +400,48 @@ section.wp-block-group {
 
 .img-hover {
   overflow: hidden;
-  img {
-    transition: all 0.3s ease;
-  }
+  img,
   &:hover {
     img {
       scale: 1.5;
+    }
+  }
+}
+
+.img-cta {
+  overflow: hidden;
+  h4,
+  .arrow,
+  .bg-gradient-3 {
+    transition: all 0.3s ease;
+  }
+
+  h4 {
+    position: absolute;
+    bottom: 3rem;
+    left: 50%;
+    transform: translate(-50%, 0%);
+  }
+
+  .arrow {
+    position: absolute;
+    bottom: 3rem;
+    right: -2rem;
+    opacity: 0;
+  }
+
+  &:hover {
+    .bg-gradient-3 {
+      height: 200%;
+    }
+
+    h4 {
+      left: 7rem;
+    }
+
+    .arrow {
+      right: 2rem;
+      opacity: 1;
     }
   }
 }
@@ -424,9 +460,10 @@ section.wp-block-group {
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: black;
+      @apply bg-azure;
       opacity: 0;
       z-index: 1;
+      transition: all 0.3s ease;
     }
     z-index: 2;
     &:hover {
@@ -442,6 +479,37 @@ section.wp-block-group {
       z-index: 1;
       &::after {
         opacity: 0.5;
+      }
+    }
+  }
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+
+.folds {
+  margin-top: 2rem;
+  .folds-item {
+    padding: 1rem 0;
+    transition: all 0.3s ease;
+    @apply border-t-2 border-solid border-mist cursor-pointer;
+
+    &:not(:first-child) {
+      @apply border-b-2;
+    }
+
+    .folds-content {
+      overflow: hidden;
+      visibility: hidden;
+      max-height: 0px;
+      transition: all 0.3s ease;
+    }
+
+    &.active {
+      .folds-content {
+        max-height: 1000px;
+        visibility: visible;
       }
     }
   }

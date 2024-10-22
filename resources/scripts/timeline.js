@@ -13,7 +13,7 @@ export default class Timeline {
     this.dotEasing = 'easeInOutSine';
     this.lineDuration = 10;
     this.dotDuration = 200;
-    this.threshold = 45; // Threshold for intersection checks
+    this.threshold = 10; // Threshold for intersection checks
 
     this.initalizeTimeline();
     this.detectDotIntersection();
@@ -201,6 +201,7 @@ export default class Timeline {
     this.timelineItems.forEach((item, i) => {
       let dot = item.querySelector('.timeline-dot');
       if (i < index) {
+        console.log('before');
         anime({
           targets: dot,
           width: 12,

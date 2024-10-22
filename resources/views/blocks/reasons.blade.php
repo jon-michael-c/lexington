@@ -12,7 +12,7 @@
             @endif
         </div>
         <div
-            class="reasons-items flex flex-col justify-center items-center bg-mist-100 h-[800px] relative z-[2] ml-auto w-[60%] py-16">
+            class="reasons-items h-[900px] flex flex-col justify-center items-center bg-mist-100 relative z-[2] ml-auto w-[60%] py-16">
             @if (isset($items))
                 @foreach ($items as $item)
                     <div class="reasons-item">

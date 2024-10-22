@@ -11,13 +11,12 @@
         <div class="bg-gradient-1 absolute top-0 left-0 w-[85%] h-full z-[-1] "></div>
         <div class="bg-gradient-2 absolute top-0 left-0 w-full h-full z-[-2]  mix-blend-multiply"></div>
         <div class="bg-gradient-3 absolute top-0 left-0 w-full h-full z-[-3]"></div>
-
     </div>
     <div
-        class="page-header-text relative bottom-[160px] pl-8 sm:pl-0 sm:bottom-[unset] z-[3] w-full flex gap-8 flex-col sm:flex-row items-end sm:pb-14 mt-auto">
+        class="page-header-text relative bottom-[160px] pl-8 sm:pl-4 sm:bottom-[unset] z-[3] w-full flex gap-8 flex-col sm:flex-row items-end sm:pb-10 mt-auto">
         <div class="w-full max-w-[550px] ">
             @include('components.breadcrumb')
-            <div class="max-w-[595px]">
+            <div class="w-fit max-w-[595px]">
                 <h1 class="text-white">{!! $header_text !!}</h1>
             </div>
         </div>

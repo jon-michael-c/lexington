@@ -65,7 +65,6 @@ domReady(async () => {
       opacity: 1,
       duration: duration,
       easing: 'easeInOutQuad',
-      delay: anime.stagger(200),
     });
 
     // Animate the column image
@@ -94,6 +93,7 @@ domReady(async () => {
   });
 
   const collage = document.querySelector('.collage');
+  if (!collage) return;
   const collageItems = document.querySelectorAll('.collage__item');
   const collageBG = document.querySelector('.collage__bg');
   collageItems.forEach((item) => {
