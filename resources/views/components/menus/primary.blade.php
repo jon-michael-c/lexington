@@ -4,7 +4,7 @@
     @foreach ($menu as $item)
         <li class="menu-item relative @if ($item['children']) has-children @endif {!! $item['classes'] !!}">
             @if ($item['children'])
-                <span class="text-charcoal text-xs font-normal  hover:cursor-pointer text-center sm:text-left">
+                <span class="text-charcoal text-xs font-normal  hover:cursor-pointer text-center md:text-left">
                     {{ $item['title'] }}
                     <img src="@asset('images/submenu-arrow.svg')" alt="arrow down" class="sub-menu-arrow w-[11px] inline ml-1" />
                 </span>

@@ -91,7 +91,19 @@ footer .bg-image {
   }
   &.stats-md {
     .stat {
-      @include md-lg {
+      @include m-xxs {
+        &:not(:last-child)::after {
+          content: '';
+          position: absolute;
+          top: 100%;
+          right: 0;
+          height: 2px;
+          width: 100%;
+          @apply bg-mist;
+        }
+      }
+
+      @include xxs-sm {
         &:not(:nth-child(2n)):not(:last-child)::after {
           content: '';
           position: absolute;
@@ -115,7 +127,7 @@ footer .bg-image {
         }
       }
 
-      @include lg {
+      @include sm {
         &:not(:nth-child(3n)):not(:last-child)::after {
           content: '';
           position: absolute;
@@ -143,7 +155,42 @@ footer .bg-image {
   &.stats-lg {
     // for 4 columns logic
     .stat {
-      @include md-lg {
+      @include m-xxs {
+        &:not(:last-child)::after {
+          content: '';
+          position: absolute;
+          top: 100%;
+          right: 0;
+          height: 2px;
+          width: 100%;
+          @apply bg-mist;
+        }
+      }
+
+      @include xxs-sm {
+        &:not(:nth-child(2n)):not(:last-child)::after {
+          content: '';
+          position: absolute;
+          top: 50%;
+          right: 0;
+          height: 55%;
+          width: 2px;
+          transform: translate(0%, -50%);
+          @apply bg-mist;
+        }
+
+        // not the last 2 items
+        &:not(:nth-last-child(-n + 2)):before {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          height: 2px;
+          width: 100%;
+          @apply bg-mist;
+        }
+      }
+      @include sm-md {
         &:not(:nth-child(3n)):not(:last-child)::after {
           content: '';
           position: absolute;
@@ -166,7 +213,7 @@ footer .bg-image {
           @apply bg-mist;
         }
       }
-      @include lg {
+      @include md {
         &:not(:nth-child(4n)):not(:last-child)::after {
           content: '';
           position: absolute;
@@ -324,6 +371,27 @@ section.wp-block-group {
       }
     }
   }
+
+  @include m-sm {
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+    .accordion-bg {
+      grid-column: full-width !important;
+    }
+    .accordion-content {
+      grid-column: full-width !important;
+      grid-template-columns: 1fr;
+      height: fit-content;
+      .acf-innerblocks-container {
+        padding: 0px 24px;
+      }
+      .accordion-items {
+        width: 100vw;
+        position: relative;
+        left: -24px;
+      }
+    }
+  }
 }
 
 .reasons {
@@ -408,9 +476,6 @@ section.wp-block-group {
       scale: 1.5;
     }
   }
-}
-
-.img-cta {
 }
 
 .img-cta {

@@ -1,5 +1,5 @@
 <a href="{{ get_permalink($id) }}" class="post-preview">
-    <div class="grid gap-2 px-8 py-6">
+    <div class="grid gap-2 sm:px-8 py-6">
         <div>
             <p class="uppercase text-sm text-magenta">{{ get_the_date('d M Y', $id) }}</p>
         </div>

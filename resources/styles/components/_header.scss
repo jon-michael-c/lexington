@@ -36,7 +36,7 @@ header {
         height: 2px;
         @apply bg-magenta;
 
-        @include lg {
+        @include md {
           transition: width 0.2s cubic-bezier(0.39, 0.575, 0.565, 1);
         }
       }
@@ -63,14 +63,14 @@ header {
         display: block !important;
       }
 
-      @include lg {
+      @include md {
         &::after {
           bottom: -4px;
         }
       }
     }
 
-    @include m-lg {
+    @include m-md {
       .navbar-collapse {
         visibility: hidden;
         opacity: 0;
@@ -91,7 +91,7 @@ header {
   }
 
   .sub-menu {
-    @include lg {
+    @include md {
       @apply absolute bg-white shadow-md;
       top: 167%;
       left: 0;
@@ -125,7 +125,7 @@ header {
     display: none;
   }
 
-  @include m-sm {
+  @include m-md {
     display: flex;
     flex-direction: column;
   }
@@ -185,7 +185,7 @@ header {
       transition: transform 0.2s cubic-bezier(0.39, 0.575, 0.565, 1);
     }
 
-    @include m-sm {
+    @include m-md {
       li {
         text-align: center;
 
@@ -260,7 +260,7 @@ header {
 }
 
 header {
-  @include m-sm {
+  @include m-md {
     nav {
       ul.primaryMenu {
         .menu-item {

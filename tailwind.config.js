@@ -3,6 +3,7 @@ const config = {
   content: ['./app/**/*.php', './resources/**/*.{php,vue,js}'],
   theme: {
     screens: {
+      xxs: '370px',
       xs: '480px',
       sm: '640px',
       md: '768px',
