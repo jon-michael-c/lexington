@@ -5,9 +5,9 @@
     $role = get_field('role', $id);
 @endphp
 
-<a class="team-member block text-center mx-auto max-w-[180px]" href="{{ get_the_permalink($id) }}"
-    aria-label="View {{ get_the_title($id) }}'s profile" data-title="{{ $role }}"
-    data-location="{{ $location }}" data-group="{{ $group ? $group[0]->name : '' }}"
+<a class="team-member block text-center mx-auto max-w-[180px] focus-visible:outline-mist-300"
+    href="{{ get_the_permalink($id) }}" aria-label="View {{ get_the_title($id) }}'s profile"
+    data-title="{{ $role }}" data-location="{{ $location }}" data-group="{{ $group ? $group[0]->name : '' }}"
     data-name="{{ get_the_title($id) }}">
 
     <div class="w-[90%] mx-auto">
@@ -15,7 +15,7 @@
             class="w-full h-full object-cover">
     </div>
     <div class="w-full h-[20px] bg-mist mt-[-10px] mb-4"></div>
-    <div class="">
+    <div class="" id="{{ $id }}">
         <div>
             <p class="text-charcoal text-xs leading-[1.25] font-extrabold">{!! get_the_title($id) !!}</p>
         </div>

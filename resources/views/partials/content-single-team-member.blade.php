@@ -4,8 +4,9 @@
         </div>
         <div class="mb-12 hidden sm:block">
             <div class="wp-button">
-                <a href="{{ get_permalink(get_page_by_title('Team')) }}"
-                    class="wp-button__link wp-element-button uppercase">Back to
+                <a href="{{ home_url('team') . '#' . get_the_ID() }}" class="wp-button__link wp-element-button uppercase"
+                    onclick="window.history.back(); return false;">Back to
+
                     Team</a>
             </div>
         </div>

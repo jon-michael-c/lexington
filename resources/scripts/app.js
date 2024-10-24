@@ -8,6 +8,7 @@ import Numbers from './components/numbers';
 import Intro from './components/intro';
 import anime, { stagger } from 'animejs';
 import Overlay from './components/overlay';
+import Navbar from './components/navbar';
 
 /**
  * Application entrypoint
@@ -23,6 +24,7 @@ domReady(async () => {
   new Numbers();
   new Intro();
   new Overlay();
+  new Navbar('.navbar');
 
   let easing = 'cubicBezier(.5, .05, .1, .3)';
   let duration = 750;

@@ -13,10 +13,16 @@ export default class Overlay {
       delay: 200,
       easing: 'easeInOutQuint',
       hoverDelay: 100,
+      autoplayInterval: 2500, // Interval for autoplay in milliseconds
+      loopAutoplay: true, // Whether to loop autoplay
     };
 
     // Initialize hover timeout
     this.hoverTimeout = null;
+
+    // Autoplay state
+    this.autoplayIntervalId = null;
+    this.currentAutoplayIndex = 0;
 
     // Initialize animations
     this.initHoverEffects();
@@ -118,11 +124,15 @@ export default class Overlay {
       // Mouse over event
       item.addEventListener('mouseover', () => {
         this.handleHover(item);
+        // Optionally, pause autoplay on user interaction
+        this.pauseAutoplay();
       });
 
       // Mouse leave event
       item.addEventListener('mouseleave', () => {
         this.handleMouseLeave(item);
+        // Optionally, resume autoplay after interaction
+        this.startAutoplay();
       });
     });
 
@@ -132,17 +142,22 @@ export default class Overlay {
       this.overlayItems.forEach((item) => {
         this.handleMouseLeave(item);
       });
+      // Optionally, resume autoplay
+      this.startAutoplay();
     });
   }
 
   /**
-   * Observer to trigger animation on the first item when overlay enters the viewport
+   * Initialize IntersectionObserver to trigger animations
    */
   initObserver() {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
+            // Start autoplay when overlay enters viewport
+            this.startAutoplay();
+
             let firstItem = this.overlayItems[0];
             this.animateItem(firstItem, {
               fontSize: '38px',
@@ -152,6 +167,20 @@ export default class Overlay {
               dotColor: '#8C1D40',
               lineTop: '50%', // Initial animation for the line when entering view
             });
+          } else {
+            // Stop autoplay when overlay leaves viewport
+            this.stopAutoplay();
+
+            // Optionally, reset all items
+            this.overlayItems.forEach((item) => {
+              this.animateItem(item, {
+                fontSize: '24px',
+                maxHeight: '0',
+                opacity: 0,
+                dotColor: '#C7D9D4',
+                lineTop: '48%', // Reset line position
+              });
+            });
           }
         });
       },
@@ -159,5 +188,67 @@ export default class Overlay {
     );
 
     observer.observe(this.overlay);
+  }
+
+  /**
+   * Start the autoplay feature
+   */
+  startAutoplay() {
+    if (this.autoplayIntervalId) return; // Prevent multiple intervals
+
+    this.autoplayIntervalId = setInterval(() => {
+      const currentItem = this.overlayItems[this.currentAutoplayIndex];
+      this.animateItem(currentItem, {
+        fontSize: '38px',
+        maxHeight: '350px',
+        opacity: 1,
+        visibility: 'visible',
+        dotColor: '#8C1D40',
+        lineTop: '50%', // Position line accordingly
+      });
+
+      // Deactivate all other items
+      this.overlayItems.forEach((item, index) => {
+        if (index !== this.currentAutoplayIndex) {
+          this.animateItem(item, {
+            fontSize: '24px',
+            maxHeight: '0',
+            opacity: 0,
+            dotColor: '#C7D9D4',
+          });
+        }
+      });
+
+      // Move to the next item
+      this.currentAutoplayIndex += 1;
+
+      // Loop back to the first item if needed
+      if (this.currentAutoplayIndex >= this.overlayItems.length) {
+        if (this.config.loopAutoplay) {
+          this.currentAutoplayIndex = 0;
+        } else {
+          // Stop autoplay if looping is disabled
+          this.stopAutoplay();
+        }
+      }
+    }, this.config.autoplayInterval);
+  }
+
+  /**
+   * Pause the autoplay feature
+   */
+  pauseAutoplay() {
+    this.stopAutoplay();
+  }
+
+  /**
+   * Stop the autoplay feature
+   */
+  stopAutoplay() {
+    if (this.autoplayIntervalId) {
+      clearInterval(this.autoplayIntervalId);
+      this.autoplayIntervalId = null;
+      this.currentAutoplayIndex = 0; // Reset index if desired
+    }
   }
 }

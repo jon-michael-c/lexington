@@ -228,7 +228,7 @@ header {
 
   span {
     width: 100%;
-    height: 3px;
+    height: 2px;
     @apply bg-magenta;
     transition: all 0.3s ease-in-out;
   }
@@ -256,5 +256,47 @@ header {
   & > a {
     @apply text-magenta bg-mist-300;
     font-weight: 700 !important;
+  }
+}
+
+header {
+  @include m-sm {
+    nav {
+      ul.primaryMenu {
+        .menu-item {
+          &.has-children {
+            &:hover {
+              .sub-menu {
+                margin-top: 0.5rem;
+              }
+            }
+          }
+          &.current-menu-parent {
+            &::after {
+              display: none !important;
+            }
+          }
+          ul.sub-menu {
+            position: relative;
+            width: 100vw;
+
+            li {
+              padding: 0px !important;
+
+              a {
+                padding: 0.5rem 0rem;
+                width: 100%;
+              }
+            }
+
+            .sub-sub-menu-item {
+              a {
+                padding: 0.3rem 0rem;
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }

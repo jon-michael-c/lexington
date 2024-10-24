@@ -410,16 +410,7 @@ section.wp-block-group {
   }
 }
 
-.image-overlay {
-  & > .absolute {
-    transition: height 0.3s ease;
-  }
-
-  &:hover {
-    .absolute {
-      height: 200%;
-    }
-  }
+.img-cta {
 }
 
 .img-cta {
@@ -444,6 +435,10 @@ section.wp-block-group {
     opacity: 0;
   }
 
+  .image-overlay .absolute {
+    transition: height 0.3s ease;
+  }
+
   &:hover {
     .bg-gradient-3 {
       height: 200%;
@@ -456,6 +451,10 @@ section.wp-block-group {
     .arrow {
       right: 2rem;
       opacity: 1;
+    }
+
+    .image-overlay .absolute {
+      height: 200%;
     }
   }
 }
