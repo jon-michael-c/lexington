@@ -67,17 +67,18 @@ collect(['setup', 'filters'])
 
 function getMenu($location)
 {
-
-
     $menuItems = wp_get_nav_menu_items($location);
     $menuArray = [];
 
-    // First, convert all menu items to associative arrays and index by ID
     if ($menuItems) {
         foreach ($menuItems as $item) {
+            // Combine the classes into a string
             $classes = implode(' ', $item->classes);
-            if (get_the_ID() == $item->object_id) {
+
+            // Add 'current-menu-item' class if the item is the current page
+            if ($item->object_id == get_the_ID()) {
                 $classes .= ' current-menu-item';
+                $item->current = true;
             }
 
             $menuArray[$item->ID] = [
@@ -89,37 +90,44 @@ function getMenu($location)
                 'classes' => $classes,
                 'children' => [],
                 'current' => $item->current ? true : false,
+                'current_item_parent' => $item->current_item_parent,
             ];
         }
-    }
 
-    // Next, iterate through the array and assign children to their parents
-    foreach ($menuArray as $id => &$menuItem) {
-        if ($menuItem['parent_id'] != 0) { // If item has a parent
-            $menuArray[$menuItem['parent_id']]['children'][] = &$menuItem; // Add it to the parent's 'children' array
-        }
-    }
-    unset($menuItem); // Break reference to the last element
+        // Update all parents to include 'current_item_parent' class if they have a current child
+        foreach ($menuArray as &$menuItem) {
+            $parent_id = $menuItem['parent_id'];
+            if ($menuItem['current']) {
 
-    // Mark parent items as current if any of their children are current
-    foreach ($menuArray as &$menuItem) {
-        if ($menuItem['current']) {
-            $parentId = $menuItem['parent_id'];
-            while ($parentId != 0 && isset($menuArray[$parentId])) {
-                $menuArray[$parentId]['current'] = true;
-                $parentId = $menuArray[$parentId]['parent_id'];
+                while ($parent_id != 0 && isset($menuArray[$parent_id])) {
+                    $menuArray[$parent_id]['current_item_parent'] = true;
+                    // Add 'current-menu-parent' class to the parent
+                    $menuArray[$parent_id]['classes'] .= ' current-menu-parent';
+                    $parent_id = $menuArray[$parent_id]['parent_id'];
+                }
             }
         }
+        unset($menuItem); // Break reference to the last element
+    }
+
+    // Build the hierarchical menu tree
+    foreach ($menuArray as $id => &$menuItem) {
+        if ($menuItem['parent_id'] != 0) { // Item has a parent
+            $menuArray[$menuItem['parent_id']]['children'][] = &$menuItem;
+        }
     }
     unset($menuItem); // Break reference to the last element
 
-    // Filter out the child items to get a list of top-level items only
+    // Get only the top-level menu items
     $menuTree = array_filter($menuArray, function ($item) {
         return $item['parent_id'] == 0;
     });
 
-    return array_values($menuTree); // Re-index and return 
+
+
+    return array_values($menuTree); // Re-index and return
 }
+
 
 // Disable support for comments and trackbacks in post types
 function disable_comments_post_types_support()

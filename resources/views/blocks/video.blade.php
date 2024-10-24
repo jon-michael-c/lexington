@@ -1,7 +1,7 @@
 <section class="full-width pb-8 sm:pb-16">
     @if (isset($video) && isset($video['url']))
         <div class="video-container overflow-hidden inner-full relative w-full h-full md:h-[530px] cursor-pointer">
-            <video class="w-full h-full object-cover relative">
+            <video class="w-full h-full object-cover relative" autoplay playsinline muted loop>
                 <source src="{{ $video['url'] }}" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
@@ -16,18 +16,22 @@
             </div>
         </div>
         <script>
+            var video = document.querySelector('video');
             document.querySelector('.video-container').addEventListener('click', function() {
-                var video = document.querySelector('video');
-                var playButton = document.querySelector('.play-button');
-
                 if (video.paused) {
                     video.play();
-                    playButton.style.opacity = '0';
                 } else {
                     video.pause();
-                    playButton.style.opacity = '1';
                 }
+            });
+            var playButton = document.querySelector('.play-button');
 
+            video.addEventListener('play', function() {
+                playButton.style.opacity = '0';
+            });
+
+            video.addEventListener('pause', function() {
+                playButton.style.opacity = '1';
             });
         </script>
     @endif

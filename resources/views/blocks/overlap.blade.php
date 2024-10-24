@@ -27,7 +27,7 @@
   <div class="inner-full absolute top-[50%] right-0 w-[55%] {{ $rightHeight }} -translate-y-1/2 z-[-3] bg-mist-100">
   </div>
   <div class="overlay grid grid-cols-2 gap-8 items-center relative my-12 sm:my-36">
-      <div class="h-full relative z-10 flex items-center justify-start p-16">
+      <div class="h-full relative z-10 flex items-center justify-start p-16 pl-0">
           <div>
               <InnerBlocks />
           </div>

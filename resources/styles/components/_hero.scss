@@ -5,122 +5,6 @@
   @include md {
     aspect-ratio: 5 / 2;
   }
-
-  &-etf-slider {
-    .bg-overlay {
-      background: linear-gradient(
-        222deg,
-        #bfa5fe 6.82%,
-        #a658ff 44.15%,
-        #5d13c1 85.05%
-      );
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      opacity: 0.8;
-      z-index: -1;
-    }
-    .bg-image {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -2;
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: center center;
-      }
-    }
-
-    .etf-slider-controls-container {
-      position: relative;
-      width: 100%;
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      bottom: -170px;
-      @include md {
-        position: absolute;
-        right: 10%;
-        bottom: 1%;
-      }
-      @include lg {
-        bottom: 3%;
-      }
-      .etf-slider-controls {
-        height: 130px;
-        width: fit-content;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 8px;
-
-        .etf-slider-arrow {
-          width: 12px;
-          height: 12px;
-          cursor: pointer;
-          svg {
-            width: 100%;
-            height: 100%;
-          }
-
-          &.up {
-            transform: rotate(180deg);
-            transform-origin: center center;
-          }
-        }
-
-        .etf-slider-scrollbar {
-          width: 2px;
-          height: 80%;
-          background-color: white;
-          position: relative;
-          .bar {
-            position: absolute;
-            top: 0;
-            left: -2px;
-            width: 6px;
-            background-color: white;
-          }
-        }
-      }
-    }
-  }
-}
-
-.hero-etf-slider {
-  position: relative;
-  .hero-etf-slider-slide {
-    position: absolute;
-    visibility: hidden;
-    top: 0;
-    transform: translate(0%, 25%);
-    opacity: 0;
-    scale: 0.8;
-    max-width: 450px;
-    padding-right: 24px;
-    @include md {
-      top: 50%;
-      left: 17vw;
-      max-width: 500px;
-      transform: translate(0%, 150%);
-    }
-
-    &.active {
-      visibility: visible;
-      opacity: 1;
-      scale: 1;
-      @include md {
-        transform: translate(0%, -50%);
-      }
-    }
-  }
 }
 
 @include md-lg {
@@ -130,16 +14,92 @@
 }
 
 .hero-video-btn {
-  @apply bg-mist-100 text-mist;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
-  width: 42px;
-  height: 42px;
-  cursor: pointer;
-  p {
-    font-size: 1.5rem !important;
-    font-weight: 700 !important;
+  .container {
+    position: absolute;
+  }
+
+  input {
+    opacity: 0;
+    position: absolute;
+    pointer-events: none;
+  }
+
+  label {
+    display: grid;
+    border: none;
+    @apply bg-mist-100;
+    --w: 42px;
+    width: var(--w);
+    height: var(--w);
+    border-radius: 50%;
+    place-items: center;
+    cursor: pointer;
+  }
+
+  .play_pause_icon {
+    --w: 15px;
+    --h: 18px;
+    width: var(--w);
+    height: var(--h);
+    @apply bg-mist;
+    translate: 0 0;
+    transition: all 0.2s ease-in-out;
+  }
+
+  .play {
+    clip-path: polygon(
+      20% 0,
+      20% 100%,
+      90% 50%,
+      90% 50%,
+      90% 50%,
+      90% 50%,
+      90% 50%,
+      90% 50%,
+      90% 50%
+    );
+    translate: 6% 0;
+  }
+
+  .container:has(input:checked) .play_pause_icon,
+  .pause {
+    clip-path: polygon(
+      0 0,
+      0 100%,
+      33.33% 100%,
+      33.33% 0,
+      66.66% 0,
+      100% 0,
+      100% 100%,
+      66.66% 100%,
+      66.66% 0
+    );
+    translate: 0 0;
+  }
+
+  .play-2 {
+    clip-path: polygon(
+      20% 0,
+      20% 100%,
+      35% 90%,
+      35% 90%,
+      35% 90%,
+      90% 50%,
+      35% 10%,
+      35% 10%,
+      35% 10%
+    );
+    translate: 6% 0;
+  }
+}
+
+.hero-cta {
+  svg {
+    transition: all 0.2s ease;
+  }
+  &:hover {
+    svg {
+      transform: translateX(5px);
+    }
   }
 }

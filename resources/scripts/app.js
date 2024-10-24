@@ -14,6 +14,7 @@ import Overlay from './components/overlay';
  */
 domReady(async () => {
   // ...
+
   new VideoCTAs();
   new Carousel();
   new Timeline();

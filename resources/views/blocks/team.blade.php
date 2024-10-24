@@ -71,12 +71,10 @@
         <x-select :id="$titleS" :options="$titles" />
         <x-select :id="$groupS" :options="$groups" />
         <x-search :id="$searchS" />
-        <div>
-            <a href="{{ home_url('team#members') }}" class="text-ocean uppercase link">Search</a>
-        </div>
     </div>
 
-    <div id="team-members" class="grid gap-4 sm:gap-10 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+    <div id="team-members"
+        class="grid gap-4 sm:gap-10 xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
         @foreach ($team as $id)
             @include('partials.team.preview', ['id' => $id])
         @endforeach
@@ -122,5 +120,35 @@
         titleSelect.addEventListener('change', filterTeamMembers);
         groupSelect.addEventListener('change', filterTeamMembers);
         searchInput.addEventListener('input', filterTeamMembers);
+
+
+        // Get url parameters and set the select values
+        const urlParams = new URLSearchParams(window.location.search);
+        const location = urlParams.get('location');
+        const title = urlParams.get('title');
+        const group = urlParams.get('group');
+        const search = urlParams.get('search');
+
+        if (location) {
+            locationSelect.value = location;
+        }
+
+        if (title) {
+            titleSelect.value = title;
+        }
+
+        if (group) {
+            groupSelect.value = group;
+        }
+
+        if (search) {
+            searchInput.value = search;
+        }
+
+        filterTeamMembers();
+
+        // URL Example to test: https://example.com/team?location=New%20York&title=Developer&group=Management&search=John
+
+
     });
 </script>

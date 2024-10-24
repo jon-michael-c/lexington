@@ -2,137 +2,155 @@ import anime from 'animejs';
 
 export default class Overlay {
   constructor() {
-    let overlay = document.querySelector('.overlay-list');
-    if (!overlay) return;
-    let overlayItems = document.querySelectorAll('.overlay-list li');
-    let timing = 200;
-    let delay = 200;
-    let easing = 'cubicBezier(.5, .05, .1, .3)';
-    let hoverTimeout; // Declare hover timeout
+    this.overlay = document.querySelector('.overlay-list');
+    if (!this.overlay) return;
 
-    overlayItems.forEach((item) => {
-      // Handle mouseover event with a delay
+    this.overlayItems = document.querySelectorAll('.overlay-list li');
+
+    // Default animation settings
+    this.config = {
+      timing: 300,
+      delay: 200,
+      easing: 'easeInOutQuint',
+      hoverDelay: 100,
+    };
+
+    // Initialize hover timeout
+    this.hoverTimeout = null;
+
+    // Initialize animations
+    this.initHoverEffects();
+    this.initObserver();
+  }
+
+  /**
+   * Helper method to animate an overlay item
+   */
+  animateItem(item, config) {
+    let header = item.querySelector('h4');
+    let text = item.querySelector('p');
+    let dot = item.querySelector('.overlay-dot');
+
+    anime({
+      targets: header,
+      fontSize: config.fontSize || '24px',
+      duration: this.config.timing,
+      easing: this.config.easing,
+    });
+
+    anime({
+      targets: text,
+      maxHeight: config.maxHeight || '0',
+      opacity: config.opacity || 0,
+      visibility: config.visibility || 'hidden',
+      duration: this.config.timing,
+      easing: this.config.easing,
+    });
+
+    anime({
+      targets: dot,
+      backgroundColor: config.dotColor || '#C7D9D4',
+      duration: this.config.timing,
+      easing: this.config.easing,
+    });
+
+    // Handle overlay-line animation if provided
+    if (config.lineTop) {
+      anime({
+        targets: '.overlay-line',
+        top: config.lineTop,
+        duration: this.config.timing,
+        easing: this.config.easing,
+      });
+    }
+  }
+
+  /**
+   * Handle hover animation for a single overlay item
+   */
+  handleHover(item) {
+    this.hoverTimeout = setTimeout(() => {
+      // Activate hovered item and move line to '50%'
+      this.animateItem(item, {
+        fontSize: '38px',
+        maxHeight: '350px',
+        opacity: 1,
+        visibility: 'visible',
+        dotColor: '#8C1D40',
+        lineTop: '50%', // Move line to '50%' on hover
+      });
+
+      // Deactivate all other items
+      this.overlayItems.forEach((otherItem) => {
+        if (otherItem !== item) {
+          this.animateItem(otherItem, {
+            fontSize: '24px',
+            maxHeight: '0',
+            opacity: 0,
+            dotColor: '#C7D9D4',
+          });
+        }
+      });
+    }, this.config.hoverDelay);
+  }
+
+  /**
+   * Handle mouse leave to reset item animations and line
+   */
+  handleMouseLeave(item) {
+    clearTimeout(this.hoverTimeout);
+
+    // Reset item and move line to '48%'
+    this.animateItem(item, {
+      fontSize: '24px',
+      maxHeight: '0',
+      opacity: 0,
+      dotColor: '#C7D9D4',
+      lineTop: '48%', // Move line to '48%' on mouse leave
+    });
+  }
+
+  /**
+   * Initialize hover effects on overlay items
+   */
+  initHoverEffects() {
+    this.overlayItems.forEach((item) => {
+      // Mouse over event
       item.addEventListener('mouseover', () => {
-        hoverTimeout = setTimeout(() => {
-          let header = item.querySelector('h4');
-          let text = item.querySelector('p');
-          let dot = item.querySelector('.overlay-dot');
-          anime({
-            targets: header,
-            fontSize: '38px',
-            duration: timing,
-            easing: easing,
-          });
-
-          anime({
-            targets: text,
-            maxHeight: '350px',
-            opacity: 1,
-            visibility: 'visible',
-            duration: timing,
-            easing: easing,
-          });
-
-          anime({
-            targets: dot,
-            backgroundColor: '#8C1D40',
-            duration: timing,
-            easing: easing,
-          });
-        }, 100);
+        this.handleHover(item);
       });
 
-      // Handle mouseleave event
+      // Mouse leave event
       item.addEventListener('mouseleave', () => {
-        clearTimeout(hoverTimeout); // Clear the hover timeout if mouse leaves early
-
-        // Reset animation on mouse leave
-        let header = item.querySelector('h4');
-        let text = item.querySelector('p');
-        let dot = item.querySelector('.overlay-dot');
-        anime({
-          targets: header,
-          fontSize: '24px',
-          scale: 1,
-          duration: timing,
-          easing: easing,
-        });
-
-        anime({
-          targets: text,
-          opacity: 0,
-          maxHeight: '0',
-          duration: timing,
-          easing: easing,
-        });
-
-        anime({
-          targets: dot,
-          backgroundColor: '#C7D9D4',
-          duration: timing,
-          easing: easing,
-        });
+        this.handleMouseLeave(item);
       });
     });
 
-    overlay.addEventListener('mouseleave', () => {
-      if (hoverTimeout) clearTimeout(hoverTimeout); // Clear the hover timeout if mouse leaves early
-      overlayItems.forEach((item) => {
-        let header = item.querySelector('h4');
-        let text = item.querySelector('p');
-        let dot = item.querySelector('.overlay-dot');
-        anime({
-          targets: header,
-          scale: 1,
-          fontSize: '24px',
-          duration: timing,
-          easing: easing,
-        });
-
-        anime({
-          targets: text,
-          maxHeight: '0',
-          duration: timing,
-          easing: easing,
-        });
-
-        anime({
-          targets: dot,
-          backgroundColor: '#C7D9D4',
-          duration: timing,
-          easing: easing,
-        });
+    // Reset all items when leaving the entire overlay
+    this.overlay.addEventListener('mouseleave', () => {
+      if (this.hoverTimeout) clearTimeout(this.hoverTimeout);
+      this.overlayItems.forEach((item) => {
+        this.handleMouseLeave(item);
       });
     });
-    // when obserser sees overlay, activate the first item
+  }
+
+  /**
+   * Observer to trigger animation on the first item when overlay enters the viewport
+   */
+  initObserver() {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            let firstItem = overlayItems[0];
-            let header = firstItem.querySelector('h4');
-            let text = firstItem.querySelector('p');
-            let dot = firstItem.querySelector('.overlay-dot');
-            anime({
-              targets: header,
+            let firstItem = this.overlayItems[0];
+            this.animateItem(firstItem, {
               fontSize: '38px',
-              duration: timing,
-              easing: easing,
-            });
-
-            anime({
-              targets: text,
               maxHeight: '1000px',
               opacity: 1,
               visibility: 'visible',
-              duration: timing,
-              easing: easing,
-            });
-            anime({
-              targets: dot,
-              backgroundColor: '#8C1D40',
-              duration: timing,
-              easing: easing,
+              dotColor: '#8C1D40',
+              lineTop: '50%', // Initial animation for the line when entering view
             });
           }
         });
@@ -140,6 +158,6 @@ export default class Overlay {
       { threshold: 0.1 }
     );
 
-    observer.observe(overlay);
+    observer.observe(this.overlay);
   }
 }

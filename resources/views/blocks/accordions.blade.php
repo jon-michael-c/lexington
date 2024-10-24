@@ -15,8 +15,11 @@
                             </div>
                         </div>
                         <div class="accordion-text bg-mist-300 text-charcoal">
-                            <p class="font-semibold text-[24px] text-azure uppercase pb-2">{!! $item['title'] !!}</p>
-                            {!! $item['content'] !!}
+                            <p class="px-12 font-semibold text-[24px] text-azure uppercase pb-2">{!! $item['title'] !!}
+                            </p>
+                            <div class="px-12">
+                                {!! $item['content'] !!}
+                            </div>
                         </div>
                     </div>
                 @endforeach
@@ -27,26 +30,71 @@
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const accordionItems = document.querySelectorAll('.accordion-item');
+        const accordion = document.querySelector('.accordion-items');
+        let timeout;
 
         accordionItems.forEach((item) => {
             const title = item.querySelector('.accordion-title');
 
             item.addEventListener('mouseenter', () => {
-                item.classList.add('active');
+                clearTimeout(timeout);
+                timeout = setTimeout(() => {
+                    // Deactivate all other items and make their titles short
+                    accordionItems.forEach((otherItem) => {
+                        if (otherItem !== item) {
+                            otherItem.classList.remove('active');
+                            otherItem.querySelector('.accordion-title')
+                                .classList.add('short');
+                        }
+                    });
 
-                accordionItems.forEach((otherItem) => {
-                    otherItem.querySelector('.accordion-title').classList.add('short');
-                });
+                    // Activate the current item
+                    item.classList.add('active');
+                    title.classList.remove('short');
+                }, 200); // Adjust the delay as needed
             });
 
             item.addEventListener('mouseleave', () => {
-                item.classList.remove('active');
-
-                accordionItems.forEach((otherItem) => {
-                    otherItem.querySelector('.accordion-title').classList.remove(
-                        'short');
-                });
+                clearTimeout(timeout);
+                timeout = setTimeout(() => {
+                    item.classList.remove('active');
+                    title.classList.add('short');
+                }, 200); // Adjust the delay as needed
             });
         });
+
+        // When mouse leaves the accordion, deactivate all items
+        accordion.addEventListener('mouseleave', () => {
+            clearTimeout(timeout);
+            accordionItems.forEach((item) => {
+                item.classList.remove('active');
+                item.querySelector('.accordion-title')
+                    .classList.remove('short');
+            });
+        });
+
+        // When scroll into view, activate the first item
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    accordionItems[0].classList.add('active');
+                    accordionItems[0].querySelector('.accordion-title')
+                        .classList.remove('short');
+                    for (let i = 1; i < accordionItems.length; i++) {
+                        if (accordionItems[i].classList.contains('active')) {
+                            continue;
+                        }
+                        accordionItems[i].classList.remove('active');
+                        accordionItems[i].querySelector('.accordion-title')
+                            .classList.add('short');
+                    }
+
+                }
+            });
+        }, {
+            threshold: 0.5,
+        });
+
+        observer.observe(accordion);
     });
 </script>

@@ -11,12 +11,13 @@
                 <ul class="sub-menu">
                     @foreach ($item['children'] as $child)
                         <li
-                            class="menu-item sub-menu-item bg-mist-100 hover:bg-mist-300 transition-all {!! $child['classes'] !!}">
-                            <a href="{{ $child['url'] }}" class="text-charcoal text-xs block ">{!! $child['title'] !!}</a>
+                            class="menu-item sub-menu-item bg-mist-100 transition-all @if ($child['children']) has-children @endif  {!! $child['classes'] !!}">
+                            <a href="{{ $child['url'] }}"
+                                class="text-charcoal text-xs block @if ($child['children']) has-children @endif">{!! $child['title'] !!}</a>
                             @if ($child['children'])
                                 <ul class="sub-sub-menu">
                                     @foreach ($child['children'] as $subChild)
-                                        <li class="menu-item sub-sub-menu-item transition-all {!! $child['classes'] !!}">
+                                        <li class="menu-item sub-sub-menu-item transition-all {!! $subChild['classes'] !!}">
                                             <a href="{{ $subChild['url'] }}"
                                                 class="text-charcoal text-[12px] block ">{!! $subChild['title'] !!}</a>
                                         </li>

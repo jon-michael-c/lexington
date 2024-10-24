@@ -313,7 +313,6 @@ section.wp-block-group {
       &.active {
         .accordion-text {
           height: 450px;
-          padding: 0rem 3rem;
           opacity: 1;
           visibility: visible;
         }
@@ -400,10 +399,25 @@ section.wp-block-group {
 
 .img-hover {
   overflow: hidden;
-  img,
+
+  img {
+    transition: all 0.3s ease;
+  }
   &:hover {
     img {
       scale: 1.5;
+    }
+  }
+}
+
+.image-overlay {
+  & > .absolute {
+    transition: height 0.3s ease;
+  }
+
+  &:hover {
+    .absolute {
+      height: 200%;
     }
   }
 }
@@ -511,6 +525,14 @@ section.wp-block-group {
         max-height: 1000px;
         visibility: visible;
       }
+    }
+  }
+}
+
+.breadcrumb {
+  a {
+    &:last-child:not(:first-child) {
+      @apply font-bold;
     }
   }
 }

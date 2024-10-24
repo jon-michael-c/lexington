@@ -10,7 +10,7 @@
                 Your browser does not support the video tag.
             </video>
         </div>
-        <div class="bg-gradient-1 absolute top-0 left-0 w-[85%] h-full z-[-1] "></div>
+        <div class="bg-gradient-1 absolute top-0 left-0 w-full h-full z-[-1] "></div>
         <div class="bg-gradient-3 absolute top-0 left-0 w-full h-full z-[-3]"></div>
 
     </div>
@@ -34,15 +34,16 @@
                         and co-investment funds.
                     </h4>
                 </div>
-                <div class="text-white mt-auto flex items-center gap-4">
-                    <a href="{{ home_url('/investment-strategies') }}" class="uppercase">Our Investment Strategies</a>
+                <a href="{{ home_url('/investment-strategies') }}"
+                    class="hero-cta text-white mt-auto flex items-center gap-4">
+                    <span class="uppercase text-white">Our Investment Strategies</span>
                     <div>
                         <svg xmlns="http://www.w3.org/2000/svg" width="12" height="22" viewBox="0 0 12 22"
                             fill="none">
                             <path d="M1 1L11 11L1 21" stroke="white" />
                         </svg>
                     </div>
-                </div>
+                </a>
             </div>
         </div>
     </div>
@@ -58,7 +59,12 @@
     <div
         class="video-control breakout w-[16px] sm:w-[32px] h-[16px] sm:h-[32px] absolute bottom-[90px] right-[-12px] sm:right-[-56px] z-[2] opacity-0">
         <div class="hero-video-btn">
-            <p> || </p>
+            <div class="container">
+                <label for="checkbox">
+                    <div class="play_pause_icon play"></div>
+                </label>
+                <input type="checkbox" id='checkbox' checked>
+            </div>
         </div>
     </div>
 </section>

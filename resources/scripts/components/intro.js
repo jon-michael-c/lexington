@@ -3,6 +3,8 @@ import anime from 'animejs';
 export default class Intro {
   constructor() {
     if (!document.querySelector('.hero')) return;
+    // Go to the top
+
     // Define targets
     const siteLogo = '.site-logo';
     const tagline = document.querySelector('.tagline');
@@ -103,9 +105,13 @@ export default class Intro {
       },
       {
         targets: reds[0],
+        top: '45%',
         left: '-16px',
       },
-
+      {
+        targets: reds[2],
+        width: '100%',
+      },
       {
         targets: [vids[0], vids[1], vids[2]],
         opacity: 0,
@@ -120,6 +126,15 @@ export default class Intro {
       },
       { targets: reds[1], opacity: 0 },
       { targets: green, left: '0', backgroundColor: '#C7D9D4' },
+      {
+        targets: green,
+        height: '100%',
+        bottom: '0',
+      },
+      {
+        targets: green2,
+        opacity: 1,
+      },
     ];
 
     async function runTimelines(i) {
@@ -167,36 +182,7 @@ export default class Intro {
       if (i >= 5) {
         anim5.forEach((animation) => {
           tl5.add(animation, 0); // Add all animations at the same start point
-          tl5.add(
-            {
-              targets: reds[2],
-              width: '100%',
-            },
-            '-=100'
-          );
 
-          tl5.add(
-            {
-              targets: reds[0],
-              top: '45%',
-            },
-            '-=100'
-          );
-          tl5.add(
-            {
-              targets: green2,
-              opacity: 1,
-            },
-            '-=100'
-          );
-          tl5.add(
-            {
-              targets: green,
-              height: '100%',
-              bottom: '0',
-            },
-            '-=100'
-          );
           tl5.add(
             {
               targets: videoControl,
@@ -204,11 +190,27 @@ export default class Intro {
             },
             '-=100'
           );
+          tl5.add(
+            {
+              targets: body,
+              overflowX: 'auto',
+            },
+            '-=100'
+          );
+          tl5.add(
+            {
+              targets: '.intro-bg',
+              update: function () {
+                document.querySelector('.intro-bg').style.display = 'none';
+                document.querySelector('.intro').style.display = 'none';
+              },
+            },
+            '-=100'
+          );
         });
 
         body.style.overflow = 'auto'; // Allow scrolling
         await tl5.finished; // Wait for Timeline 5 to finish
-
         const introbg = document.querySelector('.intro-bg');
         introbg.style.display = 'none'; // Hide the intro background
         const intro = document.querySelector('.intro');
@@ -220,7 +222,8 @@ export default class Intro {
     // Run the timelines in sequence
     runTimelines(5);
 
-    videoControl.addEventListener('click', () => {
+    const videoBtn = document.querySelector('.hero-video-btn label');
+    videoBtn.addEventListener('click', () => {
       const video = document.querySelector('.bg-video > video');
       if (video.paused) {
         video.play();

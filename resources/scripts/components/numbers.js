@@ -16,7 +16,7 @@ export default class Numbers {
               targets: number,
               innerHTML: [0, value * 2, value / 2, value],
               round: 1,
-              easing: 'cubicBezier(0.5, 0.05, 0.1, 0.3)',
+              easing: 'easeInOutSine',
               duration: 1000,
               update: function (anim) {
                 number.innerHTML = Math.round(

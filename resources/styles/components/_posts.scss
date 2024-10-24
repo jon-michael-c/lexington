@@ -5,13 +5,37 @@
     -webkit-line-clamp: 2;
     text-overflow: ellipsis;
     overflow: hidden;
+    transition: all 0.2s ease;
   }
-}
 
-.team-member-preview {
+  svg {
+    path {
+      transition: all 0.2s ease;
+    }
+  }
+
   &:hover {
-    p {
-      color: rgba(125, 162, 255, var(--tw-text-opacity)) !important;
+    font-weight: 600;
+    cursor: pointer;
+    .post-title {
+      $shadow-offset: 0.3px;
+      $shadow-color: #242132;
+      text-shadow: -$shadow-offset -$shadow-offset 0 $shadow-color,
+        $shadow-offset -$shadow-offset 0 $shadow-color,
+        -$shadow-offset $shadow-offset 0 $shadow-color,
+        $shadow-offset $shadow-offset 0 $shadow-color;
+      $transition-timing: 0.2s;
+      $easing: ease;
+      -webkit-transition: all $transition-timing $easing;
+      -moz-transition: all $transition-timing $easing;
+      -o-transition: all $transition-timing $easing;
+      transition: all $transition-timing $easing;
+    }
+
+    svg {
+      path {
+        stroke-width: 2px;
+      }
     }
   }
 }

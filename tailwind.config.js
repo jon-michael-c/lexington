@@ -41,13 +41,13 @@ const config = {
 
     backgroundImage: {
       'gradient-1':
-        'linear-gradient(270deg, rgba(0, 46, 69, 0.00) 0%, rgba(0, 46, 69, 0.65) 100%);',
-      'gradient-2':
-        'linear-gradient(270deg, rgba(199, 217, 212, 0.00) 0%, rgba(36, 33, 50, 0.85) 100%)',
-      'gradient-3':
         'linear-gradient(180deg, rgba(199, 217, 212, 0.00) 0%, #002E45 100%)',
-
+      'gradient-2':
+        'linear-gradient(270deg, rgba(199, 217, 212, 0.00) 0%, rgba(36, 33, 50, 0.80) 200%)',
+      'gradient-3':
+        'linear-gradient(270deg, rgba(0, 46, 69, 0.00) 0%, rgba(0, 46, 69, 0.65) 100%)',
       'gradient-4': 'linear-gradient(222deg, #C7D9D4 0%, #002E45 75%)',
+      'gradient-5': 'linear-gradient(180deg, rgba(199, 217, 212, 0), #002e45)',
     },
   },
   plugins: [],
