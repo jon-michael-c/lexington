@@ -219,8 +219,51 @@ export default class Intro {
       }
     }
 
-    // Run the timelines in sequence
-    runTimelines(5);
+    function setFinalStates() {
+      anime.set(tagline, { color: '#ffffff' });
+      anime.set(green, {
+        backgroundColor: '#C7D9D4',
+        left: '0',
+        width: '40%',
+        height: '100%',
+        opacity: 1,
+      });
+      anime.set(reds[0], {
+        top: '45%',
+        left: '-16px',
+        height: '226px',
+        opacity: 1,
+      });
+      anime.set([header, heroText, heroBtn, stripe, green2], { opacity: 1 });
+      anime.set(reds[2], { width: '100%', opacity: 0.9, right: '0%' });
+      anime.set(vids[3], { left: '0%', top: '0%', opacity: 1 });
+      anime.set(tagline, {
+        left: '3%',
+        scale: 1,
+        translateY: '0%',
+        translateX: '0%',
+        opacity: 1,
+      });
+      tagline.style.top = 'unset';
+      document.querySelector('.tagline h1').style.fontSize = '60px';
+      document.querySelector('.intro-bg').style.display = 'none';
+      document.querySelector('.intro').style.display = 'none';
+      body.style.overflow = 'auto'; // Allow scrolling
+      const introbg = document.querySelector('.intro-bg');
+      introbg.style.display = 'none'; // Hide the intro background
+      const intro = document.querySelector('.intro');
+      intro.style.display = 'none'; // Hide the intro
+      header.style.opacity = '1'; // Show the header
+    }
+
+    //runTimelines(5);
+
+    if (localStorage.getItem('intro') == 'true' || window.innerWidth < 768) {
+      setFinalStates();
+    } else {
+      runTimelines(5);
+      localStorage.setItem('intro', 'true');
+    }
 
     const videoBtn = document.querySelector('.hero-video-btn label');
     videoBtn.addEventListener('click', () => {

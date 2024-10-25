@@ -48,15 +48,8 @@ footer .bg-image {
 
 .page-header {
   .page-header-content {
-    grid-column: content-start / full-width-end !important;
     @include sm {
       grid-column: breakout !important;
-    }
-  }
-
-  .page-header-text {
-    @include sm {
-      grid-column: content-start / full-width-end !important;
     }
   }
 }
@@ -302,10 +295,19 @@ footer .bg-image {
       align-items: start;
     }
   }
+
   .acf-innerblocks-container {
     display: grid;
     gap: 1.5rem;
     width: 100%;
+
+    @include m-sm {
+      gap: 2rem;
+
+      .image-bg {
+        position: relative;
+      }
+    }
   }
 }
 
@@ -597,6 +599,13 @@ section.wp-block-group {
   a {
     &:last-child:not(:first-child) {
       @apply font-bold;
+    }
+  }
+
+  @include m-sm {
+    a,
+    p {
+      font-size: 13px;
     }
   }
 }

@@ -34,8 +34,13 @@
       width: 100%;
       height: 100%;
       z-index: -1;
-      opacity: 0.9;
-      background: linear-gradient(42deg, #002e45 25%, #c7d9d4 100%);
+      opacity: 0.5;
+      background: linear-gradient(
+        222deg,
+        rgba(199, 217, 212, 0) 0%,
+        #002e45 100%
+      );
+
       transition: all 0.2s ease-in-out;
     }
 
@@ -51,9 +56,10 @@
       position: absolute;
       right: 2.5rem;
       bottom: 2.5rem;
-      transform: translate(-150px, 0%);
-      opacity: 0;
+      opacity: 1;
       transition: all 0.2s ease-in-out;
+      width: 15px;
+      height: 15px;
     }
   }
 
@@ -81,7 +87,17 @@
       align-items: start;
       padding: 2.5rem;
       text-align: center;
-
+      &__overlay {
+        opacity: 0.9;
+        background: linear-gradient(222deg, #c7d9d4 0%, #002e45 75%);
+        transition: all 0.2s ease;
+      }
+      &__arrow {
+        opacity: 0;
+        transform: translate(-150%, 0%);
+        width: 20px;
+        height: 20px;
+      }
       &:hover {
         width: 90%;
 

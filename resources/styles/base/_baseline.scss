@@ -247,3 +247,10 @@ body
     transform: rotate(1turn);
   }
 }
+
+.wp-block-list {
+  li {
+    @extend p;
+    @apply text-charcoal;
+  }
+}

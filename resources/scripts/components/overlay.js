@@ -76,9 +76,10 @@ export default class Overlay {
    */
   handleHover(item) {
     this.hoverTimeout = setTimeout(() => {
+      let fontSize = window.innerWidth < 768 ? '32px' : '38px';
       // Activate hovered item and move line to '50%'
       this.animateItem(item, {
-        fontSize: '38px',
+        fontSize: fontSize,
         maxHeight: '350px',
         opacity: 1,
         visibility: 'visible',
@@ -159,8 +160,9 @@ export default class Overlay {
             this.startAutoplay();
 
             let firstItem = this.overlayItems[0];
+            let fontSize = window.innerWidth < 768 ? '32px' : '38px';
             this.animateItem(firstItem, {
-              fontSize: '38px',
+              fontSize: fontSize,
               maxHeight: '1000px',
               opacity: 1,
               visibility: 'visible',

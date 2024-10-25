@@ -16,7 +16,7 @@
     </div>
     <div
         class="page-header-text relative bottom-[160px] pl-8 sm:pl-8  sm:bottom-[unset] z-[3] w-full flex gap-8 flex-col sm:flex-row items-end sm:pb-20 mt-auto">
-        <div class="tagline w-full max-w-[550px] ">
+        <div class="tagline w-[50%] max-w-[550px] ">
             <div class="max-w-[595px]">
                 <h1>{!! get_field('page_excerpt', get_the_ID()) !!}</h1>
             </div>

@@ -56,4 +56,20 @@ class App extends Composer
         return '© ' . $foundingYear . ' - ' . $currentYear;
     }
 
+    function get_asset_url(string $path): string
+    {
+        $manifest_path = get_template_directory() . '/public/js/manifest.json';
+        if (!file_exists($manifest_path)) {
+            return get_template_directory_uri() . '/public/js/' . $path;
+        }
+
+        $manifest = json_decode(file_get_contents($manifest_path), true);
+
+        if (isset($manifest[$path]['file'])) {
+            return get_template_directory_uri() . '/public/js/' . $manifest[$path]['file'];
+        }
+
+        return get_template_directory_uri() . '/public/js/' . $path;
+    }
+
 }

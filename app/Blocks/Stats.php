@@ -187,6 +187,6 @@ class Stats extends Block
      */
     public function assets(array $block): void
     {
-        //
     }
+
 }

@@ -1,6 +1,7 @@
 .overlay-list {
   position: relative;
   padding-left: 3rem;
+
   li {
     .overlay-list-item {
       position: relative;
@@ -62,5 +63,26 @@
     width: 2px;
     height: 91%;
     @apply bg-mist;
+  }
+
+  @include m-sm {
+    padding-left: 1rem;
+
+    li {
+      h4 {
+        font-weight: normal !important;
+      }
+      .overlay-list-item {
+        .overlay-dot {
+          left: -1rem;
+        }
+      }
+    }
+  }
+}
+
+.overlay-container {
+  @include m-sm {
+    position: relative;
   }
 }
