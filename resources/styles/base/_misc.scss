@@ -258,12 +258,13 @@ footer .bg-image {
 
     @include m-sm {
       flex-direction: column;
-      align-items: center;
+      align-items: start;
+
       padding-top: 2rem;
       padding-bottom: 3rem;
       gap: 0;
 
-      div {
+      & > div:last-child {
         max-width: 100%;
       }
     }
@@ -391,6 +392,19 @@ section.wp-block-group {
         width: 100vw;
         position: relative;
         left: -24px;
+
+        .accordion-item {
+          .accordion-text {
+            overflow: hidden;
+          }
+
+          &.active {
+            .accordion-text {
+              height: fit-content;
+              padding: 2rem 0;
+            }
+          }
+        }
       }
     }
   }
@@ -461,6 +475,40 @@ section.wp-block-group {
           max-height: 1000px;
           opacity: 1;
           visibility: visible;
+        }
+      }
+    }
+  }
+
+  @include m-sm {
+    margin: 0 !important;
+    .reasons-bg {
+      grid-column: full-width !important;
+    }
+    .reasons-breakout {
+      grid-column: full-width !important;
+      .reasons-image {
+        position: relative;
+        height: 350px;
+      }
+      .reasons-items {
+        .reasons-item {
+          padding: 1rem 2rem;
+          &:first-child {
+            &::before {
+              display: none;
+            }
+          }
+
+          &:last-child {
+            &::after {
+              display: none;
+            }
+          }
+
+          &::after {
+            width: calc(100% - 4rem);
+          }
         }
       }
     }
@@ -606,6 +654,30 @@ section.wp-block-group {
     a,
     p {
       font-size: 13px;
+    }
+  }
+}
+
+.secondaries-chart-container {
+  overflow-x: auto;
+  position: relative;
+  width: 100%;
+  // Scrollbar color
+  ::-webkit-scrollbar-track {
+    @apply bg-mist-300;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-mist;
+  }
+
+  scrollbar-color: #c7d9d4 #e3ece9 !important;
+
+  // Scrollbar color
+  @include m-sm {
+    #sec-chart {
+      overflow-x: auto;
+      width: 920px;
     }
   }
 }

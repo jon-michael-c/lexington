@@ -9,6 +9,28 @@
 
 html {
   //scroll-behavior: smooth;
+
+  ::-webkit-scrollbar {
+    width: 7px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #c7d9d4;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #0e062d;
+    border-radius: 5px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #c7d9d4;
+    border-radius: 10px;
+    padding: 1px;
+  }
+
+  scrollbar-width: thin;
+  scrollbar-color: #8c1d40 #e3ece9;
 }
 
 body {

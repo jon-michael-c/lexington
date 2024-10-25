@@ -15,7 +15,8 @@
                             </div>
                         </div>
                         <div class="accordion-text bg-mist-300 text-charcoal">
-                            <p class="px-12 font-semibold text-[24px] text-azure uppercase pb-2">{!! $item['title'] !!}
+                            <p class="px-12 font-semibold text-[18px] sm:text-[24px] text-azure uppercase pb-2">
+                                {!! $item['title'] !!}
                             </p>
                             <div class="px-12">
                                 {!! $item['content'] !!}
