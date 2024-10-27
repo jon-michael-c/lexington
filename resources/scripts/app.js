@@ -10,6 +10,8 @@ import anime, { stagger } from 'animejs';
 import Overlay from './components/overlay';
 import Navbar from './components/navbar';
 
+new Intro();
+
 /**
  * Application entrypoint
  */
@@ -22,7 +24,6 @@ domReady(async () => {
   new Quotes();
   new HighchartsController();
   new Numbers();
-  new Intro();
   new Overlay();
   new Navbar('.navbar');
 

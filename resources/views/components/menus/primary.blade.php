@@ -1,5 +1,5 @@
 <ul
-    class="primaryMenu text-xs text-white flex flex-col gap-2 items-center pt-8 pb-2 lg:py-0 lg:flex-row  lg:space-x-8 rtl:space-x-reverse lg:mt-0 lg:border-0  lg:ml-auto lg:justify-end">
+    class="primaryMenu text-xs text-white flex flex-col gap-2 items-center pt-8 pb-2 md:py-0 md:flex-row  md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0  md:ml-auto md:justify-end">
 
     @foreach ($menu as $item)
         <li class="menu-item relative @if ($item['children']) has-children @endif {!! $item['classes'] !!}">

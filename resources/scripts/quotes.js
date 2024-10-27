@@ -6,6 +6,7 @@ export default class Quotes {
     this.container = container;
     this.quotes = document.querySelectorAll('.quote');
     this.dots = document.querySelectorAll('.quote__dot');
+    console.log(this.dots);
     this.interval = null;
     this.timeout = null;
     this.index = 0;

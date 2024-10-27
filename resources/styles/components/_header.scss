@@ -2,7 +2,7 @@ header {
   z-index: -2;
 
   nav {
-    @include sm {
+    @include lg {
       .primaryMenu {
         & > li:last-of-type {
           margin-left: 3rem !important;
@@ -36,7 +36,7 @@ header {
         height: 2px;
         @apply bg-magenta;
 
-        @include md {
+        @include lg {
           transition: width 0.2s cubic-bezier(0.39, 0.575, 0.565, 1);
         }
       }
@@ -63,14 +63,14 @@ header {
         display: block !important;
       }
 
-      @include md {
+      @include lg {
         &::after {
           bottom: -4px;
         }
       }
     }
 
-    @include m-md {
+    @include m-lg {
       .navbar-collapse {
         visibility: hidden;
         opacity: 0;
@@ -91,8 +91,8 @@ header {
   }
 
   .sub-menu {
-    @include md {
-      @apply absolute bg-white shadow-md;
+    @include lg {
+      @apply absolute bg-white shadow-lg;
       top: 167%;
       left: 0;
       z-index: 1000;
@@ -125,13 +125,13 @@ header {
     display: none;
   }
 
-  @include m-md {
+  @include m-lg {
     display: flex;
     flex-direction: column;
   }
 
   .sub-menu {
-    @apply absolute shadow-md;
+    @apply absolute shadow-lg;
     background-repeat: no-repeat;
     background-size: 200% !important;
     background-position: right;
@@ -185,7 +185,7 @@ header {
       transition: transform 0.2s cubic-bezier(0.39, 0.575, 0.565, 1);
     }
 
-    @include m-md {
+    @include m-lg {
       li {
         text-align: center;
 
@@ -260,7 +260,7 @@ header {
 }
 
 header {
-  @include m-md {
+  @include m-lg {
     nav {
       ul.primaryMenu {
         .menu-item {

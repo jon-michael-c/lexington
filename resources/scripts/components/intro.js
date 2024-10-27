@@ -32,9 +32,9 @@ export default class Intro {
       duration: 600,
     };
 
+    anime.set(siteLogo, { opacity: 1 }); // Set initial state for logo
     // Animation steps array
     const anim1 = [
-      { targets: siteLogo, opacity: [0, 1] }, // Fade in logo
       { targets: siteLogo, opacity: 0 }, // Fade out logo
       { targets: tagline, opacity: 1 }, // Fade in tagline // Tagline animation
     ];
@@ -257,13 +257,18 @@ export default class Intro {
     }
 
     //runTimelines(5);
+    body.style.opacity = '0';
 
-    if (localStorage.getItem('intro') == 'true' || window.innerWidth < 768) {
-      setFinalStates();
-    } else {
-      runTimelines(5);
-      localStorage.setItem('intro', 'true');
-    }
+    document.addEventListener('DOMContentLoaded', () => {
+      if (localStorage.getItem('intro') == 'true' || window.innerWidth < 768) {
+        body.style.opacity = '1';
+        setFinalStates();
+      } else {
+        body.style.opacity = '1';
+        runTimelines(5);
+        localStorage.setItem('intro', 'true');
+      }
+    });
 
     const videoBtn = document.querySelector('.hero-video-btn label');
     videoBtn.addEventListener('click', () => {
