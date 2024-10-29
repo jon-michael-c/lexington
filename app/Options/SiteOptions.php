@@ -152,6 +152,16 @@ class SiteOptions extends Field
                 'label' => 'Copyright First Year',
                 'instructions' => 'Add your first year here.',
             ])
+            ->addWysiwyg('cookie_text', [
+                'label' => 'Cookie Text',
+                'instructions' => 'Add your cookie text here.',
+                'toolbar' => 'full',
+            ])
+            ->addWysiwyg('cookie_policy', [
+                'label' => 'Cookie Policy',
+                'instructions' => 'Add your cookie policy here.',
+                'toolbar' => 'full',
+            ])
             ->addWysiwyg('disclaimer', [
                 'label' => 'Footer Disclaimer',
                 'instructions' => 'Add your footer disclaimer here.',

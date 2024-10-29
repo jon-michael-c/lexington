@@ -1,0 +1,116 @@
+#cookies {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 99999;
+  @apply bg-ocean text-white;
+  transition: all 0.3s ease-in-out;
+  transform: translateY(100%);
+
+  &.show {
+    transform: translateY(0%);
+  }
+
+  #cookie-policy {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  #close-policy {
+    position: absolute;
+    top: 0rem;
+    right: 1rem;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+  }
+
+  .wp-element-button {
+    color: white !important;
+  }
+
+  scrollbar-color: #8c1d40 #002e45;
+
+  .cookies-banner {
+    min-height: 50px;
+    transition: all 0.3s ease-in-out;
+
+    color: white !important;
+    .cookies-policy {
+      visibility: hidden;
+      overflow: hidden;
+      opacity: 0;
+      text-align: left !important;
+      transition: all 0.3s ease-in-out;
+      padding-right: 3rem;
+      position: relative;
+      @apply text-charcoal;
+
+      .content {
+        height: 100%;
+        width: 100%;
+        max-width: 900px;
+        max-height: 0px;
+        padding-right: 3rem;
+        overflow: auto;
+
+        color: white !important;
+        h1 {
+          @apply text-white font-Juana text-3xl font-normal mb-4;
+        }
+
+        h2,
+        h3 {
+          @apply text-white font-Eina text-xl font-semibold mt-2 mb-1;
+        }
+
+        ul {
+          list-style-position: outside;
+          list-style-type: disc;
+          padding-left: 22px;
+          font-size: 18px;
+          font-weight: normal;
+          li {
+            margin-bottom: 5px;
+          }
+        }
+
+        table {
+          margin: 1rem 0;
+
+          th,
+          td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+          }
+
+          th {
+            background-color: #002e455e;
+          }
+        }
+
+        p:not(:last-child) {
+          margin-bottom: 6px;
+        }
+      }
+
+      &.show {
+        visibility: visible;
+        opacity: 1;
+        overflow-y: auto;
+
+        .content {
+          max-height: 500px;
+        }
+      }
+    }
+  }
+
+  .hide {
+    opacity: 0;
+    max-height: 0px;
+    overflow: hidden;
+  }
+}

@@ -24,6 +24,7 @@
 
         @include('sections.footer')
     </div>
+    @include('partials.cookies')
 
     @php(do_action('get_footer'))
     @php(wp_footer())

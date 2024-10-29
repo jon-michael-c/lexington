@@ -4,6 +4,7 @@ export default class Intro {
   constructor() {
     if (!document.querySelector('.hero')) return;
     // Go to the top
+    this.finished = false;
 
     // Define targets
     const siteLogo = '.site-logo';
@@ -263,6 +264,7 @@ export default class Intro {
       if (localStorage.getItem('intro') == 'true' || window.innerWidth < 768) {
         body.style.opacity = '1';
         setFinalStates();
+        this.finished = true;
       } else {
         body.style.opacity = '1';
         runTimelines(5);

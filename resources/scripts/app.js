@@ -9,8 +9,9 @@ import Intro from './components/intro';
 import anime, { stagger } from 'animejs';
 import Overlay from './components/overlay';
 import Navbar from './components/navbar';
+import Cookies from './components/cookies';
 
-new Intro();
+window.intro = new Intro();
 
 /**
  * Application entrypoint
@@ -18,6 +19,7 @@ new Intro();
 domReady(async () => {
   // ...
 
+  new Cookies();
   new VideoCTAs();
   new Carousel();
   new Timeline();
