@@ -11,13 +11,10 @@ import Overlay from './components/overlay';
 import Navbar from './components/navbar';
 import Cookies from './components/cookies';
 
-window.intro = new Intro();
-
-window.addEventListener('load', () => {
-  let app = document.querySelector('#app');
-  app.style.opacity = 1;
-});
-
+if (!localStorage.getItem('intro')) {
+  new Intro();
+  localStorage.setItem('intro', 'true');
+}
 /**
  * Application entrypoint
  */

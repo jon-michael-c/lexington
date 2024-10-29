@@ -148,7 +148,8 @@ class Hero extends Block
     public function with(): array
     {
         return [
-            'items' => $this->items(),
+            'main_video' => get_field('main_video'),
+            'intro_videos' => get_field('intro_videos'),
         ];
     }
 
@@ -160,9 +161,26 @@ class Hero extends Block
         $fields = Builder::make('hero');
 
         $fields
-            ->addRepeater('items')
-                ->addText('item')
-            ->endRepeater();
+            ->addFile('main_video', [
+                'label' => 'Main Video',
+                'instructions' => 'Upload a video to be displayed in the hero.',
+                'required' => false,
+            ])
+            ->addRepeater('intro_videos', [
+                'label' => 'Intro Videos',
+                'instructions' => 'Add intro videos to be displayed in the hero.',
+                'required' => false,
+                'layout' => 'block',
+                'max' => 3,
+            ])
+            ->addFile('video', [
+                'label' => 'Video',
+                'instructions' => 'Upload a video to be displayed in the hero.',
+                'required' => false,
+            ])
+            ->endRepeater()
+        ;
+
 
         return $fields->build();
     }

@@ -3,138 +3,231 @@ import anime from 'animejs';
 export default class Intro {
   constructor() {
     if (!document.querySelector('.hero')) return;
-    // Go to the top
     this.finished = false;
 
-    // Define targets
-    const siteLogo = '.site-logo';
-    const tagline = document.querySelector('.tagline');
-    const vids = ['.vid-1', '.vid-2', '.vid-3', '.hero > .page-header-content'];
-    const reds = ['.red-1', '', '.hero-text-container'];
-    const green = '.hero .bg-block';
-    const heroText = '.hero-text';
-    const header = document.querySelector('header');
-    const heroBtn = document.querySelector('.hero-video-btn');
-    const stripe = document.querySelector('.stripe');
     const body = document.querySelector('body');
-    const green2 = document.querySelector('.green-2');
-    const app = document.querySelector('#app');
-    const videoControl = document.querySelector('.video-control');
-    app.style.overflowX = 'hidden';
-    header.style.opacity = '0';
-    heroBtn.style.opacity = '0';
-    stripe.style.opacity = '0';
-    green2.style.opacity = '0';
-    body.style.overflow = 'hidden';
+    body.style.overflowY = 'hidden';
+
+    const siteLogo = document.querySelector('.site-logo');
+    const heading = document.querySelector('.hero__heading-h1');
+    const red1 = document.querySelector('.hero__line');
+    const red2 = document.querySelector('.hero__text-bg');
+    const green1 = document.querySelector('.hero__green-1');
+    const green2 = document.querySelector('.hero__green-2');
+    const stripe = document.querySelector('.hero__stripe');
+    const heroVideo = document.querySelector('.hero__video');
+    const heroText = document.querySelector('.hero__text');
+    const heroTextContent = document.querySelector('.hero__text-content');
+    const header = document.querySelector('.banner');
+    const video1 = document.querySelector('.intro__video-1');
+    const video2 = document.querySelector('.intro__video-2');
+    const video3 = document.querySelector('.intro__video-3');
+    const sections = document.querySelectorAll('section:not(.hero)');
+
+    siteLogo.style.opacity = 1;
 
     // Base timeline settings
     const baseTimelineSettings = {
       easing: 'easeInOutQuint',
-      duration: 600,
+      duration: 500,
     };
 
-    anime.set(siteLogo, { opacity: 1 }); // Set initial state for logo
+    anime.set(
+      [
+        sections,
+        header,
+        heading,
+        red1,
+        red2,
+        green1,
+        green2,
+        stripe,
+        heroVideo,
+        heroText,
+        heroTextContent,
+      ],
+      { opacity: 0 }
+    ); // Set initial state for logo
     // Animation steps array
     const anim1 = [
-      { targets: siteLogo, opacity: 0 }, // Fade out logo
-      { targets: tagline, opacity: 1 }, // Fade in tagline // Tagline animation
+      {
+        targets: siteLogo,
+        opacity: 0,
+      },
     ];
 
     const anim2 = [
       {
-        targets: [...vids, reds[0], reds[1], green],
+        targets: [heading],
         opacity: 1,
-      },
-      {
-        targets: tagline,
-        scale: 1.5,
-        translateX: ['-50%', '-30%'],
-        translateY: ['0%', '0%'],
+        color: '#8C1D40',
+        translateY: ['50%', '50%'],
+        translateX: ['65%', '65%'],
+        scale: [0.7, 0.7],
       },
     ];
 
     const anim3 = [
-      { targets: tagline, color: '#C7D9D4' },
-      { targets: '.red-1', height: '226px', bottom: '80%' },
-      { targets: vids[1], height: '589px' },
       {
-        targets: vids[0],
-        width: '645px',
-        height: '398px',
-        left: '50%',
-        top: '42%',
+        targets: [heading],
+        scale: [0.7, 1.2],
       },
-      { targets: vids[2], width: '342px', height: '398px' },
-      { targets: vids[3], left: ['150%', '85%'], opacity: 1 },
-      { targets: green, left: '50%', width: '50vw' },
+      {
+        targets: [video1],
+        opacity: 1,
+        width: ['141px', '141px'],
+        height: ['172px', '172px'],
+        top: ['0%', '0%'],
+        left: ['30%', '30%'],
+      },
+      {
+        targets: [video2],
+        opacity: 1,
+        width: ['222px', '222px'],
+        height: ['258px', '258px'],
+        bottom: ['0%', '0%'],
+        right: ['10%', '10%'],
+      },
+      {
+        targets: [video3],
+        opacity: 1,
+        width: ['542px', '542px'],
+        height: ['158px', '158px'],
+        bottom: ['0%', '0%'],
+        left: ['0%', '0%'],
+      },
+
+      {
+        targets: [heroVideo],
+        opacity: 1,
+        width: ['100%', '100%'],
+        height: ['501px', '501px'],
+        left: ['100%', '100%'],
+      },
+      {
+        targets: [green1],
+        opacity: 1,
+        left: ['90%', '90%'],
+        top: ['0%', '0%'],
+      },
+      {
+        targets: [red1],
+        opacity: 1,
+        translateX: ['-300%', '-300%'],
+        translateY: ['120%', '120%'],
+      },
     ];
 
     const anim4 = [
       {
-        targets: vids[0],
-        height: '472px',
-        width: '426px',
-        left: '0%',
-        translateY: ['-50%', '-50%'],
-        translateX: ['-50%', '0%'],
-        top: '50%',
+        targets: [heading],
+        color: '#C7D9D4',
       },
-      { targets: vids[1], left: '-10%', height: '258px', width: '281px' },
-      { targets: vids[2], left: '25%' },
-      { targets: vids[3], left: '70%', top: '0%', height: '610px' },
       {
-        targets: tagline,
-        color: '#ffffff',
-        left: '0%',
-        translateX: '0%',
-        translateY: '0%',
-        scale: [1.5, 1],
-        update: function () {
-          tagline.style.position = 'relative';
-          tagline.style.width = '100%';
-          tagline.querySelector('h1').style.fontSize = '60px';
-        },
+        targets: [video1],
+        top: ['0%', '10%'],
+        left: ['30%', '28%'],
+        width: ['141px', '645px'],
+        height: ['172px', '398px'],
       },
-      { targets: reds[2], right: ['0%', '0%'], opacity: 0.9 },
-      { targets: green, width: '40%', right: '30%', height: '90vh' },
+      {
+        targets: [video2],
+        right: ['10%', '15%'],
+        width: ['222px', '342px'],
+        height: ['258px', '398px'],
+      },
+      {
+        targets: [video3],
+        height: ['158px', '589px'],
+      },
+      {
+        targets: [heroVideo],
+        left: ['100%', '83%'],
+      },
+      {
+        targets: [green1],
+        left: ['90%', '50%'],
+        width: ['100%', '120%'],
+      },
+      {
+        targets: [red1],
+        translateY: ['120%', '-150%'],
+      },
     ];
 
     const anim5 = [
       {
-        targets: vids[3],
-        left: '0%',
+        targets: [heading],
+        color: '#FFFFFF',
+        scale: [1.2, 1],
+        translateX: ['65%', '0%'],
+        translateY: ['50%', '0%'],
       },
       {
-        targets: reds[0],
-        top: '45%',
-        left: '-16px',
+        targets: [video1],
+        left: ['28%', '-7%'],
+        height: ['398px', '472px'],
       },
       {
-        targets: reds[2],
-        width: '100%',
+        targets: [video2],
+        right: ['15%', '45%'],
       },
       {
-        targets: [vids[0], vids[1], vids[2]],
+        targets: [video3],
+        height: ['589px', '281px'],
+        left: ['0%', '-35%'],
+      },
+      {
+        targets: [heroVideo],
+        left: ['83%', '63%'],
+        height: ['501px', '611px'],
+      },
+      {
+        targets: [green1],
+        left: ['50%', '35%'],
+        width: ['120%', '50%'],
+        height: ['80%', '100%'],
+      },
+      {
+        targets: [heroText],
+        opacity: 1,
+      },
+      {
+        targets: [red1],
+        translateX: ['-300%', '0%'],
+      },
+
+      {
+        targets: [red2],
+        opacity: 0.9,
+        width: ['5%', '5%'],
+      },
+    ];
+
+    const anim6 = [
+      {
+        targets: [video1, video2, video3],
         opacity: 0,
       },
       {
-        targets: '.intro-bg',
-        opacity: 0,
+        targets: [heroVideo],
+        left: ['63%', '0%'],
       },
       {
-        targets: [header, heroText, heroBtn, stripe],
+        targets: [green1],
+        left: ['35%', '0%'],
+      },
+      {
+        targets: [heroTextContent, green2, header, sections, stripe],
         opacity: 1,
       },
-      { targets: reds[1], opacity: 0 },
-      { targets: green, left: '0', backgroundColor: '#C7D9D4' },
       {
-        targets: green,
-        height: '100%',
-        bottom: '0',
+        targets: [red1],
+        translateY: ['-150%', '0%'],
       },
       {
-        targets: green2,
-        opacity: 1,
+        targets: [red2],
+        width: ['5%', '100%'],
       },
     ];
 
@@ -183,94 +276,24 @@ export default class Intro {
       if (i >= 5) {
         anim5.forEach((animation) => {
           tl5.add(animation, 0); // Add all animations at the same start point
-
-          tl5.add(
-            {
-              targets: videoControl,
-              opacity: 1,
-            },
-            '-=100'
-          );
-          tl5.add(
-            {
-              targets: body,
-              overflowX: 'auto',
-            },
-            '-=100'
-          );
-          tl5.add(
-            {
-              targets: '.intro-bg',
-              update: function () {
-                document.querySelector('.intro-bg').style.display = 'none';
-                document.querySelector('.intro').style.display = 'none';
-              },
-            },
-            '-=100'
-          );
         });
 
-        body.style.overflow = 'auto'; // Allow scrolling
         await tl5.finished; // Wait for Timeline 5 to finish
-        const introbg = document.querySelector('.intro-bg');
-        introbg.style.display = 'none'; // Hide the intro background
-        const intro = document.querySelector('.intro');
-        intro.style.display = 'none'; // Hide the intro
-        header.style.opacity = '1'; // Show the header
+      }
+
+      let tl6 = anime.timeline(baseTimelineSettings);
+      if (i >= 6) {
+        anim6.forEach((animation) => {
+          tl6.add(animation, 0);
+        });
+        await tl6.finished;
+        body.style.overflowY = 'auto';
       }
     }
 
-    function setFinalStates() {
-      anime.set(siteLogo, { opacity: 0, zIndex: -100 });
-      anime.set(tagline, { color: '#ffffff' });
-      anime.set(green, {
-        backgroundColor: '#C7D9D4',
-        left: '0',
-        width: '40%',
-        height: '100%',
-        opacity: 1,
-      });
-      anime.set(reds[0], {
-        top: '45%',
-        left: '-16px',
-        height: '226px',
-        opacity: 1,
-      });
-      anime.set([header, heroText, heroBtn, stripe, green2], { opacity: 1 });
-      anime.set(reds[2], { width: '100%', opacity: 0.9, right: '0%' });
-      anime.set(vids[3], { left: '0%', top: '0%', opacity: 1 });
-      anime.set(tagline, {
-        left: '3%',
-        scale: 1,
-        translateY: '0%',
-        translateX: '0%',
-        opacity: 1,
-      });
-      tagline.style.top = 'unset';
-      document.querySelector('.tagline h1').style.fontSize = '60px';
-      document.querySelector('.intro-bg').style.display = 'none';
-      document.querySelector('.intro').style.display = 'none';
-      body.style.overflow = 'auto'; // Allow scrolling
-      const introbg = document.querySelector('.intro-bg');
-      introbg.style.display = 'none'; // Hide the intro background
-      const intro = document.querySelector('.intro');
-      intro.style.display = 'none'; // Hide the intro
-      header.style.opacity = '1'; // Show the header
-    }
+    runTimelines(6);
 
-    //runTimelines(5);
-    body.style.opacity = '0';
-
-    if (localStorage.getItem('intro') == 'true' || window.innerWidth < 768) {
-      body.style.opacity = '1';
-      setFinalStates();
-      this.finished = true;
-    } else {
-      body.style.opacity = '1';
-      runTimelines(5);
-      localStorage.setItem('intro', 'true');
-    }
-
+    /*
     const videoBtn = document.querySelector('.hero-video-btn label');
     videoBtn.addEventListener('click', () => {
       const video = document.querySelector('.bg-video > video');
@@ -280,5 +303,6 @@ export default class Intro {
         video.pause();
       }
     });
+    */
   }
 }
