@@ -1,9 +1,6 @@
 <div class="intro">
     <div class="intro-bg"></div>
     <div class="animation-container">
-        <div class="site-logo">
-            <img src="@asset('images/site-logo.svg')" alt="Logo">
-        </div>
         <div class="vid-1 vid">
             <div class="gradient-bg"></div>
             <video autoplay muted loop>

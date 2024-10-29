@@ -74,7 +74,7 @@ export default class Intro {
         targets: vids[0],
         height: '472px',
         width: '426px',
-        left: '0',
+        left: '0%',
         translateY: ['-50%', '-50%'],
         translateX: ['-50%', '0%'],
         top: '50%',
@@ -221,6 +221,7 @@ export default class Intro {
     }
 
     function setFinalStates() {
+      anime.set(siteLogo, { opacity: 0, zIndex: -100 });
       anime.set(tagline, { color: '#ffffff' });
       anime.set(green, {
         backgroundColor: '#C7D9D4',
@@ -260,17 +261,15 @@ export default class Intro {
     //runTimelines(5);
     body.style.opacity = '0';
 
-    document.addEventListener('DOMContentLoaded', () => {
-      if (localStorage.getItem('intro') == 'true' || window.innerWidth < 768) {
-        body.style.opacity = '1';
-        setFinalStates();
-        this.finished = true;
-      } else {
-        body.style.opacity = '1';
-        runTimelines(5);
-        localStorage.setItem('intro', 'true');
-      }
-    });
+    if (localStorage.getItem('intro') == 'true' || window.innerWidth < 768) {
+      body.style.opacity = '1';
+      setFinalStates();
+      this.finished = true;
+    } else {
+      body.style.opacity = '1';
+      runTimelines(5);
+      localStorage.setItem('intro', 'true');
+    }
 
     const videoBtn = document.querySelector('.hero-video-btn label');
     videoBtn.addEventListener('click', () => {

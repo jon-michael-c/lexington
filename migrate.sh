@@ -7,7 +7,7 @@ wp migrate profile 2
 # Step 2: SSH into remote server and run Composer
 REMOTE_USER="lexington"
 REMOTE_HOST="lexington.leibowitzdesign.com"
-THEME_PATH="/bedrock/web/app/themes/lexington"
+THEME_PATH="/home/lexington/bedrock/web/app/themes/lexington"
 
 
 echo "Connecting to remote server..."

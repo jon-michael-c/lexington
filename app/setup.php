@@ -17,6 +17,22 @@ add_action('wp_enqueue_scripts', function () {
     bundle('app')->enqueue();
 }, 100);
 
+
+/**
+ * Add defer attribute to the app.js script.
+ *
+ * @param string $tag HTML script tag.
+ * @param string $handle Script handle.
+ * @return string Modified HTML script tag.
+ */
+add_filter('script_loader_tag', function ($tag, $handle) {
+    // Check if the handle is for the app bundle and add defer
+    if ($handle === 'app') {
+        return str_replace(' src', ' defer src', $tag);
+    }
+    return $tag;
+}, 10, 2);
+
 /**
  * Register the theme assets with the block editor.
  *
@@ -130,15 +146,6 @@ add_filter('upload_mimes', function ($mimes) {
     $mimes['svg'] = 'image/svg+xml';
     return $mimes;
 });
-// Enqueue the JavaScript file and localize the script
-add_action('wp_enqueue_scripts', function () {
-    wp_enqueue_script('contact-form-script', get_template_directory_uri() . '/resources/assets/scripts/app.js', ['jquery'], null, true);
-    wp_localize_script('contact-form-script', 'ajax_object', [
-        'ajax_url' => admin_url('admin-ajax.php')
-    ]);
-});
-
-// Define the AJAX handler function
 function send_contact_email()
 {
     $first_name = sanitize_text_field($_POST['firstName']);

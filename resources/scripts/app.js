@@ -13,6 +13,11 @@ import Cookies from './components/cookies';
 
 window.intro = new Intro();
 
+window.addEventListener('load', () => {
+  let app = document.querySelector('#app');
+  app.style.opacity = 1;
+});
+
 /**
  * Application entrypoint
  */
