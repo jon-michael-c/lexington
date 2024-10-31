@@ -191,13 +191,24 @@
   position: fixed;
   top: 50%;
   left: 50%;
-  width: 500px;
+  width: 390px;
   height: auto;
   opacity: 0;
-  z-index: 99999;
+  z-index: -99999;
   transform-origin: center center;
   transform: translate(-50%, -50%);
-  animation: loading 1.8s ease infinite;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    animation: loading 1s ease infinite;
+    z-index: 1;
+  }
   img {
     width: 100%;
     height: 100%;
@@ -206,14 +217,13 @@
 }
 
 @keyframes loading {
-  // Grayscale loading
   0% {
-    filter: grayscale(100%);
+    opacity: 0.5;
   }
   50% {
-    filter: grayscale(0%);
+    opacity: 0.1;
   }
   100% {
-    filter: grayscale(100%);
+    opacity: 0.5;
   }
 }

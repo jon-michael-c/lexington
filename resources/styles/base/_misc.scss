@@ -466,6 +466,7 @@ section.wp-block-group {
         transition: all 0.5s ease;
       }
 
+      &.active,
       &:hover {
         cursor: pointer;
         @apply bg-mist-300;
@@ -622,6 +623,23 @@ section.wp-block-group {
     padding: 1rem 0;
     transition: all 0.3s ease;
     @apply border-t-2 border-solid border-mist cursor-pointer;
+    position: relative;
+    &:hover {
+      cursor: pointer;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 1.45rem;
+      right: 0.25rem;
+      width: 15px;
+      height: 15px;
+      background-image: url('~@images/arrow.svg');
+      background-position: center center;
+      background-repeat: no-repeat;
+      transition: all 0.2s ease;
+    }
 
     &:not(:first-child) {
       @apply border-b-2;
@@ -638,6 +656,10 @@ section.wp-block-group {
       .folds-content {
         max-height: 1000px;
         visibility: visible;
+      }
+
+      &::after {
+        transform: rotate(180deg);
       }
     }
   }

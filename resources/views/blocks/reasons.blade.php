@@ -18,7 +18,6 @@
                 @foreach ($items as $item)
                     <div class="reasons-item">
                         <div class="reasons-icon">
-
                         </div>
                         <div>
                             <div class="reasons-title">

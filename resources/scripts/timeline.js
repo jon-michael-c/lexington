@@ -13,7 +13,7 @@ export default class Timeline {
     this.dotEasing = 'easeInOutSine';
     this.lineDuration = 10;
     this.dotDuration = 200;
-    this.threshold = 10; // Threshold for intersection checks
+    this.threshold = 50; // Threshold for intersection checks
 
     this.initalizeTimeline();
     this.detectDotIntersection();

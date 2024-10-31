@@ -2,7 +2,7 @@
     @if (isset($items))
         @foreach ($items as $item)
             @if (isset($item['title']) && isset($item['content']))
-                <div class="folds-item cursor-pointer @if ($loop->first) active @endif">
+                <div class="folds-item cursor-pointer">
                     <div class="folds-title">
                         <p class="font-semibold text-magenta">{!! $item['title'] !!}</p>
                     </div>

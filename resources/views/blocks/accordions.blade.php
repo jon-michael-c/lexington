@@ -34,62 +34,109 @@
         const accordion = document.querySelector('.accordion-items');
         let timeout;
 
-        accordionItems.forEach((item) => {
+        // Variables for Autoplay
+        let autoplayInterval = null; // Reference to the autoplay interval
+        const AUTOPLAY_DELAY = 3000; // Time in ms between automatic activations (e.g., 3 seconds)
+        let currentIndex = 0; // Tracks the currently active item index
+
+        // Function to activate a specific accordion item by index
+        function activateItem(index) {
+            // Ensure index is within bounds
+            if (index < 0 || index >= accordionItems.length) return;
+
+            // Deactivate all other items and make their titles short
+            accordionItems.forEach((item, idx) => {
+                const title = item.querySelector('.accordion-title');
+                if (idx === index) {
+                    item.classList.add('active');
+                    title.classList.remove('short');
+                } else {
+                    item.classList.remove('active');
+                    title.classList.add('short');
+                }
+            });
+
+            currentIndex = index; // Update the current index
+        }
+
+        // Function to activate the next item in the list
+        function activateNextItem() {
+            const nextIndex = (currentIndex + 1) % accordionItems.length;
+            activateItem(nextIndex);
+        }
+
+        // Function to start the autoplay
+        function startAutoplay() {
+            // Prevent multiple intervals from being set
+            if (autoplayInterval === null) {
+                autoplayInterval = setInterval(activateNextItem, AUTOPLAY_DELAY);
+            }
+        }
+
+        // Function to stop the autoplay
+        function stopAutoplay() {
+            if (autoplayInterval !== null) {
+                clearInterval(autoplayInterval);
+                autoplayInterval = null;
+            }
+        }
+
+        // Initialize the first item as active when the page loads
+        activateItem(0);
+
+        // Start autoplay when the accordion is in view (handled by IntersectionObserver below)
+
+        accordionItems.forEach((item, index) => {
             const title = item.querySelector('.accordion-title');
 
             item.addEventListener('mouseenter', () => {
+                // Stop autoplay when user interacts
+                stopAutoplay();
+
                 clearTimeout(timeout);
                 timeout = setTimeout(() => {
-                    // Deactivate all other items and make their titles short
-                    accordionItems.forEach((otherItem) => {
-                        if (otherItem !== item) {
-                            otherItem.classList.remove('active');
-                            otherItem.querySelector('.accordion-title')
-                                .classList.add('short');
-                        }
-                    });
-
-                    // Activate the current item
-                    item.classList.add('active');
-                    title.classList.remove('short');
+                    // Activate the hovered item
+                    activateItem(index);
                 }, 200); // Adjust the delay as needed
             });
 
             item.addEventListener('mouseleave', () => {
                 clearTimeout(timeout);
                 timeout = setTimeout(() => {
-                    item.classList.remove('active');
-                    title.classList.add('short');
+                    // Optionally, you can decide whether to deactivate on mouse leave
+                    // For autoplay, it's better to keep one item active, so we don't deactivate here
+                    // If you want to deactivate, uncomment the following lines:
+
+                    // item.classList.remove('active');
+                    // title.classList.add('short');
                 }, 200); // Adjust the delay as needed
             });
         });
 
-        // When mouse leaves the accordion, deactivate all items
+        // When mouse leaves the accordion, resume autoplay
         accordion.addEventListener('mouseleave', () => {
-            clearTimeout(timeout);
-            accordionItems.forEach((item) => {
-                item.classList.remove('active');
-                item.querySelector('.accordion-title')
-                    .classList.remove('short');
-            });
+            // Restart autoplay
+            startAutoplay();
         });
 
-        // When scroll into view, activate the first item
+        // IntersectionObserver to start autoplay when the accordion comes into view
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
-                    accordionItems[0].classList.add('active');
-                    accordionItems[0].querySelector('.accordion-title')
-                        .classList.remove('short');
-                    for (let i = 1; i < accordionItems.length; i++) {
-                        if (accordionItems[i].classList.contains('active')) {
-                            continue;
-                        }
-                        accordionItems[i].classList.remove('active');
-                        accordionItems[i].querySelector('.accordion-title')
-                            .classList.add('short');
-                    }
+                    // Activate the first item
+                    activateItem(0);
 
+                    // Start autoplay
+                    startAutoplay();
+                } else {
+                    // Optionally, stop autoplay when the accordion is out of view
+                    stopAutoplay();
+
+                    // Optionally, deactivate all items when out of view
+                    // accordionItems.forEach((item) => {
+                    //     item.classList.remove('active');
+                    //     item.querySelector('.accordion-title').classList.add('short');
+                    // });
                 }
             });
         }, {

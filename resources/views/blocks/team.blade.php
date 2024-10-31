@@ -22,6 +22,16 @@
         ];
     }
 
+    usort($locations, function ($a, $b) {
+        if ($a['label'] === 'All Locations') {
+            return -1;
+        }
+        if ($b['label'] === 'New York') {
+            return 1;
+        }
+        return strcmp($a['label'], $b['label']);
+    });
+
     $allTitles = [];
     foreach ($team as $id) {
         $title = get_field('role', $id);
@@ -51,12 +61,36 @@
         ['value' => '', 'label' => 'All Groups'], // Add 'All Groups' option
     ];
 
+    $groupsArray = ['Secondaries', 'Co-Investment', 'Investor Relations', 'Legal and Compliance', 'Operations'];
+
     foreach ($allGroups as $group) {
         $groups[] = [
             'value' => $group->name,
             'label' => $group->name,
         ];
     }
+
+    usort($groups, function ($a, $b) use ($groupsArray) {
+        if ($a['label'] === 'All Groups') {
+            return -1;
+        }
+        $indexA = array_search($a['label'], $groupsArray);
+        $indexB = array_search($b['label'], $groupsArray);
+
+        if ($indexA === false && $indexB === false) {
+            return strcmp($a['label'], $b['label']);
+        }
+
+        if ($indexA === false) {
+            return 1;
+        }
+
+        if ($indexB === false) {
+            return -1;
+        }
+
+        return $indexA - $indexB;
+    });
 
     $locationS = 'location-select';
     $titleS = 'title-select';

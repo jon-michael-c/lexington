@@ -2,8 +2,8 @@
     @if (isset($video) && isset($video['url']))
         <div
             class="video-container aspect-video overflow-hidden inner-full relative w-full h-full md:h-[530px] cursor-pointer">
-            <video class="w-full h-full object-cover relative" autoplay playsinline muted loop>
-                <source src="{{ $video['url'] }}" type="video/mp4">
+            <video class="w-full h-full object-cover relative" muted loop playsinline>
+                <source src="{{ $video['url'] }}" type="{{ $video['mime_type'] }}">
                 Your browser does not support the video tag.
             </video>
             <div
@@ -17,22 +17,82 @@
             </div>
         </div>
         <script>
-            var video = document.querySelector('video');
-            document.querySelector('.video-container').addEventListener('click', function() {
-                if (video.paused) {
-                    video.play();
-                } else {
+            document.addEventListener('DOMContentLoaded', function() {
+                const videoContainer = document.querySelector('.video-container');
+                const video = videoContainer.querySelector('video');
+                const playButton = videoContainer.querySelector('.play-button');
+
+                // Function to attempt playing the video
+                const playVideo = async () => {
+                    try {
+                        await video.play();
+                        // Hide the play button when video plays
+                        playButton.style.opacity = '0';
+                    } catch (error) {
+                        console.warn('Autoplay failed:', error);
+                        // Show the play button if autoplay fails
+                        playButton.style.opacity = '1';
+                    }
+                };
+
+                // Function to pause the video
+                const pauseVideo = () => {
                     video.pause();
-                }
-            });
-            var playButton = document.querySelector('.play-button');
+                    // Show the play button when video is paused
+                    playButton.style.opacity = '1';
+                };
 
-            video.addEventListener('play', function() {
-                playButton.style.opacity = '0';
-            });
+                // Initialize Intersection Observer
+                const observerOptions = {
+                    root: null, // Observe relative to the viewport
+                    threshold: 0.5 // 50% of the video should be visible
+                };
 
-            video.addEventListener('pause', function() {
-                playButton.style.opacity = '1';
+                let once = false;
+
+                const observerCallback = (entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting && !once) {
+                            playVideo();
+
+                            once = true;
+                        } else {
+                            pauseVideo();
+                        }
+
+                    });
+                };
+
+                const observer = new IntersectionObserver(observerCallback, observerOptions);
+                observer.observe(videoContainer);
+
+                // Toggle play/pause on container click
+                videoContainer.addEventListener('click', function() {
+                    if (video.paused) {
+                        video.play();
+                    } else {
+                        video.pause();
+                    }
+                });
+
+                // Update play button visibility based on video state
+                video.addEventListener('play', function() {
+                    playButton.style.opacity = '0';
+                });
+
+                video.addEventListener('pause', function() {
+                    playButton.style.opacity = '1';
+                });
+
+                // Optional: Handle visibility changes to pause/play the video
+                document.addEventListener('visibilitychange', () => {
+                    if (document.hidden) {
+                        pauseVideo();
+                    } else {
+                        // Attempt to play again when the tab becomes active
+                        playVideo();
+                    }
+                });
             });
         </script>
     @endif

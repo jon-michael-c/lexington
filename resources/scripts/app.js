@@ -11,10 +11,17 @@ import Overlay from './components/overlay';
 import Navbar from './components/navbar';
 import Cookies from './components/cookies';
 
-if (!localStorage.getItem('intro')) {
+if (!sessionStorage.getItem('intro') && window.innerWidth >= 786) {
   new Intro();
-  localStorage.setItem('intro', 'true');
+  sessionStorage.setItem('intro', 'true');
 }
+
+// Keypress to clear the localStorage on 'i' key
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    sessionStorage.removeItem('intro');
+  }
+});
 /**
  * Application entrypoint
  */
@@ -131,6 +138,127 @@ domReady(async () => {
     collageItems.forEach((item) => {
       item.classList.remove('inactive');
     });
+  });
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+  // Select the reasons section
+  const reasonsSection = document.querySelector('.reasons');
+  if (!reasonsSection) return;
+
+  // Select all reasons-item elements
+  const reasonsItems = reasonsSection.querySelectorAll('.reasons-item');
+
+  // Initialize variables
+  let currentIndex = 0;
+  const autoplayInterval = 3000; // Time in milliseconds (e.g., 3000ms = 3s)
+  let autoplayTimer;
+  let isAutoplaying = false; // Track autoplay state
+
+  // Function to activate a specific item
+  function activateItem(index) {
+    reasonsItems.forEach((item, idx) => {
+      if (idx === index) {
+        item.classList.add('active');
+      } else {
+        item.classList.remove('active');
+      }
+    });
+  }
+
+  // Function to go to the next item
+  function nextItem() {
+    currentIndex = (currentIndex + 1) % reasonsItems.length;
+    activateItem(currentIndex);
+  }
+
+  // Function to start autoplay
+  function startAutoplay() {
+    if (!isAutoplaying && reasonsItems.length > 0) {
+      autoplayTimer = setInterval(nextItem, autoplayInterval);
+      isAutoplaying = true;
+      console.log('Autoplay started');
+    }
+  }
+
+  // Function to stop autoplay
+  function stopAutoplay() {
+    if (isAutoplaying) {
+      clearInterval(autoplayTimer);
+      autoplayTimer = null;
+      isAutoplaying = false;
+      console.log('Autoplay stopped');
+    }
+  }
+
+  // Initialize by activating the first item
+  if (reasonsItems.length > 0) {
+    activateItem(currentIndex);
+  }
+
+  // Foreach reasons-item, on mouseover, put active class, remove from others, and mouseout, remove active class
+  reasonsItems.forEach((item) => {
+    item.addEventListener('mouseover', () => {
+      stopAutoplay();
+      reasonsItems.forEach((otherItem) => {
+        if (otherItem !== item) {
+          otherItem.classList.remove('active');
+        }
+      });
+      item.classList.add('active');
+    });
+
+    item.addEventListener('mouseout', () => {
+      item.classList.remove('active');
+    });
+  });
+
+  // Set up Intersection Observer to start autoplay when in view
+  const observerOptions = {
+    root: null, // Relative to the viewport
+    threshold: 0.5, // 50% of the section must be visible
+  };
+
+  const observerCallback = (entries, observer) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        startAutoplay();
+      } else {
+        stopAutoplay();
+      }
+    });
+  };
+
+  const observer = new IntersectionObserver(observerCallback, observerOptions);
+  observer.observe(reasonsSection);
+
+  let reasonsItemsContainer = reasonsSection.querySelector('.reasons-items');
+  // Pause autoplay on mouseenter
+  reasonsItemsContainer.addEventListener('mouseenter', stopAutoplay);
+
+  // Resume autoplay on mouseleave, but only if the section is still in view
+  reasonsItemsContainer.addEventListener('mouseleave', () => {
+    // Correctly use '&&' instead of '&#038;&#038;'
+    const isInView =
+      reasonsSection.getBoundingClientRect().top < window.innerHeight &&
+      reasonsSection.getBoundingClientRect().bottom > 0;
+    if (isInView) {
+      startAutoplay();
+    }
+  });
+
+  // Optional: Handle visibility changes to pause/play the autoplay
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      stopAutoplay();
+    } else {
+      // If the section is in view, resume autoplay
+      const rect = reasonsSection.getBoundingClientRect();
+      const isInView = rect.top < window.innerHeight && rect.bottom > 0;
+      if (isInView) {
+        startAutoplay();
+      }
+    }
   });
 });
 

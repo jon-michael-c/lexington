@@ -23,13 +23,10 @@ export default class Intro {
     const video2 = document.querySelector('.intro__video-2');
     const video3 = document.querySelector('.intro__video-3');
     const sections = document.querySelectorAll('section:not(.hero)');
-
-    siteLogo.style.opacity = 1;
-
     // Base timeline settings
     const baseTimelineSettings = {
-      easing: 'easeInOutQuint',
-      duration: 500,
+      easing: 'easeInSine',
+      duration: 550,
     };
 
     anime.set(
@@ -65,9 +62,6 @@ export default class Intro {
         translateX: ['65%', '65%'],
         scale: [0.7, 0.7],
       },
-    ];
-
-    const anim3 = [
       {
         targets: [heading],
         scale: [0.7, 1.2],
@@ -110,15 +104,9 @@ export default class Intro {
         left: ['90%', '90%'],
         top: ['0%', '0%'],
       },
-      {
-        targets: [red1],
-        opacity: 1,
-        translateX: ['-300%', '-300%'],
-        translateY: ['120%', '120%'],
-      },
     ];
 
-    const anim4 = [
+    const anim3 = [
       {
         targets: [heading],
         color: '#C7D9D4',
@@ -149,13 +137,9 @@ export default class Intro {
         left: ['90%', '50%'],
         width: ['100%', '120%'],
       },
-      {
-        targets: [red1],
-        translateY: ['120%', '-150%'],
-      },
     ];
 
-    const anim5 = [
+    const anim4 = [
       {
         targets: [heading],
         color: '#FFFFFF',
@@ -194,9 +178,9 @@ export default class Intro {
       },
       {
         targets: [red1],
-        translateX: ['-300%', '0%'],
+        opacity: 1,
+        translateY: ['-150%', '-150%'],
       },
-
       {
         targets: [red2],
         opacity: 0.9,
@@ -204,7 +188,7 @@ export default class Intro {
       },
     ];
 
-    const anim6 = [
+    const anim5 = [
       {
         targets: [video1, video2, video3],
         opacity: 0,
@@ -251,7 +235,10 @@ export default class Intro {
       await tl2.finished; // Wait for Timeline 2 to finish
 
       // Create Timeline 3 using anim3
-      let tl3 = anime.timeline(baseTimelineSettings);
+      let tl3 = anime.timeline({
+        easing: 'easeInSine',
+        duration: 1000,
+      });
 
       if (i >= 3) {
         anim3.forEach((animation) => {
@@ -281,17 +268,58 @@ export default class Intro {
         await tl5.finished; // Wait for Timeline 5 to finish
       }
 
-      let tl6 = anime.timeline(baseTimelineSettings);
-      if (i >= 6) {
-        anim6.forEach((animation) => {
-          tl6.add(animation, 0);
-        });
-        await tl6.finished;
-        body.style.overflowY = 'auto';
+      siteLogo.style.zIndex = -99999;
+      body.style.overflowY = 'auto';
+    }
+
+    siteLogo.style.opacity = 1;
+    siteLogo.style.zIndex = 99999;
+
+    // Select all video elements on the page
+    const allVideos = document.querySelectorAll('video');
+    let videosLoaded = 0;
+    const totalVideos = allVideos.length;
+
+    // Function to check if all videos are loaded
+    function checkAllVideosLoaded() {
+      if (videosLoaded === totalVideos) {
+        runTimelines(5);
       }
     }
 
-    runTimelines(6);
+    // Iterate over each video element
+    allVideos.forEach((video) => {
+      // Function to handle successful loading
+      const onLoaded = () => {
+        videosLoaded++;
+        checkAllVideosLoaded();
+        // Remove event listeners after they are called to prevent memory leaks
+        video.removeEventListener('canplaythrough', onLoaded);
+        video.removeEventListener('error', onError);
+      };
+
+      // Function to handle loading errors
+      const onError = () => {
+        console.error(`Error loading video: ${video.src}`);
+        videosLoaded++;
+        checkAllVideosLoaded();
+        // Remove event listeners after they are called to prevent memory leaks
+        video.removeEventListener('canplaythrough', onLoaded);
+        video.removeEventListener('error', onError);
+      };
+
+      // Check if the video is already loaded sufficiently
+      if (video.readyState >= 4) {
+        // HAVE_ENOUGH_DATA
+        videosLoaded++;
+        checkAllVideosLoaded();
+      } else {
+        // Listen for the canplaythrough event
+        video.addEventListener('canplaythrough', onLoaded);
+        // Optionally, listen for error events
+        video.addEventListener('error', onError);
+      }
+    });
 
     /*
     const videoBtn = document.querySelector('.hero-video-btn label');

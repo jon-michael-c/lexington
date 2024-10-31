@@ -13,7 +13,7 @@ export default class Overlay {
       delay: 200,
       easing: 'easeInOutQuint',
       hoverDelay: 100,
-      autoplayInterval: 2500, // Interval for autoplay in milliseconds
+      autoplayInterval: 2000, // Interval for autoplay in milliseconds
       loopAutoplay: true, // Whether to loop autoplay
     };
 
@@ -156,11 +156,10 @@ export default class Overlay {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            // Start autoplay when overlay enters viewport
-            this.startAutoplay();
-
             let firstItem = this.overlayItems[0];
             let fontSize = window.innerWidth < 768 ? '32px' : '38px';
+
+            // Immediately animate the first item to avoid lag
             this.animateItem(firstItem, {
               fontSize: fontSize,
               maxHeight: '1000px',
@@ -169,8 +168,14 @@ export default class Overlay {
               dotColor: '#8C1D40',
               lineTop: '50%', // Initial animation for the line when entering view
             });
+
+            // Set the current autoplay index to 1 (next item)
+            this.currentAutoplayIndex = 1;
+
+            // Start autoplay after animating the first item
+            this.startAutoplay();
           } else {
-            // Stop autoplay when overlay leaves viewport
+            // Existing code for when the overlay leaves the viewport
             this.stopAutoplay();
 
             // Optionally, reset all items
@@ -189,6 +194,7 @@ export default class Overlay {
       { threshold: 0.1 }
     );
 
+    // Observe the overlay element
     observer.observe(this.overlay);
   }
 

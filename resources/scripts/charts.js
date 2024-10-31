@@ -1,4 +1,5 @@
 import Highcharts from 'highcharts';
+import anime from 'animejs';
 
 export default class HighChartsController {
   constructor() {
@@ -10,6 +11,33 @@ export default class HighChartsController {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             this.createChart(); // Create chart when it comes into view
+            let bracketLine = document.querySelector('.bracket-line');
+            let bracketLabel = document.querySelector('.bracket-label');
+            let num = parseInt(bracketLabel.querySelector('span').innerHTML);
+            console.log(num);
+            bracketLine.style.animation = 'bracket-line 1s forwards';
+
+            anime({
+              targets: bracketLine,
+              width: '100%',
+              duration: 750,
+              easing: 'easeInOutQuad',
+            });
+
+            anime({
+              targets: bracketLabel,
+              opacity: 1,
+              duration: 1000,
+              easing: 'easeInOutSine',
+            });
+            anime({
+              targets: bracketLabel.querySelector('span'),
+              round: 1,
+              innerHTML: [0, num],
+              duration: 1000,
+              easing: 'easeInOutSine',
+            });
+
             observer.unobserve(entry.target); // Stop observing after the chart is created
           }
         });
@@ -108,6 +136,9 @@ export default class HighChartsController {
         labels: {
           enabled: true,
           format: '${value}',
+          style: {
+            fontSize: '14px',
+          },
         },
       },
       legend: {
@@ -125,7 +156,7 @@ export default class HighChartsController {
         },
         series: {
           animation: {
-            duration: 1000, // Overall animation duration
+            duration: 1000,
             easing: 'easeOutBounce',
           },
         },

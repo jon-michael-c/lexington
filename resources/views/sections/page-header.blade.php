@@ -3,7 +3,7 @@
 @endphp
 
 <section class="page-header full-width relative h-[330px] overflow-hidden sm:h-[510px] py-6 sm:pb-28">
-    <div class="page-header-text relative flex sm:items-center sm:h-[448px]">
+    <div class="page-header-text breakout relative flex sm:items-center sm:h-[448px]">
         <div class="w-full  flex items-center relative gap-3 left-[-8px]  sm:pb-14 sm:gap-8 sm:mt-auto sm:left-[-16px]">
             <div class="breakout bg-magenta min-w-[16px] sm:min-w-[32px] h-[100px] sm:h-[183px] bottom-[50%]  z-[2]">
             </div>
