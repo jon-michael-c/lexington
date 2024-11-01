@@ -26,7 +26,9 @@
             <img src="{{ $siteLogo }}" alt="Logo">
         </div>
         @include('sections.footer')
+        @include('partials.cookies')
     </div>
+
 
     @php(do_action('get_footer'))
     @php(wp_footer())

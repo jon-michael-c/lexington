@@ -10,6 +10,7 @@ import anime, { stagger } from 'animejs';
 import Overlay from './components/overlay';
 import Navbar from './components/navbar';
 import Cookies from './components/cookies';
+import Map from './components/map';
 
 if (!sessionStorage.getItem('intro') && window.innerWidth >= 786) {
   new Intro();
@@ -28,6 +29,7 @@ document.addEventListener('keydown', (e) => {
 domReady(async () => {
   // ...
 
+  new Map();
   new Cookies();
   new VideoCTAs();
   new Carousel();

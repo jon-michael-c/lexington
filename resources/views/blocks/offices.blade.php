@@ -18,7 +18,7 @@
             // Convert text to tel link, ex +1 (212) 754-0411 -> +12127540411
             $tel = preg_replace('/[^0-9]/', '', $phone);
         @endphp
-        <div class="office sm:h-[230px] pl-8 relative">
+        <div class="office sm:h-[230px] pl-8 relative" data-office="{{ Str::slug(get_the_title($office)) }}">
 
             <div class="absolute top-0 left-0 bg-mist w-[2px] h-full"></div>
             <div class="grid gap-3 w-full">

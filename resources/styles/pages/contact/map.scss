@@ -1,0 +1,104 @@
+.locations-map {
+  position: relative;
+  .pins {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 10;
+    .pin {
+      position: absolute;
+      transform: translate(-50%, -500%);
+      transform-origin: center center;
+      svg {
+        height: 30px;
+        width: 21px;
+        transition: all 0.3s ease-in-out;
+        path {
+          transition: all 0.3s ease-in-out;
+        }
+      }
+
+      .pin-title-container {
+        position: relative;
+        bottom: -5px;
+        left: 10%;
+        opacity: 0;
+        max-width: 0%;
+        z-index: -1;
+        overflow: hidden;
+        transform: translateX(-50%);
+        transition: all 0.3s ease-in-out;
+        .pin-title {
+          text-align: center;
+          @apply bg-mist;
+          padding: 4px;
+          padding-top: 0px;
+          width: 100%;
+          height: 100%;
+          overflow: hidden;
+          transition: all 0.3s ease-in-out;
+          span {
+            @apply text-ocean font-Juana text-xl font-medium;
+          }
+        }
+      }
+
+      &.active {
+        cursor: pointer;
+        z-index: 2;
+        svg {
+          path {
+            @apply fill-taupe;
+          }
+        }
+        .pin-title-container {
+          opacity: 1;
+          max-width: 100%;
+        }
+      }
+    }
+
+    #new-york {
+      top: 125px;
+      left: 293px;
+    }
+
+    #boston {
+      top: 114px;
+      left: 303px;
+    }
+
+    #london {
+      top: 84px;
+      left: 551px;
+    }
+
+    #luxembourg {
+      top: 100px;
+      left: 603px;
+    }
+
+    #miami {
+      top: 184px;
+      left: 223px;
+    }
+
+    #menlo-park {
+      top: 145px;
+      left: 111px;
+    }
+
+    #hong-kong {
+      top: 202px;
+      left: 1012px;
+    }
+
+    #santiago {
+      top: 435px;
+      left: 279px;
+    }
+  }
+}

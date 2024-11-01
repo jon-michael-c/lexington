@@ -22,6 +22,11 @@
 
         <div class="e-content grid gap-6">
             @php(the_content())
+            @if (get_field('external_link'))
+                <a href="{{ get_field('external_link') }}" target="_blank"
+                    class="block text-charcoal uppercase link w-fit">Read
+                    More</a>
+            @endif
         </div>
         <div class="my-16 sm:my-36">
             <a href="{{ home_url('news-and-press') }}"
