@@ -3,9 +3,14 @@
     $image = get_the_post_thumbnail_url($page_id);
     $header_text = 'News and Press';
     $paged = get_query_var('paged') ?: 1;
+    $type = request()->query('type', ['post', 'news', 'press-releases']);
+    if ($type == 'all') {
+        $type = ['post', 'news', 'press-releases'];
+    }
+
     $query = new WP_Query([
-        'post_type' => 'post',
-        'posts_per_page' => 6,
+        'post_type' => $type,
+        'posts_per_page' => 9,
         'orderby' => 'date',
         'fields' => 'ids',
         'paged' => $paged,
@@ -14,24 +19,24 @@
 
     $options = [
         [
-            'value' => 'option1',
-            'label' => 'Option 1',
+            'value' => 'all',
+            'label' => 'All',
         ],
         [
-            'value' => 'option2',
-            'label' => 'Option 2',
+            'value' => 'news',
+            'label' => 'News',
         ],
         [
-            'value' => 'option3',
-            'label' => 'Option 3',
+            'value' => 'press-releases',
+            'label' => 'Press Releases',
         ],
     ];
 @endphp
 <section class="py-8 sm:py-24">
     <div class="w-full grid gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 sm:gap-8 pb-12">
-        <x-select :options="$options" />
-        <x-select :options="$options" />
-        <x-select :options="$options" />
+        <div class="type-select">
+            <x-select :options="$options" :current="$type" />
+        </div>
     </div>
     <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6 posts-container">
         @while ($query->have_posts())
@@ -58,5 +63,19 @@
         @endphp
     </div>
 </section>
-
 @php(wp_reset_postdata())
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const select = document.querySelector('.type-select select');
+        const postsContainer = document.querySelector('.posts-container');
+
+        select.addEventListener('change', function() {
+            const type = select.value;
+            const url = new URL(window.location.href + '/page/1');
+            url.searchParams.set('type', type);
+            window.location.href = url;
+        });
+    });
+</script>

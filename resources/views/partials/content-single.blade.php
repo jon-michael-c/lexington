@@ -3,8 +3,11 @@
         <div class="inner-full absolute top-0 right-[-96px] w-[150vw] h-full bg-mist-100 z-[-1]"></div>
         <header class="pb-4 sm:pb-8">
             <div class="max-w-[800px]">
-                <a href="{{ get_post_type_archive_link('post') }}" class="text-charcoal block uppercase mb-4">News and
-                    Press</a>
+
+                <a href="{{ home_url('news-and-press') }}" class="text-charcoal block uppercase mb-4"
+                    onclick="if (window.history.length > 1) { window.history.back(); return false; } else { window.location.href='{{ home_url('news-and-press') }}'; }">Back
+                    to
+                    News & Press</a>
                 <h1 class="text-ocean text-2xl sm:text-3xl">
                     {!! $title !!}
                 </h1>
@@ -21,7 +24,8 @@
             @php(the_content())
         </div>
         <div class="my-16 sm:my-36">
-            <a href="{{ get_permalink(get_page_by_title('News and Press')->ID) }}"
+            <a href="{{ home_url('news-and-press') }}"
+                onclick="if (window.history.length > 1) { window.history.back(); return false; } else { window.location.href='{{ home_url('news-and-press') }}'; }"
                 class="text-ocean uppercase link">Back to News &
                 Press</a>
         </div>

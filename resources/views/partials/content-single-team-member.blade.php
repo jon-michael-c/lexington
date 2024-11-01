@@ -5,8 +5,8 @@
         <div class="mb-12 hidden sm:block">
             <div class="wp-button">
                 <a href="{{ home_url('team') . '#' . get_the_ID() }}" class="wp-button__link wp-element-button uppercase"
-                    onclick="window.history.back(); return false;">Back to
-
+                    onclick="if (window.history.length > 1) { window.history.back(); return false; } else { window.location.href='{{ home_url('team') }}'; }">Back
+                    to
                     Team</a>
             </div>
         </div>

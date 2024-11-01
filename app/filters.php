@@ -44,3 +44,10 @@ add_filter('wp_head', function (): void {
 });
 
 
+
+
+add_filter('acf/settings/load_json', function () {
+    return [dirname(__FILE__) . '/acf-json'];
+});
+
+

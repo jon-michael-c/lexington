@@ -129,6 +129,16 @@ class SiteOptions extends Field
                 'instructions' => 'Add your Google Analytics code here.',
             ])
             /**
+             * Google Tag Manager Tab 
+             */
+            ->addTab('Google Tag Manager', [
+                'placement' => 'left',
+            ])
+            ->addTextarea('google_tag_manager_snippet', [
+                'label' => 'Google Tag Manager',
+                'instructions' => 'Add your Google Tag Manager code here.',
+            ])
+            /**
              * 404 Page Tab
              */
             ->addTab('404 Page', [
@@ -167,6 +177,25 @@ class SiteOptions extends Field
                 'instructions' => 'Add your footer disclaimer here.',
                 'toolbar' => 'full',
             ])
+            ->addTab('Code Snippets', [
+                'placement' => 'left',
+            ])
+            ->addTextArea('after_opening_head', [
+                'label' => 'After Opening Head',
+                'instructions' => 'Add code to be included immediately after the opening <head> tag.',
+            ])
+            ->addTextArea('before_closing_head', [
+                'label' => 'Before Closing Head',
+                'instructions' => 'Add code to be included before the closing </head> tag.',
+            ])
+            ->addTextArea('after_opening_body', [
+                'label' => 'After Opening Body',
+                'instructions' => 'Add code to be included immediately after the opening <body> tag.',
+            ])
+            ->addTextArea('before_closing_body', [
+                'label' => 'Before Closing Body',
+                'instructions' => 'Add code to be included before the closing </body> tag.',
+            ]);
         ;
 
         return $fields->build();

@@ -13,10 +13,12 @@ class Select extends Component
      */
     public $options;
     public $id;
-    public function __construct($options = [], $id = '')
+    public $current;
+    public function __construct($options = [], $id = '', $current = '')
     {
         $this->options = $options;
         $this->id = $id;
+        $this->current = $current;
     }
 
     /**

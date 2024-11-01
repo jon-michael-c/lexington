@@ -218,3 +218,54 @@ function customize_menu_order($menu_order)
 
 add_filter('custom_menu_order', '__return_true');
 add_filter('menu_order', 'customize_menu_order');
+
+function migrate_posts_to_custom_post_types()
+{
+    // Migrate posts in the 'News' category to the 'news' custom post type
+    $news_category = get_category_by_slug('news');
+    if ($news_category) {
+        $news_posts = get_posts(array(
+            'category' => $news_category->term_id,
+            'numberposts' => -1,
+            'post_type' => 'post',
+            'fields' => 'ids',
+        ));
+
+        foreach ($news_posts as $post_id) {
+            wp_update_post(array(
+                'ID' => $post_id,
+                'post_type' => 'news',
+            ));
+        }
+    }
+
+    // Migrate posts in the 'Press Releases' category to the 'press-releases' custom post type
+    $press_releases_category = get_category_by_slug('press-releases');
+    if ($press_releases_category) {
+        $press_release_posts = get_posts(array(
+            'category' => $press_releases_category->term_id,
+            'numberposts' => -1,
+            'post_type' => 'post',
+            'fields' => 'ids',
+        ));
+
+        foreach ($press_release_posts as $post_id) {
+            wp_update_post(array(
+                'ID' => $post_id,
+                'post_type' => 'press-releases',
+            ));
+        }
+    }
+
+    // Optionally, remove the categories if they are no longer needed
+    // foreach ( $news_posts as $post_id ) {
+    //     wp_remove_object_terms( $post_id, $news_category->term_id, 'category' );
+    // }
+    // foreach ( $press_release_posts as $post_id ) {
+    //     wp_remove_object_terms( $post_id, $press_releases_category->term_id, 'category' );
+    // }
+
+    // Remove the action to prevent re-running
+    remove_action('init', 'migrate_posts_to_custom_post_types');
+}
+//add_action('init', 'migrate_posts_to_custom_post_types');

@@ -185,3 +185,46 @@ function send_contact_email()
 // Register the AJAX actions
 add_action('wp_ajax_send_contact_email', 'send_contact_email');
 add_action('wp_ajax_nopriv_send_contact_email', 'send_contact_email');
+
+
+// Add Google Tag Manager code to the head, after the opening head tag from options
+add_action('wp_head', function () {
+    $google_tag_manager_snippet = get_field('google_tag_manager_snippet', 'option');
+    if ($google_tag_manager_snippet) {
+        echo $google_tag_manager_snippet;
+    }
+
+    $google_analytics = get_field('google_analytics_snippet', 'option');
+    if ($google_analytics) {
+        echo $google_analytics;
+    }
+}, 1);
+
+// Add code after the opening <head> tag
+add_action('wp_head', function () {
+    if ($code = get_field('after_opening_head', 'option')) {
+        echo $code;
+    }
+}, 1); // Priority 1 to ensure it runs first
+
+// Add code before the closing </head> tag
+add_action('wp_head', function () {
+    if ($code = get_field('before_closing_head', 'option')) {
+        echo $code;
+    }
+}, 100); // Priority 100 to ensure it runs last
+
+// Add code after the opening <body> tag
+add_action('wp_body_open', function () {
+    if ($code = get_field('after_opening_body', 'option')) {
+        echo $code;
+    }
+});
+
+// Add code before the closing </body> tag
+add_action('wp_footer', function () {
+    if ($code = get_field('before_closing_body', 'option')) {
+        echo $code;
+    }
+});
+
