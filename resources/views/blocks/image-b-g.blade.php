@@ -9,7 +9,7 @@
 
 @if ($reverse)
     <div class="image-bg py-16 ">
-        <div class="absolute top-0 right-0 w-full  sm:w-[50vw] h-full z-[-1] {{ $bgColor }}">
+        <div class="absolute top-0 right-0 w-full  sm:w-[50vw] h-full  {{ $bgColor }}">
 
         </div>
         @if (isset($image) && isset($image['url']))
@@ -25,7 +25,7 @@
     </div>
 @else
     <div class="image-bg  py-16 pr-4">
-        <div class="absolute top-0 right-0 w-full sm:left-0 sm:w-[50vw] h-full z-[-1] {{ $bgColor }}">
+        <div class="absolute top-0 right-0 w-full sm:left-0 sm:w-[50vw] h-full {{ $bgColor }}">
 
         </div>
         @if (isset($image) && isset($image['url']))

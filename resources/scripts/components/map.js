@@ -12,21 +12,6 @@ export default class Map {
   }
 
   init() {
-    this.mDots.forEach((dot) => {
-      dot.style.opacity = 0;
-    });
-    let i = 0;
-    this.mDots.forEach((dot) => {
-      anime({
-        targets: dot,
-        opacity: 1,
-        easing: 'easeInOutQuad',
-        duration: 150,
-        delay: (i * 1) / 3,
-      });
-      i++;
-    });
-
     let svgs = document.querySelectorAll('.pin svg');
     svgs.forEach((pin) => {
       pin.addEventListener('mouseover', () => {
@@ -62,7 +47,10 @@ export default class Map {
       (entries, observer) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            this.moveIn();
+            this.dotFade();
+            setTimeout(() => {
+              this.moveIn();
+            }, 500); // Adjust the timeout duration as needed
             observer.unobserve(entry.target);
           }
         });
@@ -77,13 +65,30 @@ export default class Map {
     this.pins.forEach((pin, index) => {
       anime({
         targets: pin,
-        translateY: ['-1000%', '-50%'],
+        translateY: ['-3000%', '-50%'],
         translateX: ['-50%', '-50%'],
         opacity: 1,
         duration: 750,
         easing: 'easeInOutQuad',
         delay: index * 100, // Stagger the animation by 100ms for each pin
       });
+    });
+  }
+
+  dotFade() {
+    this.mDots.forEach((dot) => {
+      dot.style.opacity = 0;
+    });
+    let i = 0;
+    this.mDots.forEach((dot) => {
+      anime({
+        targets: dot,
+        opacity: 1,
+        easing: 'easeInOutQuad',
+        duration: 150,
+        delay: (i * 1) / 3,
+      });
+      i++;
     });
   }
 }

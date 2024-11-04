@@ -18,7 +18,8 @@
     <div class="w-full h-[20px] bg-mist mt-[-10px] mb-4"></div>
     <div class="" id="{{ $id }}">
         <div>
-            <p class="text-charcoal text-xs leading-[1.25] font-extrabold">{!! get_the_title($id) !!}</p>
+            <p class="text-charcoal text-xs  leading-[1.25] font-extrabold">{!! get_the_title($id) !!}
+            </p>
         </div>
         <div>
             <p class="text-taupe text-xs">{!! get_field('role', $id) !!}

@@ -5,7 +5,8 @@
     @php($i = 1)
     @foreach ($intro_videos as $video)
         <div class="intro__video intro__video-{{ $i }}">
-            <video autoplay muted loop playsinline>
+            <video @if (isset($video['video']['sizes']['large'])) poster="{{ $video['video']['sizes']['large'] }}" @endif autoplay
+                muted loop playsinline>
                 <source src="{{ $video['video']['url'] }}" type="{{ $video['video']['mime_type'] }}">
             </video>
         </div>

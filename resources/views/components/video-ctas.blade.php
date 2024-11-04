@@ -7,7 +7,12 @@
                         <a href="{{ $cta['link']['url'] }}" class="video-ctas__item">
                             <div class="video-ctas__item__overlay"></div>
                             <div class="video-ctas__item__video">
-                                <video src="{{ $cta['video']['url'] }}" muted loop></video>
+                                <video class="w-full h-full object-cover"
+                                    @if (isset($cta['video']['sizes']['large'])) poster="{{ $cta['video']['sizes']['large'] }}" @endif
+                                    playsinline muted loop>
+                                    <source src="{{ $cta['video']['url'] }}" type="{{ $cta['video']['mime_type'] }}">
+                                    Your browser does not support the video tag.
+                                </video>
                             </div>
                             <h4 class="video-ctas__item__heading">{!! $cta['title'] !!}</h4>
                             <div class="video-ctas__item__arrow">

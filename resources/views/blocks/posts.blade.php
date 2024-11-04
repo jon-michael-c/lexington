@@ -10,7 +10,7 @@
 
     $query = new WP_Query([
         'post_type' => $type,
-        'posts_per_page' => 9,
+        'posts_per_page' => 12,
         'orderby' => 'date',
         'fields' => 'ids',
         'paged' => $paged,

@@ -171,6 +171,17 @@ article {
   p:not(:last-child) {
     margin-bottom: 6px;
   }
+
+  p {
+    @apply text-charcoal;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    @apply text-ocean;
+  }
 }
 
 b,
@@ -290,4 +301,8 @@ body
     @extend p;
     @apply text-charcoal;
   }
+}
+
+.wp-block-columns {
+  gap: 0;
 }

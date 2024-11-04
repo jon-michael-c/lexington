@@ -1,7 +1,7 @@
 @php
     // Get the 3 most recent news articles
     $news = get_posts([
-        'post_type' => 'post',
+        'post_type' => ['post', 'press-releases', 'news'],
         'posts_per_page' => 3,
         'orderby' => 'date',
         'fields' => 'ids',

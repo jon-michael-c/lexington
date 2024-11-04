@@ -1,6 +1,10 @@
 @extends('layouts.app')
-
-@php($src = 'https://lexington.local/app/uploads/2024/10/culture.jpeg')
 @section('content')
-    <x-image :src="$src" />
+    <article class="full-width relative overflow-hidden min-h-[800px]">
+        <div class="container text-center m-auto">
+            <h1 class="text-magenta sm:text-[60px]">404</h1>
+            <p class="text-charcoal font-medium">Sorry, the page you are looking for could not be found.</p>
+            <a href="{{ url('/') }}" class="wp-element-button">Go to Homepage</a>
+        </div>
+    </article>
 @endsection

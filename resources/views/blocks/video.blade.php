@@ -2,7 +2,8 @@
     @if (isset($video) && isset($video['url']))
         <div
             class="video-container aspect-video overflow-hidden inner-full relative w-full h-full md:h-[530px] cursor-pointer">
-            <video class="w-full h-full object-cover relative" muted loop playsinline>
+            <video class="w-full h-full object-cover relative"
+                @if (isset($video['sizes']['large'])) poster="{{ $video['sizes']['large'] }}" @endif muted loop playsinline>
                 <source src="{{ $video['url'] }}" type="{{ $video['mime_type'] }}">
                 Your browser does not support the video tag.
             </video>

@@ -32,11 +32,11 @@
     document.addEventListener('DOMContentLoaded', function() {
         const accordionItems = document.querySelectorAll('.accordion-item');
         const accordion = document.querySelector('.accordion-items');
-        let timeout;
+        let interactionTimeout;
 
         // Variables for Autoplay
         let autoplayInterval = null; // Reference to the autoplay interval
-        const AUTOPLAY_DELAY = 3000; // Time in ms between automatic activations (e.g., 3 seconds)
+        const AUTOPLAY_DELAY = 4000; // Increased delay for slower autoplay
         let currentIndex = 0; // Tracks the currently active item index
 
         // Function to activate a specific accordion item by index
@@ -84,64 +84,51 @@
         // Initialize the first item as active when the page loads
         activateItem(0);
 
-        // Start autoplay when the accordion is in view (handled by IntersectionObserver below)
-
+        // Event handlers
         accordionItems.forEach((item, index) => {
-            const title = item.querySelector('.accordion-title');
-
             item.addEventListener('mouseenter', () => {
                 // Stop autoplay when user interacts
                 stopAutoplay();
 
-                clearTimeout(timeout);
-                timeout = setTimeout(() => {
-                    // Activate the hovered item
-                    activateItem(index);
-                }, 200); // Adjust the delay as needed
+                // Activate the hovered item
+                activateItem(index);
             });
 
             item.addEventListener('mouseleave', () => {
-                clearTimeout(timeout);
-                timeout = setTimeout(() => {
-                    // Optionally, you can decide whether to deactivate on mouse leave
-                    // For autoplay, it's better to keep one item active, so we don't deactivate here
-                    // If you want to deactivate, uncomment the following lines:
-
-                    // item.classList.remove('active');
-                    // title.classList.add('short');
-                }, 200); // Adjust the delay as needed
+                // Optionally, restart autoplay when mouse leaves an item after a delay
+                interactionTimeout = setTimeout(() => {
+                    startAutoplay();
+                }, 1000); // Delay before autoplay resumes
             });
         });
 
-        // When mouse leaves the accordion, resume autoplay
+        // When mouse leaves the entire accordion, resume autoplay after a delay
         accordion.addEventListener('mouseleave', () => {
-            // Restart autoplay
-            startAutoplay();
+            clearTimeout(interactionTimeout);
+            interactionTimeout = setTimeout(() => {
+                startAutoplay();
+            }, 1000); // Adjust the delay as needed
         });
 
         // IntersectionObserver to start autoplay when the accordion comes into view
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    // Activate the first item
-                    activateItem(0);
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        // Activate the current item
+                        activateItem(currentIndex);
 
-                    // Start autoplay
-                    startAutoplay();
-                } else {
-                    // Optionally, stop autoplay when the accordion is out of view
-                    stopAutoplay();
-
-                    // Optionally, deactivate all items when out of view
-                    // accordionItems.forEach((item) => {
-                    //     item.classList.remove('active');
-                    //     item.querySelector('.accordion-title').classList.add('short');
-                    // });
-                }
-            });
-        }, {
-            threshold: 0.5,
-        });
+                        // Start autoplay
+                        startAutoplay();
+                    } else {
+                        // Stop autoplay when the accordion is out of view
+                        stopAutoplay();
+                    }
+                });
+            }, {
+                threshold: 0.5,
+            }
+        );
 
         observer.observe(accordion);
     });

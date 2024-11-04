@@ -23,8 +23,10 @@
                             <div class="reasons-title">
                                 <p class="text-magenta font-bold">{!! $item['title'] !!}</p>
                             </div>
-                            <div class="reasons-text text-charcoal">
-                                {!! $item['content'] !!}
+                            <div class="reasons-text-container">
+                                <div class="reasons-text text-charcoal">
+                                    {!! $item['content'] !!}
+                                </div>
                             </div>
                         </div>
                     </div>

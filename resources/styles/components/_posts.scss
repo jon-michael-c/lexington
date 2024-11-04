@@ -132,3 +132,16 @@
     }
   }
 }
+
+.pagination {
+  .page-numbers {
+    @apply text-charcoal;
+    &.current {
+      @apply font-semibold;
+    }
+
+    &:hover {
+      @apply text-magenta;
+    }
+  }
+}

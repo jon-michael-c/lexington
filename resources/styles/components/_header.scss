@@ -45,11 +45,6 @@ header {
         @apply font-bold;
       }
 
-      &.current-menu-item::after,
-      &.current-menu-parent::after {
-        width: 100%;
-      }
-
       &.current-menu-parent > span,
       &.current-menu-parent > a {
         @apply font-bold;

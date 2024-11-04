@@ -108,7 +108,7 @@
     </div>
 
     <div id="team-members"
-        class="grid gap-4 sm:gap-10 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
+        class="grid gap-4 sm:gap-10 sm:gap-x-[1px] grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
         @foreach ($team as $id)
             @include('partials.team.preview', ['id' => $id])
         @endforeach

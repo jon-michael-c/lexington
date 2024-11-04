@@ -1,5 +1,13 @@
 .locations-map {
   position: relative;
+  & > svg {
+    width: 100% !important;
+    height: auto !important;
+
+    & > g path {
+      opacity: 0;
+    }
+  }
   .pins {
     position: absolute;
     top: 0;
@@ -9,8 +17,9 @@
     overflow: hidden;
     z-index: 10;
     .pin {
+      opacity: 0;
       position: absolute;
-      transform: translate(-50%, -500%);
+      transform: translate(-3000%, -50%);
       transform-origin: center center;
       svg {
         height: 30px;
@@ -19,14 +28,21 @@
         path {
           transition: all 0.3s ease-in-out;
         }
+
+        @include m-md {
+          scale: 0.75;
+        }
+        @include m-sm {
+          scale: 0.5;
+        }
       }
 
       .pin-title-container {
-        position: relative;
-        bottom: -5px;
-        left: 10%;
+        position: absolute;
+        bottom: 23px;
+        left: 51%;
         opacity: 0;
-        max-width: 0%;
+        max-width: 0px;
         z-index: -1;
         overflow: hidden;
         transform: translateX(-50%);
@@ -41,7 +57,7 @@
           overflow: hidden;
           transition: all 0.3s ease-in-out;
           span {
-            @apply text-ocean font-Juana text-xl font-medium;
+            @apply text-ocean font-Juana text-[11px] sm:text-xl font-medium;
           }
         }
       }
@@ -56,49 +72,49 @@
         }
         .pin-title-container {
           opacity: 1;
-          max-width: 100%;
+          max-width: 450px;
         }
       }
     }
 
     #new-york {
-      top: 125px;
-      left: 293px;
+      top: 26.5%;
+      left: 20.7%;
     }
 
     #boston {
-      top: 114px;
-      left: 303px;
+      top: 24.3%;
+      left: 21.8%;
     }
 
     #london {
-      top: 84px;
-      left: 551px;
+      top: 17.3%;
+      left: 45%;
     }
 
     #luxembourg {
-      top: 100px;
-      left: 603px;
+      top: 20%;
+      left: 47.2%;
     }
 
     #miami {
-      top: 184px;
-      left: 223px;
+      top: 35%;
+      left: 17%;
     }
 
     #menlo-park {
-      top: 145px;
-      left: 111px;
+      top: 28%;
+      left: 5.7%;
     }
 
     #hong-kong {
-      top: 202px;
-      left: 1012px;
+      top: 38.7%;
+      left: 83.5%;
     }
 
     #santiago {
-      top: 435px;
-      left: 279px;
+      top: 76.8%;
+      left: 20.7%;
     }
   }
 }
