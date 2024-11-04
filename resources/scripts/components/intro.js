@@ -1,4 +1,4 @@
-import anime from 'animejs';
+import anime, { stagger } from 'animejs';
 
 export default class Intro {
   constructor() {
@@ -192,6 +192,7 @@ export default class Intro {
       {
         targets: [video1, video2, video3],
         opacity: 0,
+        delay: anime.stagger(250),
       },
       {
         targets: [heroVideo],
@@ -257,8 +258,11 @@ export default class Intro {
         await tl4.finished; // Wait for Timeline 4 to finish
       }
 
-      // Create Timeline 5 using anim5
-      let tl5 = anime.timeline(baseTimelineSettings);
+      // Create Timeline 5 using anim3
+      let tl5 = anime.timeline({
+        easing: 'easeInSine',
+        duration: 900,
+      });
 
       if (i >= 5) {
         anim5.forEach((animation) => {

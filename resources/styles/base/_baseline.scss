@@ -33,6 +33,10 @@ html {
   scrollbar-color: #8c1d40 #e3ece9;
 }
 
+#app {
+  overflow-x: hidden;
+}
+
 body {
   @apply bg-white;
   font-family: 'Eina', Tahoma, sans-serif;

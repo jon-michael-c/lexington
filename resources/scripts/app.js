@@ -12,11 +12,28 @@ import Navbar from './components/navbar';
 import Cookies from './components/cookies';
 import Map from './components/map';
 
-if (!sessionStorage.getItem('intro') && window.innerWidth >= 786) {
+if (
+  !sessionStorage.getItem('intro') &&
+  window.innerWidth >= 786 &&
+  document.querySelector('.hero')
+) {
   new Intro();
   sessionStorage.setItem('intro', 'true');
+} else {
+  anime({
+    targets: ['.banner'],
+    opacity: 1,
+    easing: 'easeInOutQuad',
+    duration: 500,
+  });
 }
 
+anime({
+  targets: ['.hero'],
+  opacity: 1,
+  easing: 'easeInOutQuad',
+  duration: 500,
+});
 // Keypress to clear the localStorage on 'i' key
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') {

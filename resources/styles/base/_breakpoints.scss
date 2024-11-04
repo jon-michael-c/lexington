@@ -81,3 +81,9 @@
     @content;
   }
 }
+
+@mixin sm-lg {
+  @media (min-width: 640px) and (max-width: 1023px) {
+    @content;
+  }
+}

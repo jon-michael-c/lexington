@@ -1,7 +1,12 @@
+.home .banner {
+  opacity: 0;
+}
+
 .hero {
   position: relative;
   grid-column: full-width !important;
   padding: 2.5rem 0;
+  opacity: 0;
 
   .intro__video {
     position: absolute;
@@ -128,6 +133,7 @@
 
       .hero__heading-h1 {
         @apply text-white;
+        font-size: clamp(28px, 5vw, 60px) !important;
       }
       .hero__line {
         @apply bg-magenta;
@@ -148,6 +154,7 @@
     position: relative;
     padding: 3rem 1rem 3rem 2rem;
     @apply text-white;
+
     &-bg {
       position: absolute;
       width: 100%;
@@ -182,7 +189,7 @@
     }
   }
 
-  @include sm {
+  @include md {
     padding-top: 0rem;
     padding-bottom: 5rem;
 
@@ -219,7 +226,7 @@
         position: absolute;
         z-index: -1;
         width: 100vw;
-        left: 45%;
+        left: 49%;
         bottom: 8rem;
       }
 
@@ -241,15 +248,20 @@
     &__text {
       position: absolute;
       padding: 2.5rem 3rem;
-      right: 3.5rem;
+      right: 3.25rem;
       bottom: 9.5rem;
       height: 226px;
-      width: 588px;
+      width: 44%;
+      max-width: 588px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       &-bg {
         opacity: 0.9;
+      }
+
+      @include sm-lg {
+        height: fit-content !important;
       }
 
       &-content-inner {
