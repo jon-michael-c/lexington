@@ -114,3 +114,36 @@
     overflow: hidden;
   }
 }
+
+#termly-code-snippet-support {
+  .termly-styles-root-b0aebb {
+    margin: 0;
+    width: 100%;
+    background: rgba(0, 46, 69, 1) !important;
+    color: white !important;
+    font-family: unset !important;
+    font-size: unset !important;
+    border-radius: none !important;
+
+    .termly-styles-buttons-bb7ad2 {
+      background: none !important;
+
+      .termly-styles-button-a4543c {
+        color: white !important;
+        border: none !important;
+        font-family: unset !important;
+      }
+
+      .t-declineButton,
+      .t-acceptAllButton {
+        background: #8c1d40 !important;
+      }
+    }
+  }
+
+  .termly-styles-modal-xl-e30570 {
+    .termly-styles-module-primary-c2e506 {
+      background: #8c1d40 !important;
+    }
+  }
+}
