@@ -31,20 +31,6 @@
                 "operator": "==",
                 "value": "post"
             }
-        ],
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "news"
-            }
-        ],
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "press-releases"
-            }
         ]
     ],
     "menu_order": 0,
@@ -52,9 +38,9 @@
     "style": "seamless",
     "label_placement": "top",
     "instruction_placement": "label",
-    "hide_on_screen": "",
+    "hide_on_screen": [],
     "active": true,
     "description": "",
-    "show_in_rest": 0,
-    "modified": 1730473236
+    "show_in_rest": false,
+    "modified": 1730747432
 }

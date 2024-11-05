@@ -1,5 +1,6 @@
 export default class Cookies {
   constructor() {
+    return;
     this.cookies = document.querySelector('#cookies');
     this.accept = document.querySelector('#accept-cookies');
     this.decline = document.querySelector('#decline-cookies');

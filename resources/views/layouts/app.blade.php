@@ -26,7 +26,6 @@
             <img src="{{ $siteLogo }}" alt="Logo">
         </div>
         @include('sections.footer')
-        @include('partials.cookies')
     </div>
 
 

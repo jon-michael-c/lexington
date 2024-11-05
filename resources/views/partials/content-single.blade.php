@@ -14,12 +14,14 @@
             </div>
             <hr class="border-t-2 border-mist w-full my-6 ">
             <div>
-                <p class="text-ocean"><span class="font-bold">{!! get_the_author() !!}</span><br>
+                <p class="text-ocean">
+                    @if (get_field('publication'))
+                        <span class="font-bold">{!! get_field('publication') !!}</span><br>
+                    @endif
                     <span class="text-xs">{!! get_the_date('d M Y') !!}</span>
                 </p>
             </div>
         </header>
-
         <div class="e-content grid gap-6">
             @php(the_content())
             @if (get_field('external_link'))

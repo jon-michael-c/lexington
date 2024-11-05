@@ -36,14 +36,14 @@
             {
                 "param": "post_type",
                 "operator": "==",
-                "value": "press-releases"
+                "value": "news"
             }
         ],
         [
             {
                 "param": "post_type",
                 "operator": "==",
-                "value": "news"
+                "value": "press-releases"
             }
         ]
     ],
@@ -56,5 +56,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1730473197
+    "modified": 1730747443
 }

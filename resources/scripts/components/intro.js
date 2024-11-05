@@ -29,6 +29,7 @@ export default class Intro {
       duration: 550,
     };
 
+    siteLogo.style.visibility = 'visible';
     anime.set(
       [
         sections,
@@ -273,6 +274,7 @@ export default class Intro {
       }
 
       siteLogo.style.zIndex = -99999;
+      siteLogo.style.visibility = 'hidden';
       body.style.overflowY = 'auto';
     }
 
