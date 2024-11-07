@@ -226,12 +226,19 @@ strong {
 article {
   ul {
     list-style-position: outside;
-    list-style-type: disc;
+    list-style-type: square;
+    // List style color
     padding-left: 20px;
     font-size: 18px;
     font-weight: normal;
     li {
       margin-bottom: 5px;
+      position: relative;
+
+      &::marker {
+        @apply text-magenta;
+        font-size: 0.8rem;
+      }
     }
   }
 }

@@ -82,6 +82,16 @@ footer .bg-image {
   .stat {
     position: relative;
   }
+
+  &.uneven {
+    @include xxs-sm {
+      .stat {
+        &:last-child {
+          grid-column: 1 / span 2;
+        }
+      }
+    }
+  }
   &.stats-md {
     .stat {
       @include m-xxs {

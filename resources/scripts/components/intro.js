@@ -51,6 +51,7 @@ export default class Intro {
       {
         targets: siteLogo,
         opacity: 0,
+        delay: 750,
       },
     ];
 
@@ -193,7 +194,7 @@ export default class Intro {
       {
         targets: [video1, video2, video3],
         opacity: 0,
-        delay: anime.stagger(250),
+        translateX: ['0%', '-250%'],
       },
       {
         targets: [heroVideo],
@@ -262,7 +263,7 @@ export default class Intro {
       // Create Timeline 5 using anim3
       let tl5 = anime.timeline({
         easing: 'easeInSine',
-        duration: 900,
+        duration: 1100,
       });
 
       if (i >= 5) {

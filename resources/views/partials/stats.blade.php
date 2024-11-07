@@ -1,6 +1,6 @@
 @if ($stats)
     @if (count($stats) % 3 === 0)
-        <div class="stats stats-md grid xxs:grid-cols-2 sm:grid-cols-3">
+        <div class="stats stats-md grid xxs:grid-cols-2 sm:grid-cols-3 @if (count($stats) === 3) uneven @endif">
             @foreach ($stats as $stat)
                 @php
                     $numericPart = str_replace(' ', '', $stat['value'] ?? '');
