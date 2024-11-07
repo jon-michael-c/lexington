@@ -51,7 +51,7 @@ export default class Intro {
       {
         targets: siteLogo,
         opacity: 0,
-        delay: 750,
+        delay: 700,
       },
     ];
 
@@ -75,6 +75,10 @@ export default class Intro {
         height: ['172px', '172px'],
         top: ['0%', '0%'],
         left: ['30%', '30%'],
+        update: () => {
+          let video = video1.querySelector('video');
+          video.play();
+        },
       },
       {
         targets: [video2],
@@ -83,6 +87,10 @@ export default class Intro {
         height: ['258px', '258px'],
         bottom: ['0%', '0%'],
         right: ['10%', '10%'],
+        update: () => {
+          let video = video2.querySelector('video');
+          video.play();
+        },
       },
       {
         targets: [video3],
@@ -91,6 +99,10 @@ export default class Intro {
         height: ['158px', '158px'],
         bottom: ['0%', '0%'],
         left: ['0%', '0%'],
+        update: () => {
+          let video = video3.querySelector('video');
+          video.play();
+        },
       },
 
       {
@@ -229,7 +241,10 @@ export default class Intro {
       }
 
       // Create Timeline 2 using anim2
-      let tl2 = anime.timeline(baseTimelineSettings);
+      let tl2 = anime.timeline({
+        easing: 'easeInSine',
+        duration: 1000,
+      });
       if (i >= 2) {
         anim2.forEach((animation) => {
           tl2.add(animation, 0); // Add all animations at the same start point
@@ -277,6 +292,10 @@ export default class Intro {
       siteLogo.style.zIndex = -99999;
       siteLogo.style.visibility = 'hidden';
       body.style.overflowY = 'auto';
+      let videos = [video1, video2, video3];
+      videos.forEach((video) => {
+        video.querySelector('video').pause();
+      });
     }
 
     siteLogo.style.opacity = 1;
