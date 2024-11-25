@@ -11,9 +11,10 @@
     data-name="{{ get_the_title($id) }}">
 
     <div class="w-[90%] mx-auto">
-        <x-image src="{{ get_the_post_thumbnail_url($id, 'medium') }}" alt="{{ get_the_title($id) }}"
-            class="w-full h-full object-cover" />
-
+        <div class="image-overlay relative w-full h-full overflow-hidden">
+            <img src="{{ get_the_post_thumbnail_url($id, 'medium') }}" alt="{{ get_the_title($id) }}"
+                class="w-full h-full object-cover relative">
+        </div>
     </div>
     <div class="w-full h-[20px] bg-mist mt-[-10px] mb-4"></div>
     <div class="" id="{{ $id }}">
