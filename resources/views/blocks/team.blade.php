@@ -2,7 +2,8 @@
     $team = get_posts([
         'post_type' => 'team-member',
         'posts_per_page' => -1,
-        'order' => 'DESC',
+        'order' => 'ASC',
+        'orderby' => 'title',
         'fields' => 'ids',
     ]);
 
@@ -40,6 +41,49 @@
 
     // Remove duplicates
     $allTitles = array_unique($allTitles);
+
+    // Initialize an array to group team members by role
+    $groupedTeam = [];
+
+    // Initialize the grouped array based on role order
+    foreach ($allTitles as $role) {
+        $groupedTeam[$role] = [];
+    }
+
+    // Group team members by role
+    foreach ($team as $id) {
+        $role = get_field('role', $id);
+        if ($role && isset($groupedTeam[$role])) {
+            $groupedTeam[$role][] = [
+                'id' => $id,
+                'name' => get_the_title($id), // Get the name of the team member
+            ];
+        }
+    }
+
+    // Sort team members alphabetically within each role group
+    foreach ($groupedTeam as $role => &$members) {
+        usort($members, function ($a, $b) {
+            return strcmp($a['name'], $b['name']); // Alphabetical sorting
+        });
+    }
+    // Flatten the sorted groups back into a single array of IDs in the new order
+    $team = [];
+    $priorityName = 'Wilson Warren'; // Change this to the desired name
+    $prorityId = null;
+    foreach ($groupedTeam as $role => $members) {
+        foreach ($members as $member) {
+            if ($member['name'] === $priorityName) {
+                $priorityId = $member['id'];
+                continue;
+            }
+            $team[] = $member['id'];
+        }
+    }
+
+    if ($priorityId !== null) {
+        array_unshift($team, $priorityId);
+    }
 
     $titles = [
         ['value' => '', 'label' => 'All Titles'], // Add 'All Titles' option
