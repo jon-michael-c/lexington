@@ -64,7 +64,12 @@
     // Sort team members alphabetically within each role group
     foreach ($groupedTeam as $role => &$members) {
         usort($members, function ($a, $b) {
-            return strcmp($a['name'], $b['name']); // Alphabetical sorting
+            // By last name
+            $aName = explode(' ', $a['name']);
+            $bName = explode(' ', $b['name']);
+            $aLastName = end($aName);
+            $bLastName = end($bName);
+            return strcmp($aLastName, $bLastName);
         });
     }
     // Flatten the sorted groups back into a single array of IDs in the new order
