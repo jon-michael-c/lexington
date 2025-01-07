@@ -61,6 +61,9 @@
         }
     }
 
+    // Remove duplicate roles
+    $groupedTeam = array_filter($groupedTeam);
+
     // Sort team members alphabetically within each role group
     foreach ($groupedTeam as $role => &$members) {
         usort($members, function ($a, $b) {
@@ -89,6 +92,9 @@
     if ($priorityId !== null) {
         array_unshift($team, $priorityId);
     }
+
+    // Remove duplicates
+    $team = array_unique($team);
 
     $titles = [
         ['value' => '', 'label' => 'All Titles'], // Add 'All Titles' option
