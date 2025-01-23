@@ -38,14 +38,31 @@
         $title = get_field('role', $id);
         $allTitles[] = $title;
     }
+    // Define the custom order for roles
+    $titleOrder = [
+        'Partner',
+        'Vice President',
+        'Managing Director',
+        'Director',
+        'Senior Advisor',
+        'Senior Associate',
+        'Associate',
+        'Analyst',
+        'Research Analyst',
+    ];
 
-    // Remove duplicates
-    $allTitles = array_unique($allTitles);
+    // Create an associative array to map roles to their respective order
+    $titleOrderMap = array_flip($titleOrder);
 
-    // Initialize an array to group team members by role
+    // Normalize roles in $allTitles and sort them based on $titleOrder
+    usort($allTitles, function ($a, $b) use ($titleOrderMap) {
+        $aOrder = $titleOrderMap[$a] ?? PHP_INT_MAX; // Assign high value if not in $titleOrder
+        $bOrder = $titleOrderMap[$b] ?? PHP_INT_MAX;
+        return $aOrder <=> $bOrder; // Sort based on custom order
+    });
+
+    // Initialize the grouped array
     $groupedTeam = [];
-
-    // Initialize the grouped array based on role order
     foreach ($allTitles as $role) {
         $groupedTeam[$role] = [];
     }
@@ -53,15 +70,27 @@
     // Group team members by role
     foreach ($team as $id) {
         $role = get_field('role', $id);
-        if ($role && isset($groupedTeam[$role])) {
-            $groupedTeam[$role][] = [
-                'id' => $id,
-                'name' => get_the_title($id), // Get the name of the team member
-            ];
+        if ($role) {
+            // Match roles to the title order or leave unsorted
+            if (in_array($role, $titleOrder)) {
+                $groupedTeam[$role][] = [
+                    'id' => $id,
+                    'name' => get_the_title($id), // Get the name of the team member
+                ];
+            } else {
+                // Handle roles not in $titleOrder
+                if (!isset($groupedTeam[$role])) {
+                    $groupedTeam[$role] = [];
+                }
+                $groupedTeam[$role][] = [
+                    'id' => $id,
+                    'name' => get_the_title($id),
+                ];
+            }
         }
     }
 
-    // Remove duplicate roles
+    // Remove empty role groups
     $groupedTeam = array_filter($groupedTeam);
 
     // Sort team members alphabetically within each role group
@@ -75,20 +104,39 @@
             return strcmp($aLastName, $bLastName);
         });
     }
-    // Flatten the sorted groups back into a single array of IDs in the new order
+
+    // Flatten the sorted groups into a single array of IDs in the new order
     $team = [];
     $priorityName = 'Wilson Warren'; // Change this to the desired name
-    $prorityId = null;
-    foreach ($groupedTeam as $role => $members) {
-        foreach ($members as $member) {
-            if ($member['name'] === $priorityName) {
-                $priorityId = $member['id'];
-                continue;
+    $priorityId = null;
+
+    // Add members to the final array based on $titleOrder first
+    foreach ($titleOrder as $role) {
+        if (isset($groupedTeam[$role])) {
+            foreach ($groupedTeam[$role] as $member) {
+                if ($member['name'] === $priorityName) {
+                    $priorityId = $member['id'];
+                    continue;
+                }
+                $team[] = $member['id'];
             }
-            $team[] = $member['id'];
         }
     }
 
+    // Add remaining roles (those not in $titleOrder) at the end
+    foreach ($groupedTeam as $role => $members) {
+        if (!in_array($role, $titleOrder)) {
+            foreach ($members as $member) {
+                if ($member['name'] === $priorityName) {
+                    $priorityId = $member['id'];
+                    continue;
+                }
+                $team[] = $member['id'];
+            }
+        }
+    }
+
+    // Add priority member to the beginning if specified
     if ($priorityId !== null) {
         array_unshift($team, $priorityId);
     }
