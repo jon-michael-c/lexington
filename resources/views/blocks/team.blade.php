@@ -41,9 +41,9 @@
     // Define the custom order for roles
     $titleOrder = [
         'Partner',
-        'Vice President',
         'Managing Director',
         'Director',
+        'Vice President',
         'Senior Advisor',
         'Senior Associate',
         'Associate',
@@ -60,6 +60,9 @@
         $bOrder = $titleOrderMap[$b] ?? PHP_INT_MAX;
         return $aOrder <=> $bOrder; // Sort based on custom order
     });
+
+    // Remove duplicates
+    $allTitles = array_unique($allTitles);
 
     // Initialize the grouped array
     $groupedTeam = [];
